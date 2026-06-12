@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <title>Hull Biofouling ID Guide - A5 Booklet | MarineStream</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* A4 Sheet with 2x A5 Pages - Booklet Layout */
+        @page {
+            size: 297mm 210mm; /* A4 Landscape */
+            margin: 0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 9pt;
+            line-height: 1.35;
+            color: #1a1a1a;
+            background: white;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Bitter', Georgia, serif;
+        }
+        
+        /* A4 Sheet container - holds 2 A5 pages side by side */
+        .a4-sheet {
+            width: 297mm;
+            height: 210mm;
+            display: flex;
+            flex-direction: row;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+        
+        .a4-sheet:last-child {
+            page-break-after: auto;
+        }
+        
+        /* A5 Page container - half of A4 */
+        .page {
+            width: 148.5mm;
+            height: 210mm;
+            padding: 5mm 6mm 8mm 6mm;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        /* ============ COVER PAGE ============ */
+        .page.cover-page {
+            padding: 0;
+        }
+        
+        .cover {
+            background: linear-gradient(165deg, #0d1b2a 0%, #1b3a4b 40%, #2d5a6b 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15mm 12mm;
+            width: 148.5mm;
+            height: 210mm;
+        }
+        
+        .cover-top {
+            text-align: center;
+        }
+        
+        .cover-logo {
+            font-size: 11pt;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            margin-bottom: 8mm;
+        }
+        
+        .cover-logo span {
+            color: #64b5c6;
+        }
+        
+        .cover-main {
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .cover-icon {
+            font-size: 36pt;
+            margin-bottom: 6mm;
+        }
+        
+        .cover h1 {
+            font-size: 22pt;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 4mm;
+            letter-spacing: -0.5px;
+        }
+        
+        .cover-subtitle {
+            font-size: 11pt;
+            opacity: 0.9;
+            max-width: 90mm;
+            margin: 0 auto 8mm;
+        }
+        
+        .cover-tagline {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 2mm 5mm;
+            border-radius: 3mm;
+            font-size: 8pt;
+            letter-spacing: 0.5px;
+        }
+        
+        .cover-bottom {
+            text-align: center;
+        }
+        
+        .cover-version {
+            font-size: 8pt;
+            opacity: 0.7;
+        }
+        
+        .cover-alert {
+            background: #cc0000;
+            color: white;
+            padding: 3mm 5mm;
+            border-radius: 2mm;
+            font-size: 8pt;
+            font-weight: 600;
+            margin-top: 5mm;
+        }
+        
+        /* ============ INTRO PAGE ============ */
+        .intro-page {
+            padding: 8mm 0;
+        }
+        
+        .intro-page h2 {
+            color: #0d1b2a;
+            font-size: 14pt;
+            margin-bottom: 4mm;
+            padding-bottom: 2mm;
+            border-bottom: 0.5mm solid #cc0000;
+        }
+        
+        .intro-section {
+            margin-bottom: 5mm;
+        }
+        
+        .intro-section h3 {
+            font-size: 10pt;
+            color: #1b3a4b;
+            margin-bottom: 2mm;
+        }
+        
+        .intro-section p {
+            font-size: 8.5pt;
+            color: #333;
+            margin-bottom: 2mm;
+        }
+        
+        .priority-legend {
+            background: #f5f7f9;
+            padding: 3mm;
+            border-radius: 2mm;
+            margin-bottom: 4mm;
+        }
+        
+        .priority-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            margin-bottom: 1.5mm;
+            font-size: 8pt;
+        }
+        
+        .priority-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .priority-dot {
+            width: 4mm;
+            height: 4mm;
+            border-radius: 1mm;
+            flex-shrink: 0;
+        }
+        
+        .priority-dot.high { background: #cc0000; }
+        .priority-dot.medium { background: #ff8c00; }
+        .priority-dot.native { background: #2d7d46; }
+        
+        .action-box {
+            background: #fef3f3;
+            border-left: 1mm solid #cc0000;
+            padding: 3mm 4mm;
+            margin-top: 3mm;
+        }
+        
+        .action-box h4 {
+            color: #cc0000;
+            font-size: 9pt;
+            margin-bottom: 2mm;
+        }
+        
+        .action-box ul {
+            font-size: 8pt;
+            padding-left: 4mm;
+            color: #333;
+        }
+        
+        .action-box li {
+            margin-bottom: 1mm;
+        }
+        
+        /* ============ SPECIES PAGES ============ */
+        .species-page {
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .species-page-header {
+            background: #cc0000;
+            color: white;
+            padding: 1.5mm 3mm;
+            border-radius: 1.5mm;
+            margin-bottom: 2mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .species-page-header.medium {
+            background: #e07000;
+        }
+        
+        .species-page-header.native {
+            background: #2d7d46;
+        }
+        
+        .species-page-header.niche {
+            background: #5a4080;
+        }
+        
+        .species-page-header h2 {
+            font-size: 10pt;
+            font-weight: 600;
+        }
+        
+        .species-page-header span {
+            font-size: 6pt;
+            opacity: 0.9;
+        }
+        
+        /* Species cards - 2 per page, stacked layout */
+        .species-pair {
+            display: flex;
+            flex-direction: column;
+            gap: 2mm;
+            height: calc(100% - 12mm);
+        }
+        
+        .species-card {
+            border: 0.4mm solid #ddd;
+            border-radius: 2mm;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            background: white;
+            flex: 1;
+            min-height: 0;
+        }
+        
+        .species-card.high {
+            border-color: #cc0000;
+            border-width: 0.6mm;
+        }
+        
+        .species-card.medium {
+            border-color: #ff8c00;
+        }
+        
+        .species-card.native {
+            border-color: #2d7d46;
+        }
+        
+        .species-card.niche {
+            border-color: #5a4080;
+        }
+        
+        .species-img {
+            width: 55mm;
+            min-width: 55mm;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .species-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .species-badge {
+            position: absolute;
+            top: 1.5mm;
+            left: 1.5mm;
+            padding: 1mm 2.5mm;
+            border-radius: 1mm;
+            font-size: 6pt;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+        
+        .species-badge.high { background: #cc0000; }
+        .species-badge.medium { background: #ff8c00; }
+        .species-badge.native { background: #2d7d46; }
+        .species-badge.niche { background: #5a4080; }
+        
+        .species-info {
+            flex: 1;
+            padding: 2mm 3mm;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .species-name {
+            font-family: 'Bitter', Georgia, serif;
+            font-size: 10pt;
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.1;
+            margin-bottom: 0.5mm;
+        }
+        
+        .species-scientific {
+            font-size: 7pt;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1mm;
+        }
+        
+        .species-group {
+            display: inline-block;
+            background: #eef1f4;
+            padding: 0.5mm 2mm;
+            border-radius: 1mm;
+            font-size: 5.5pt;
+            color: #555;
+            margin-bottom: 1.5mm;
+            align-self: flex-start;
+        }
+        
+        .species-features {
+            flex: 1;
+        }
+        
+        .species-features ul {
+            list-style: none;
+            font-size: 7.5pt;
+            color: #333;
+            columns: 1;
+        }
+        
+        .species-features li {
+            padding-left: 3mm;
+            position: relative;
+            margin-bottom: 0.8mm;
+            line-height: 1.25;
+        }
+        
+        .species-features li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #cc0000;
+            font-weight: bold;
+        }
+        
+        .species-card.native .species-features li::before {
+            color: #2d7d46;
+        }
+        
+        .species-card.niche .species-features li::before {
+            color: #5a4080;
+        }
+        
+        .species-card.medium .species-features li::before {
+            color: #e07000;
+        }
+        
+        .lookalike-note {
+            background: #fff8e6;
+            border: 0.3mm solid #f0c040;
+            padding: 1.5mm 2mm;
+            border-radius: 1mm;
+            font-size: 6.5pt;
+            margin-top: auto;
+            color: #7a5a00;
+        }
+        
+        .lookalike-note strong {
+            color: #a06000;
+        }
+        
+        /* ============ QUICK REFERENCE PAGE ============ */
+        .reference-page {
+            padding: 6mm 0;
+        }
+        
+        .reference-page h2 {
+            font-size: 12pt;
+            color: #0d1b2a;
+            margin-bottom: 3mm;
+            padding-bottom: 1.5mm;
+            border-bottom: 0.4mm solid #cc0000;
+        }
+        
+        .ref-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 7pt;
+            margin-bottom: 4mm;
+        }
+        
+        .ref-table th {
+            background: #0d1b2a;
+            color: white;
+            padding: 1.5mm 2mm;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .ref-table.invasive th {
+            background: #cc0000;
+        }
+        
+        .ref-table.native th {
+            background: #2d7d46;
+        }
+        
+        .ref-table td {
+            padding: 1.2mm 2mm;
+            border-bottom: 0.2mm solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        .ref-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .ref-priority {
+            display: inline-block;
+            padding: 0.5mm 1.5mm;
+            border-radius: 1mm;
+            font-size: 5.5pt;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .ref-priority.high { background: #cc0000; }
+        .ref-priority.medium { background: #ff8c00; }
+        
+        /* ============ CONTACT PAGE ============ */
+        .contact-page {
+            padding: 6mm 0;
+        }
+        
+        .contact-page h2 {
+            font-size: 14pt;
+            color: #0d1b2a;
+            margin-bottom: 4mm;
+        }
+        
+        .hotline-box {
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            color: white;
+            padding: 5mm;
+            border-radius: 3mm;
+            text-align: center;
+            margin-bottom: 5mm;
+        }
+        
+        .hotline-box h3 {
+            font-size: 10pt;
+            margin-bottom: 2mm;
+        }
+        
+        .hotline-number {
+            font-size: 18pt;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .hotline-label {
+            font-size: 8pt;
+            opacity: 0.9;
+            margin-top: 1.5mm;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm;
+            margin-bottom: 4mm;
+        }
+        
+        .contact-card {
+            background: #f5f7f9;
+            padding: 3mm;
+            border-radius: 2mm;
+        }
+        
+        .contact-card h4 {
+            font-size: 9pt;
+            color: #0d1b2a;
+            margin-bottom: 2mm;
+        }
+        
+        .contact-card p {
+            font-size: 7.5pt;
+            color: #444;
+            margin-bottom: 1mm;
+        }
+        
+        .reminder-box {
+            background: #e8f4ea;
+            border: 0.4mm solid #2d7d46;
+            padding: 3mm 4mm;
+            border-radius: 2mm;
+        }
+        
+        .reminder-box h4 {
+            color: #2d7d46;
+            font-size: 9pt;
+            margin-bottom: 2mm;
+        }
+        
+        .reminder-box ul {
+            font-size: 7.5pt;
+            padding-left: 4mm;
+            color: #333;
+        }
+        
+        .reminder-box li {
+            margin-bottom: 1mm;
+        }
+        
+        /* Page numbers */
+        .page-number {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            font-size: 7pt;
+            color: #999;
+        }
+        
+        .page-number.left {
+            right: auto;
+            left: 0;
+        }
+        
+        /* Footer on all pages */
+        .page-footer {
+            position: absolute;
+            bottom: 2mm;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 5.5pt;
+            color: #999;
+        }
+        
+        .page-footer-logo {
+            font-weight: 600;
+            color: #0d1b2a;
+        }
+        
+        /* Developer contact links */
+        .dev-contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 7mm;
+            height: 7mm;
+            background: rgba(255,255,255,0.1);
+            border-radius: 1.5mm;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .dev-contact-link:hover {
+            background: rgba(100, 181, 198, 0.3);
+            transform: translateY(-0.5mm);
+        }
+        
+        .dev-contact-link svg {
+            transition: all 0.2s ease;
+        }
+        
+        .dev-contact-link:hover svg {
+            stroke: #8ed4e3;
+            fill: #8ed4e3;
+        }
+        
+        /* Fold line indicator */
+        .a4-sheet::after {
+            content: "";
+            position: absolute;
+            left: 148.5mm;
+            top: 0;
+            bottom: 0;
+            border-left: 0.3mm dashed #ccc;
+            pointer-events: none;
+        }
+        
+        /* Screen preview styles */
+        @media screen {
+            html {
+                background: #555;
+            }
+            
+            body {
+                max-width: 297mm;
+                margin: 20px auto;
+                background: #444;
+            }
+            
+            .a4-sheet {
+                background: white;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+                margin-bottom: 20px;
+                position: relative;
+            }
+            
+            .page {
+                border-right: 1px dashed #ddd;
+            }
+            
+            .page:last-child {
+                border-right: none;
+            }
+        }
+        
+        /* Print overrides */
+        @media print {
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 297mm;
+            }
+            
+            .a4-sheet {
+                margin: 0;
+                width: 297mm;
+                height: 210mm;
+            }
+            
+            .a4-sheet::after {
+                display: none; /* Hide fold line when printing */
+            }
+            
+            .page {
+                width: 148.5mm;
+                height: 210mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- A4 SHEET 1: Cover + Introduction -->
+    <div class="a4-sheet">
+        <!-- PAGE 1: COVER -->
+        <div class="page cover-page">
+            <div class="cover">
+                <div class="cover-top">
+                    <a href="https://www.marinestream.com.au" class="cover-logo"><img src="assets/marinestream_logo_white.png" alt="MarineStream" style="height: 28px;"></a>
+                </div>
+                <div class="cover-main">
+                    <div class="cover-icon">🔍</div>
+                    <h1>Hull Biofouling<br>ID Guide</h1>
+                    <p class="cover-subtitle">Quick reference for divers cleaning ship hulls in WA waters</p>
+                    <span class="cover-tagline">Field Pocket Guide</span>
+                </div>
+                <div class="cover-bottom">
+                    <div class="cover-alert">⚠️ Found something dodgy? STOP & REPORT</div>
+                    <p class="cover-version">Version 3.0 • January 2026</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PAGE 2: INTRODUCTION -->
+        <div class="page">
+            <div class="intro-page">
+                <h2>How to Use This Guide</h2>
+                
+                <div class="intro-section">
+                    <h3>The Job</h3>
+                    <p>You're cleaning hulls. You need to spot the bad stuff before you scrape it off. This guide shows you what to look for and what to report.</p>
+                </div>
+                
+                <div class="intro-section">
+                    <h3>Why It Matters</h3>
+                    <p>Marine pests hitch rides on hulls. Some nasty ones have already turned up in WA — like carpet sea squirt at HMAS Stirling. Divers are our first line of defence.</p>
+                </div>
+                
+                <div class="priority-legend">
+                    <div class="priority-item">
+                        <div class="priority-dot high"></div>
+                        <span><strong>NOXIOUS</strong> — Stop work. Report to DPIRD within 24hrs.</span>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-dot medium"></div>
+                        <span><strong>WATCH</strong> — Emerging threat. Document &amp; report.</span>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-dot native"></div>
+                        <span><strong>NATIVE</strong> — Normal WA fouling, no report needed</span>
+                    </div>
+                </div>
+                
+                <div style="background: #fff8e6; border: 0.3mm solid #f0c040; padding: 2mm 3mm; border-radius: 1.5mm; margin-top: 2mm; font-size: 7pt;">
+                    <strong style="color: #a06000;">Note:</strong> This guide features key species from the WA noxious fish list. View the full list at <em>fish.wa.gov.au</em> or Schedule 5, Fish Resources Management Regulations 1995.
+                </div>
+                
+                <div class="action-box">
+                    <h4>⚠️ Suspect a Noxious Fish?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — cease work until DPIRD advises</li>
+                        <li>Take photos — close-up + wide shot, use hand for scale</li>
+                        <li>Note location (bow distance, depth, port/stbd)</li>
+                        <li><strong>DON'T scrape it off</strong> — leave specimen intact</li>
+                        <li>Report to DPIRD within 24 hours (see back page)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>2</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- A4 SHEET 2: NOXIOUS SPECIES 1-4 -->
+    <div class="a4-sheet">
+        <!-- PAGE 3: NOXIOUS SPECIES 1-2 -->
+        <div class="page">
+            <div class="species-page">
+                <div class="species-page-header">
+                    <h2>NOXIOUS — Report to DPIRD</h2>
+                    <span>Page 1 of 2</span>
+                </div>
+                
+                <div class="species-pair">
+                    <!-- Carpet Sea Squirt -->
+                    <div class="species-card high" data-images="assets/dvex1.jpg,assets/dvex2.webp,assets/dvex3.png">
+                        <div class="species-img">
+                            <img src="assets/dvex1.jpg" alt="Carpet Sea Squirt">
+                            <span class="species-badge high">NOXIOUS</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Carpet Sea Squirt</div>
+                            <div class="species-scientific">Didemnum vexillum</div>
+                            <span class="species-group">Sea Squirt • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Creamy/tan like old wax</li>
+                                    <li>Veiny look — like varicose veins</li>
+                                    <li>Leathery feel, NOT slimy</li>
+                                    <li>Drips down like candle wax</li>
+                                    <li><strong>Detected: HMAS Stirling &amp; Henderson</strong></li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-note">
+                                <strong>Don't confuse with:</strong> Native sea squirts — thinner, gelatinous, no veiny texture
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Asian Green Mussel -->
+                    <div class="species-card high" data-images="assets/AsianGreenLipMuscle.webp,assets/AsianGreen01.jpeg,assets/AsianGreen02.jpg,assets/AsianGreen03.jpg,assets/AsianGreen04.jpg,assets/AsianGreen05.jpg">
+                        <div class="species-img">
+                            <img src="assets/AsianGreenLipMuscle.webp" alt="Asian Green Mussel">
+                            <span class="species-badge high">NOXIOUS</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Asian Green Mussel</div>
+                            <div class="species-scientific">Perna viridis</div>
+                            <span class="species-group">Mussel • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Young = bright emerald green</li>
+                                    <li>Older = brownish-green</li>
+                                    <li>Big — 80-165mm (hand-sized)</li>
+                                    <li>Blue-green inside when open</li>
+                                    <li><strong>Not established in WA</strong></li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-note">
+                                <strong>Don't confuse with:</strong> Blue mussel — those are blue-black, not green
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>3</span>
+            </div>
+        </div>
+        
+        <!-- PAGE 4: NOXIOUS SPECIES 3-4 -->
+        <div class="page">
+            <div class="species-page">
+                <div class="species-page-header">
+                    <h2>NOXIOUS — Report to DPIRD</h2>
+                    <span>Page 2 of 2</span>
+                </div>
+                
+                <div class="species-pair">
+                    <!-- European Fan Worm -->
+                    <div class="species-card high">
+                        <div class="species-img">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/CSIRO_ScienceImage_866_Sabella_spallanzanii_European_fanworm.jpg?width=400" alt="European Fan Worm">
+                            <span class="species-badge high">NOXIOUS</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">European Fan Worm</div>
+                            <div class="species-scientific">Sabella spallanzanii</div>
+                            <span class="species-group">Tube Worm • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>HUGE fan — 45-60mm across</li>
+                                    <li>Fan spirals in (not flat)</li>
+                                    <li>Stripy — orange/purple/white bands</li>
+                                    <li>Brown leathery tube</li>
+                                    <li><strong>Established in WA — still report</strong></li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-note">
+                                <strong>Don't confuse with:</strong> Native serpulid worms — smaller fans, white hard tubes
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Black-striped False Mussel -->
+                    <div class="species-card high" data-images="assets/BlackStripedFalseMus01.png,assets/BlackStripedFalseMus02.jpg,assets/BlackStripedFalseMus03.png">
+                        <div class="species-img">
+                            <img src="assets/BlackStripedFalseMus01.png" alt="Black-striped False Mussel">
+                            <span class="species-badge high">NOXIOUS</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Black-striped False Mussel</div>
+                            <div class="species-scientific">Mytilopsis sallei</div>
+                            <span class="species-group">Mussel • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Small — only 25mm (thumbnail)</li>
+                                    <li>Dark stripes on shell</li>
+                                    <li>Packs in thick layers</li>
+                                    <li>Loves brackish water</li>
+                                    <li><strong>Not established — check sea chests!</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>4</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- A4 SHEET 3: MORE NOXIOUS + WATCH LIST -->
+    <div class="a4-sheet">
+        <!-- PAGE 5: MORE NOXIOUS SPECIES -->
+        <div class="page">
+            <div class="species-page">
+                <div class="species-page-header">
+                    <h2>NOXIOUS — Report to DPIRD</h2>
+                    <span>Crabs &amp; Seastar</span>
+                </div>
+                
+                <div class="species-pair">
+                    <!-- European Shore Crab -->
+                    <div class="species-card high">
+                        <div class="species-img">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/Carcinus_maenas.jpg?width=400" alt="European Shore Crab">
+                            <span class="species-badge high">NOXIOUS</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">European Shore Crab</div>
+                            <div class="species-scientific">Carcinus maenas</div>
+                            <span class="species-group">Crab • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Green shell (can be orange under)</li>
+                                    <li>5 spines each side behind eyes</li>
+                                    <li>Up to 90mm across</li>
+                                    <li>Hides in sea chests &amp; rope guards</li>
+                                    <li><strong>NOT established in WA — report!</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Northern Pacific Seastar -->
+                    <div class="species-card high">
+                        <div class="species-img">
+                            <img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar">
+                            <span class="species-badge high">NOXIOUS</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Northern Pacific Seastar</div>
+                            <div class="species-scientific">Asterias amurensis</div>
+                            <span class="species-group">Seastar • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Large — up to 50cm diameter</li>
+                                    <li>5 arms with upturned tips</li>
+                                    <li>Yellow-orange with purple/red marks</li>
+                                    <li>Underside completely yellow</li>
+                                    <li><strong>Not in WA — devastating if arrives</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>5</span>
+            </div>
+        </div>
+        
+        <!-- PAGE 6: WATCH LIST -->
+        <div class="page">
+            <div class="species-page">
+                <div class="species-page-header medium">
+                    <h2>WATCH — Emerging Threats</h2>
+                    <span>Document &amp; Report</span>
+                </div>
+                
+                <div class="species-pair">
+                    <!-- Japanese Kelp (Wakame) -->
+                    <div class="species-card medium">
+                        <div class="species-img">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/CSIRO_ScienceImage_867_Undaria_pinnatifida_Japanese_kelp.jpg?width=400" alt="Japanese Kelp">
+                            <span class="species-badge medium">WATCH</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Japanese Kelp (Wakame)</div>
+                            <div class="species-scientific">Undaria pinnatifida</div>
+                            <span class="species-group">Kelp • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Big brown fronds with midrib spine</li>
+                                    <li>Wavy ruffled edges</li>
+                                    <li>Can be up to 3m long</li>
+                                    <li>Frilly reproductive bit at base</li>
+                                    <li><strong>In VIC/TAS/SA — NOT detected in WA</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Killer Algae -->
+                    <div class="species-card medium">
+                        <div class="species-img">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/Caulerpa_taxifolia_Feather_algae.jpg?width=400" alt="Killer Algae">
+                            <span class="species-badge medium">WATCH</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Killer Algae</div>
+                            <div class="species-scientific">Caulerpa taxifolia</div>
+                            <span class="species-group">Algae • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Bright green — stands out</li>
+                                    <li>Feather-shaped fronds</li>
+                                    <li>Spreads with creeping runners</li>
+                                    <li>Can grow to 65cm tall</li>
+                                    <li><strong>In NSW estuaries — NOT in WA</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>6</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- A4 SHEET 4: WATCH LIST CONT + LARGE OYSTERS -->
+    <div class="a4-sheet">
+        <!-- PAGE 7: ASIAN PADDLE CRAB + LARGE OYSTERS -->
+        <div class="page">
+            <div class="species-page">
+                <div class="species-page-header medium">
+                    <h2>WATCH — Emerging Threats</h2>
+                    <span>Crabs &amp; Oysters</span>
+                </div>
+                
+                <div class="species-pair">
+                    <!-- Asian Paddle Crab -->
+                    <div class="species-card medium">
+                        <div class="species-img">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/Charybdis_japonica.jpg?width=400" alt="Asian Paddle Crab">
+                            <span class="species-badge medium">WATCH</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Asian Paddle Crab</div>
+                            <div class="species-scientific">Charybdis japonica</div>
+                            <span class="species-group">Crab • WA Noxious Listed</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Back legs are flat paddles</li>
+                                    <li>6 spines between the eyes</li>
+                                    <li>Up to 120mm across</li>
+                                    <li>Olive-brown to purple colour</li>
+                                    <li><strong>In NZ — can spread disease</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Large Oysters (General) -->
+                    <div class="species-card medium">
+                        <div class="species-img">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/Crassostrea_gigas_p1040848.jpg?width=400" alt="Large Oysters">
+                            <span class="species-badge medium">WATCH</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Large Non-Native Oysters</div>
+                            <div class="species-scientific">Magallana spp.</div>
+                            <span class="species-group">Oyster • Hard to ID in-situ</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Messy irregular shape</li>
+                                    <li>Rough frilly edges — SHARP!</li>
+                                    <li>Can get huge — up to 400mm</li>
+                                    <li>Glued flat to surface</li>
+                                    <li><strong>Photo any large oysters for ID</strong></li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-note">
+                                <strong>Note:</strong> Includes Pacific, Black Scar &amp; Suminoe oysters. Species ID requires lab analysis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>7</span>
+            </div>
+        </div>
+        
+        <!-- PAGE 8: MORE WATCH LIST -->
+        <div class="page">
+            <div class="species-page">
+                <div class="species-page-header medium">
+                    <h2>WATCH — Emerging Threats</h2>
+                    <span>Mussels</span>
+                </div>
+                
+                <div class="species-pair">
+                    <!-- NZ Green-lipped Mussel -->
+                    <div class="species-card medium" data-images="assets/NZGreenLippedMuscle01.jpg,assets/NZGreenLippedMuscle02.jpg,assets/NZGreenLippedMuscle03.png,assets/NZGreenLippedMuscle04.png">
+                        <div class="species-img">
+                            <img src="assets/NZGreenLippedMuscle01.jpg" alt="NZ Green-lipped Mussel">
+                            <span class="species-badge medium">WATCH</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">NZ Green-lipped Mussel</div>
+                            <div class="species-scientific">Perna canaliculus</div>
+                            <span class="species-group">Mussel • Emerging Threat</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Green "lip" on shell edge — key ID</li>
+                                    <li>Brown-green shell outside</li>
+                                    <li>MASSIVE — up to 240mm</li>
+                                    <li><strong>Check vessels from NZ</strong></li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-note">
+                                <strong>Don't confuse with:</strong> Asian Green Mussel — smaller (165mm max), bright emerald, no green lip
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Brown Mussel -->
+                    <div class="species-card medium" data-images="assets/brownmuscle01.webp,assets/brownmuscle02.jpg,assets/brownmuscle03.jpg">
+                        <div class="species-img">
+                            <img src="assets/brownmuscle01.webp" alt="Brown Mussel">
+                            <span class="species-badge medium">WATCH</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Brown Mussel</div>
+                            <div class="species-scientific">Perna perna</div>
+                            <span class="species-group">Mussel • Emerging Threat</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Dark brown to black shell</li>
+                                    <li>Up to 90mm (fist-sized)</li>
+                                    <li>Dense thick clumps</li>
+                                    <li>Thick shell, hard to break</li>
+                                    <li><strong>From Africa/South America</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>8</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- A4 SHEET 5: NICHE AREAS INFO + NATIVE -->
+    <div class="a4-sheet">
+        <!-- PAGE 9: NICHE AREAS INFO -->
+        <div class="page">
+            <div class="species-page">
+                <div class="species-page-header niche">
+                    <h2>Niche Areas — Where Pests Hide</h2>
+                    <span>Key Inspection Points</span>
+                </div>
+                
+                <div style="padding: 3mm; font-size: 8pt;">
+                    <p style="margin-bottom: 3mm; color: #333;">Marine pests don't just attach to flat hull surfaces. Many hide in protected niche areas. Always check these locations carefully:</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-bottom: 4mm;">
+                        <div style="background: #f5f0f8; padding: 2.5mm; border-radius: 2mm; border-left: 1mm solid #5a4080;">
+                            <strong style="color: #5a4080; font-size: 8pt;">Sea Chests</strong>
+                            <p style="font-size: 7pt; color: #555; margin-top: 1mm;">Warm, protected water. Check for mussels, crabs, squirts</p>
+                        </div>
+                        <div style="background: #f5f0f8; padding: 2.5mm; border-radius: 2mm; border-left: 1mm solid #5a4080;">
+                            <strong style="color: #5a4080; font-size: 8pt;">Rope Guards</strong>
+                            <p style="font-size: 7pt; color: #555; margin-top: 1mm;">Crabs shelter here. Check thoroughly</p>
+                        </div>
+                        <div style="background: #f5f0f8; padding: 2.5mm; border-radius: 2mm; border-left: 1mm solid #5a4080;">
+                            <strong style="color: #5a4080; font-size: 8pt;">Gratings &amp; Grilles</strong>
+                            <p style="font-size: 7pt; color: #555; margin-top: 1mm;">Accumulate sediment and organisms</p>
+                        </div>
+                        <div style="background: #f5f0f8; padding: 2.5mm; border-radius: 2mm; border-left: 1mm solid #5a4080;">
+                            <strong style="color: #5a4080; font-size: 8pt;">Rudder &amp; Prop</strong>
+                            <p style="font-size: 7pt; color: #555; margin-top: 1mm;">Cavities and gaps harbour pests</p>
+                        </div>
+                        <div style="background: #f5f0f8; padding: 2.5mm; border-radius: 2mm; border-left: 1mm solid #5a4080;">
+                            <strong style="color: #5a4080; font-size: 8pt;">Bilge Keel Ends</strong>
+                            <p style="font-size: 7pt; color: #555; margin-top: 1mm;">Often missed. Accumulate growth</p>
+                        </div>
+                        <div style="background: #f5f0f8; padding: 2.5mm; border-radius: 2mm; border-left: 1mm solid #5a4080;">
+                            <strong style="color: #5a4080; font-size: 8pt;">Anchor Wells</strong>
+                            <p style="font-size: 7pt; color: #555; margin-top: 1mm;">Algae, squirts, mussels common</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fef3f3; border: 0.4mm solid #cc0000; padding: 2.5mm; border-radius: 2mm;">
+                        <strong style="color: #cc0000; font-size: 8pt;">🦀 Crabs to Watch For:</strong>
+                        <p style="font-size: 7pt; color: #333; margin-top: 1mm;"><strong>European Shore Crab</strong> — Green shell, 5 spines each side. NOT established in WA. <strong>NOXIOUS — report to DPIRD.</strong></p>
+                        <p style="font-size: 7pt; color: #333; margin-top: 1mm;"><strong>Asian Paddle Crab</strong> — Paddle-shaped back legs, 6 spines between eyes. Carries disease.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>9</span>
+            </div>
+        </div>
+        
+        <!-- PAGE 10: NATIVE COMPARISON -->
+        <div class="page">
+            <div class="species-page">
+                <div class="species-page-header native">
+                    <h2>Native — Normal WA Fouling</h2>
+                    <span>No Report Needed</span>
+                </div>
+                
+                <div class="species-pair">
+                    <!-- Blue Mussel -->
+                    <div class="species-card native">
+                        <div class="species-img">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/Mytilus_galloprovincialis.jpg?width=400" alt="Blue Mussel">
+                            <span class="species-badge native">NATIVE</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Blue Mussel ✓</div>
+                            <div class="species-scientific">Mytilus galloprovincialis</div>
+                            <span class="species-group">Mussel — Common</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Blue-black to dark brown shell</li>
+                                    <li>Pointy triangle shape</li>
+                                    <li>Clumps together with threads</li>
+                                    <li><strong>NOT green — that's Asian one</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Native Tube Worms -->
+                    <div class="species-card native">
+                        <div class="species-img">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/Spirobranchus_giganteus_(Christmastree_Worm_-_yellow_variation).jpg?width=400" alt="Native Tube Worms">
+                            <span class="species-badge native">NATIVE</span>
+                        </div>
+                        <div class="species-info">
+                            <div class="species-name">Native Serpulid Worms ✓</div>
+                            <div class="species-scientific">Serpulidae & Spirorbidae</div>
+                            <span class="species-group">Tube Worm — Common</span>
+                            <div class="species-features">
+                                <ul>
+                                    <li>Hard white calcium tubes</li>
+                                    <li>Small feathery fans</li>
+                                    <li>Spirorbids are tiny 3mm coils</li>
+                                    <li><strong>NOT big spiral fans like European fan worm</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3mm; padding: 2.5mm; background: #e8f4ea; border-radius: 2mm; font-size: 7.5pt;">
+                    <strong style="color: #2d7d46;">Native Sea Squirts:</strong> Thin jelly-like mats, various colours, NOT veiny/waxy. If unsure between native and invasive — <strong>always report it</strong>.
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>10</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- A4 SHEET 6: QUICK REFERENCE + CONTACT -->
+    <div class="a4-sheet">
+        <!-- PAGE 11: QUICK REFERENCE TABLE -->
+        <div class="page">
+            <div class="reference-page">
+                <h2>Quick Reference — WA Noxious Species</h2>
+                
+                <table class="ref-table invasive">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Species</th>
+                            <th style="width: 15%;">Status</th>
+                            <th>Quick ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Carpet Sea Squirt</td>
+                            <td><span class="ref-priority high">NOXIOUS</span></td>
+                            <td>Creamy veiny mat, waxy, drips down</td>
+                        </tr>
+                        <tr>
+                            <td>Asian Green Mussel</td>
+                            <td><span class="ref-priority high">NOXIOUS</span></td>
+                            <td>Bright green shell, 80-165mm</td>
+                        </tr>
+                        <tr>
+                            <td>European Fan Worm</td>
+                            <td><span class="ref-priority high">NOXIOUS</span></td>
+                            <td>Big spiral fan 45-60mm, stripy</td>
+                        </tr>
+                        <tr>
+                            <td>Black-striped Mussel</td>
+                            <td><span class="ref-priority high">NOXIOUS</span></td>
+                            <td>Small 25mm, dark stripes, sea chests</td>
+                        </tr>
+                        <tr>
+                            <td>European Shore Crab</td>
+                            <td><span class="ref-priority high">NOXIOUS</span></td>
+                            <td>Green shell, 5 spines each side</td>
+                        </tr>
+                        <tr>
+                            <td>N. Pacific Seastar</td>
+                            <td><span class="ref-priority high">NOXIOUS</span></td>
+                            <td>Large 5-arm, yellow-orange, 50cm</td>
+                        </tr>
+                        <tr>
+                            <td>Japanese Kelp</td>
+                            <td><span class="ref-priority medium">WATCH</span></td>
+                            <td>Brown fronds, spine, wavy. Not in WA</td>
+                        </tr>
+                        <tr>
+                            <td>Killer Algae</td>
+                            <td><span class="ref-priority medium">WATCH</span></td>
+                            <td>Bright green feathery fronds</td>
+                        </tr>
+                        <tr>
+                            <td>Large Oysters</td>
+                            <td><span class="ref-priority medium">WATCH</span></td>
+                            <td>Messy shell, sharp — photo for ID</td>
+                        </tr>
+                        <tr>
+                            <td>Asian Paddle Crab</td>
+                            <td><span class="ref-priority medium">WATCH</span></td>
+                            <td>Paddle legs, 6 spines between eyes</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="margin-top: 3mm; padding: 2mm 3mm; background: #fff8e6; border-radius: 1.5mm; font-size: 6.5pt; border: 0.3mm solid #f0c040;">
+                    <strong style="color: #a06000;">⚠️ This is not the complete WA noxious list.</strong> View full list: <em>fish.wa.gov.au</em> or Schedule 5, Fish Resources Management Regulations 1995.
+                </div>
+                
+                <table class="ref-table native" style="margin-top: 3mm;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Native Species</th>
+                            <th>Key Difference from Invasive</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Blue Mussel</td>
+                            <td>Blue-black shell, NOT green</td>
+                        </tr>
+                        <tr>
+                            <td>Native Tube Worms</td>
+                            <td>Small fans, white hard tubes</td>
+                        </tr>
+                        <tr>
+                            <td>Native Sea Squirts</td>
+                            <td>Thin jelly mats, NOT veiny/waxy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>11</span>
+            </div>
+        </div>
+        
+        <!-- PAGE 12: CONTACT & REPORTING -->
+        <div class="page">
+            <div class="contact-page">
+                <h2>Report to DPIRD Within 24hrs</h2>
+                
+                <div class="hotline-box">
+                    <h3>📞 FishWatch Hotline (24/7)</h3>
+                    <div class="hotline-number">1800 815 507</div>
+                    <div class="hotline-label">For suspected noxious fish — call anytime</div>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h4>DPIRD WA</h4>
+                        <p><strong>Email:</strong><br>Aquatic.Biosecurity@dpird.wa.gov.au</p>
+                        <p style="margin-top: 2mm;"><strong>MyPestGuide App:</strong><br>Search "MyPestGuide Reporter"</p>
+                    </div>
+                    <div class="contact-card">
+                        <h4>MarineStream</h4>
+                        <p><strong>Biofouling Manager:</strong><br>Mat Harvey</p>
+                        <p><strong>Operations Manager:</strong><br>Sam Diamond</p>
+                    </div>
+                </div>
+                
+                <div class="reminder-box">
+                    <h4>✓ When Reporting, Include:</h4>
+                    <ul>
+                        <li>Photos — close-up + wide shot with hand for scale</li>
+                        <li>Location on hull (bow distance, depth, port/stbd)</li>
+                        <li>Vessel name and berth location</li>
+                        <li>Date and time of sighting</li>
+                        <li>Your contact details</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #fef3f3; border: 0.4mm solid #cc0000; padding: 2mm 3mm; border-radius: 2mm; margin-top: 3mm;">
+                    <p style="font-size: 7pt; color: #333;"><strong style="color: #cc0000;">⚠️ Important:</strong> Cease work until DPIRD advises how to proceed in a biosecure manner. Do not remove suspected noxious organisms.</p>
+                </div>
+                
+                <div style="margin-top: 4mm; text-align: center; padding: 2.5mm; background: #f0f2f4; border-radius: 2mm;">
+                    <p style="font-size: 7.5pt; color: #555; margin-bottom: 1mm;">
+                        <strong>Hull Biofouling ID Guide — WA</strong> • Version 3.0 • January 2026
+                    </p>
+                    <p style="font-size: 6.5pt; color: #888;">
+                        © 2026 MarineStream • Species from WA Noxious Fish List (Schedule 5)
+                    </p>
+                    <p style="font-size: 6pt; color: #aaa; margin-top: 1mm;">
+                        Image credits: CSIRO, DPIRD WA, Wikipedia Commons, DAFF
+                    </p>
+                </div>
+                
+                <!-- Developer Contact Section -->
+                <div style="margin-top: 4mm; background: linear-gradient(135deg, #0d1b2a 0%, #1b3a4b 50%, #2d5a6b 100%); padding: 3mm 4mm; border-radius: 2.5mm; display: flex; align-items: center; gap: 3mm;">
+                    <div style="flex-shrink: 0; width: 8mm; height: 8mm; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 10pt;">🧬</span>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <p style="font-size: 6.5pt; color: rgba(255,255,255,0.7); margin-bottom: 0.5mm; text-transform: uppercase; letter-spacing: 0.5px;">Developed by Marine Scientist & Developer</p>
+                        <p style="font-size: 8pt; color: white; font-weight: 600;">Mat Harvey</p>
+                    </div>
+                    <div style="display: flex; gap: 2mm; flex-shrink: 0;">
+                        <a href="mailto:mharvey@franmarine.com.au" class="dev-contact-link" title="Email Mat">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64b5c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/mathew-harvey" target="_blank" class="dev-contact-link" title="GitHub Profile">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#64b5c6">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span class="page-footer-logo">MarineStream</span>
+                <span>12</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <title>Hull Biofouling ID Guide - MarineStream</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-region="sl">
+    
+    <!-- Region Selection Modal (First Visit) -->
+    <div class="region-modal" id="region-modal">
+        <div class="region-modal-backdrop"></div>
+        <div class="region-modal-content">
+            <div class="region-modal-header">
+                <h2>Welcome to the Hull Biofouling ID Guide</h2>
+                <p>Select your region to see relevant species and contacts</p>
+            </div>
+            <div class="region-modal-options">
+                <button class="region-modal-btn" onclick="selectRegionFromModal('wa')">
+                    <span class="region-modal-icon">🦘</span>
+                    <span class="region-modal-name">Western Australia</span>
+                    <span class="region-modal-desc">DPIRD WA regulations & contacts</span>
+                </button>
+                <button class="region-modal-btn" onclick="selectRegionFromModal('nsw')">
+                    <span class="region-modal-icon">🌊</span>
+                    <span class="region-modal-name">New South Wales</span>
+                    <span class="region-modal-desc">NSW DPI regulations & contacts</span>
+                </button>
+                <button class="region-modal-btn" onclick="selectRegionFromModal('vic')">
+                    <span class="region-modal-icon">⭐</span>
+                    <span class="region-modal-name">Victoria</span>
+                    <span class="region-modal-desc">Agriculture VIC regulations & contacts</span>
+                </button>
+                <button class="region-modal-btn" onclick="selectRegionFromModal('tas')">
+                    <span class="region-modal-icon">🏔️</span>
+                    <span class="region-modal-name">Tasmania</span>
+                    <span class="region-modal-desc">Biosecurity TAS regulations & contacts</span>
+                </button>
+                <button class="region-modal-btn" onclick="selectRegionFromModal('qld')">
+                    <span class="region-modal-icon">☀️</span>
+                    <span class="region-modal-name">Queensland</span>
+                    <span class="region-modal-desc">Biosecurity QLD regulations & contacts</span>
+                </button>
+                <button class="region-modal-btn" onclick="selectRegionFromModal('sa')">
+                    <span class="region-modal-icon">🍷</span>
+                    <span class="region-modal-name">South Australia</span>
+                    <span class="region-modal-desc">PIRSA regulations & contacts</span>
+                </button>
+                <button class="region-modal-btn" onclick="selectRegionFromModal('nt')">
+                    <span class="region-modal-icon">🐊</span>
+                    <span class="region-modal-name">Northern Territory</span>
+                    <span class="region-modal-desc">NT DEPWS regulations & contacts</span>
+                </button>
+                <button class="region-modal-btn" onclick="selectRegionFromModal('sl')">
+                    <span class="region-modal-icon">🇱🇰</span>
+                    <span class="region-modal-name">Sri Lanka</span>
+                    <span class="region-modal-desc">MEPA & IMO TEST Biofouling guidance</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <a href="https://www.marinestream.com.au" class="logo"><img src="assets/marinestream_logo_white.png" alt="MarineStream" style="height: 32px;"></a>
+            <nav>
+                <ul>
+                    <li><a href="#intro">Intro</a></li>
+                    <li><a href="#invasive">Invasive Foulers</a></li>
+                    <li><a href="#niche">Niche Hitchhikers</a></li>
+                    <li><a href="#native">Native Fouling</a></li>
+                    <li><a href="#contact">Report It</a></li>
+                </ul>
+            </nav>
+            <!-- Region Dropdown -->
+            <div class="region-dropdown" id="region-dropdown">
+                <button class="region-dropdown-trigger" onclick="toggleRegionDropdown()">
+                    <span class="region-dropdown-icon" id="region-dropdown-icon">🦘</span>
+                    <span class="region-dropdown-text" id="region-dropdown-text">WA</span>
+                    <svg class="region-dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                </button>
+                <div class="region-dropdown-menu" id="region-dropdown-menu">
+                    <button class="region-dropdown-item" data-region="wa" onclick="setRegion('wa')">
+                        <span>🦘</span> Western Australia
+                    </button>
+                    <button class="region-dropdown-item" data-region="nsw" onclick="setRegion('nsw')">
+                        <span>🌊</span> New South Wales
+                    </button>
+                    <button class="region-dropdown-item" data-region="vic" onclick="setRegion('vic')">
+                        <span>⭐</span> Victoria
+                    </button>
+                    <button class="region-dropdown-item" data-region="tas" onclick="setRegion('tas')">
+                        <span>🏔️</span> Tasmania
+                    </button>
+                    <button class="region-dropdown-item" data-region="qld" onclick="setRegion('qld')">
+                        <span>☀️</span> Queensland
+                    </button>
+                    <button class="region-dropdown-item" data-region="sa" onclick="setRegion('sa')">
+                        <span>🍷</span> South Australia
+                    </button>
+                    <button class="region-dropdown-item" data-region="nt" onclick="setRegion('nt')">
+                        <span>🐊</span> Northern Territory
+                    </button>
+                    <button class="region-dropdown-item" data-region="sl" onclick="setRegion('sl')">
+                        <span>🇱🇰</span> Sri Lanka
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="region-badge" id="region-badge">
+                <span class="region-badge-icon">📍</span>
+                <span class="region-badge-text" id="region-badge-text">Western Australia</span>
+            </div>
+            <h1>Hull Biofouling ID Guide</h1>
+            <p id="hero-subtitle">Quick reference for divers cleaning ship hulls in <span class="region-text">WA</span> - know what you're scraping off</p>
+            <div class="hero-badge">Version 3.0 • January 2026</div>
+            <div class="print-links">
+                <!-- WA Print Links -->
+                <a href="A3Poster.html" class="print-btn region-content wa-content has-sl-override" target="_blank" id="poster-link-wa">
+                    <span class="print-icon">🖨️</span>
+                    <span class="print-text">A3 Poster</span>
+                    <span class="print-desc">Wall reference</span>
+                </a>
+                <a href="A5Booklet.html" class="print-btn region-content wa-content has-sl-override" target="_blank" id="booklet-link-wa">
+                    <span class="print-icon">📖</span>
+                    <span class="print-text">A5 Booklet</span>
+                    <span class="print-desc">Pocket guide</span>
+                </a>
+                <!-- NSW Print Links -->
+                <a href="A3Poster-NSW.html" class="print-btn region-content nsw-content" target="_blank" id="poster-link-nsw" style="display:none;">
+                    <span class="print-icon">🖨️</span>
+                    <span class="print-text">A3 Poster</span>
+                    <span class="print-desc">Wall reference</span>
+                </a>
+                <a href="A5Booklet-NSW.html" class="print-btn region-content nsw-content" target="_blank" id="booklet-link-nsw" style="display:none;">
+                    <span class="print-icon">📖</span>
+                    <span class="print-text">A5 Booklet</span>
+                    <span class="print-desc">Pocket guide</span>
+                </a>
+                <!-- VIC Print Links -->
+                <a href="A3Poster-VIC.html" class="print-btn region-content vic-content" target="_blank" id="poster-link-vic" style="display:none;">
+                    <span class="print-icon">🖨️</span>
+                    <span class="print-text">A3 Poster</span>
+                    <span class="print-desc">Wall reference</span>
+                </a>
+                <a href="A5Booklet-VIC.html" class="print-btn region-content vic-content" target="_blank" id="booklet-link-vic" style="display:none;">
+                    <span class="print-icon">📖</span>
+                    <span class="print-text">A5 Booklet</span>
+                    <span class="print-desc">Pocket guide</span>
+                </a>
+                <!-- TAS Print Links -->
+                <a href="A3Poster-TAS.html" class="print-btn region-content tas-content" target="_blank" id="poster-link-tas" style="display:none;">
+                    <span class="print-icon">🖨️</span>
+                    <span class="print-text">A3 Poster</span>
+                    <span class="print-desc">Wall reference</span>
+                </a>
+                <a href="A5Booklet-TAS.html" class="print-btn region-content tas-content" target="_blank" id="booklet-link-tas" style="display:none;">
+                    <span class="print-icon">📖</span>
+                    <span class="print-text">A5 Booklet</span>
+                    <span class="print-desc">Pocket guide</span>
+                </a>
+                <!-- QLD Print Links -->
+                <a href="A3Poster-QLD.html" class="print-btn region-content qld-content" target="_blank" id="poster-link-qld" style="display:none;">
+                    <span class="print-icon">🖨️</span>
+                    <span class="print-text">A3 Poster</span>
+                    <span class="print-desc">Wall reference</span>
+                </a>
+                <a href="A5Booklet-QLD.html" class="print-btn region-content qld-content" target="_blank" id="booklet-link-qld" style="display:none;">
+                    <span class="print-icon">📖</span>
+                    <span class="print-text">A5 Booklet</span>
+                    <span class="print-desc">Pocket guide</span>
+                </a>
+                <!-- SA Print Links -->
+                <a href="A3Poster-SA.html" class="print-btn region-content sa-content" target="_blank" id="poster-link-sa" style="display:none;">
+                    <span class="print-icon">🖨️</span>
+                    <span class="print-text">A3 Poster</span>
+                    <span class="print-desc">Wall reference</span>
+                </a>
+                <a href="A5Booklet-SA.html" class="print-btn region-content sa-content" target="_blank" id="booklet-link-sa" style="display:none;">
+                    <span class="print-icon">📖</span>
+                    <span class="print-text">A5 Booklet</span>
+                    <span class="print-desc">Pocket guide</span>
+                </a>
+                <!-- NT Print Links -->
+                <a href="A3Poster-NT.html" class="print-btn region-content nt-content" target="_blank" id="poster-link-nt" style="display:none;">
+                    <span class="print-icon">🖨️</span>
+                    <span class="print-text">A3 Poster</span>
+                    <span class="print-desc">Wall reference</span>
+                </a>
+                <a href="A5Booklet-NT.html" class="print-btn region-content nt-content" target="_blank" id="booklet-link-nt" style="display:none;">
+                    <span class="print-icon">📖</span>
+                    <span class="print-text">A5 Booklet</span>
+                    <span class="print-desc">Pocket guide</span>
+                </a>
+                <!-- Sri Lanka Print Links -->
+                <a href="A3Poster-SL.html" class="print-btn region-content sl-content" target="_blank" id="poster-link-sl" style="display:none;">
+                    <span class="print-icon">🖨️</span>
+                    <span class="print-text">A3 Poster</span>
+                    <span class="print-desc">Wall reference</span>
+                </a>
+                <a href="A5Booklet-SL.html" class="print-btn region-content sl-content" target="_blank" id="booklet-link-sl" style="display:none;">
+                    <span class="print-icon">📖</span>
+                    <span class="print-text">A5 Booklet</span>
+                    <span class="print-desc">Pocket guide</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <main>
+        <div class="container">
+            <!-- Introduction Section -->
+            <section id="intro">
+                <h2 class="section-title">What's This Guide For?</h2>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>The Job</h3>
+                        <p>You're cleaning hulls. You need to spot the bad stuff before you scrape it off. This guide shows you what to look for and what to report.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Why It Matters</h3>
+                        <p class="region-content wa-content has-sl-override">Marine pests hitch rides on hulls. Some nasty ones have already turned up in WA - like carpet sea squirt at HMAS Stirling. Divers are our first line of defence.</p>
+                        <p class="region-content sl-content" style="display:none;">Invasive marine species hitch rides on ship hulls and in sea chests. Sri Lanka has already recorded new invaders such as the charru mussel (<em>Mytella strigata</em>) near Anawilundawa, and the Asian green mussel is widespread. Divers and inspectors are the first line of defence under the IMO Biofouling Guidelines.</p>
+                        <p class="region-content nsw-content" style="display:none;">Marine pests hitch rides on hulls. Sydney Harbour and NSW ports have seen invasive species like Caulerpa taxifolia and European fan worm. Divers are our first line of defence.</p>
+                        <p class="region-content vic-content" style="display:none;">Marine pests hitch rides on hulls. Port Phillip Bay has established populations of Northern Pacific Seastar. Divers are our first line of defence.</p>
+                        <p class="region-content tas-content" style="display:none;">Marine pests hitch rides on hulls. The Derwent Estuary has been devastated by Northern Pacific Seastar. Divers are our first line of defence.</p>
+                        <p class="region-content qld-content" style="display:none;">Marine pests hitch rides on hulls. QLD's tropical waters are at risk from species like Asian Green Mussel. Divers are our first line of defence.</p>
+                        <p class="region-content sa-content" style="display:none;">Marine pests hitch rides on hulls. SA waters already have European fan worm and Wakame. Divers are our first line of defence.</p>
+                        <p class="region-content nt-content" style="display:none;">Marine pests hitch rides on hulls. Darwin had a major Black-striped Mussel outbreak in 1999. Divers are our first line of defence.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Priority Levels</h3>
+                        <!-- WA Priority Levels -->
+                        <ul class="priority-list region-content wa-content has-sl-override">
+                            <li><span class="priority high">NOXIOUS</span> WA noxious listed. Stop work & report to DPIRD within 24hrs.</li>
+                            <li><span class="priority medium">WATCH</span> Emerging threat — not yet in WA. Document & report.</li>
+                            <li><span class="priority low">NATIVE</span> Normal WA fouling — no report needed.</li>
+                        </ul>
+                        <!-- Sri Lanka Priority Levels -->
+                        <ul class="priority-list region-content sl-content" style="display:none;">
+                            <li><span class="priority high">HIGH RISK</span> Invasive marine species of concern to Sri Lanka. Stop work, document & report to MEPA.</li>
+                            <li><span class="priority medium">WATCH</span> Emerging threat in the region. Document & report.</li>
+                            <li><span class="priority low">NATIVE</span> Normal local fouling — no report needed.</li>
+                        </ul>
+                        <!-- NSW Priority Levels -->
+                        <ul class="priority-list region-content nsw-content" style="display:none;">
+                            <li><span class="priority high">PROHIBITED</span> Prohibited matter under NSW Biosecurity Act. Report to DPI immediately.</li>
+                            <li><span class="priority medium">WATCH</span> Emerging threat or established pest. Document & report.</li>
+                            <li><span class="priority low">NATIVE</span> Normal NSW fouling — no report needed.</li>
+                        </ul>
+                        <!-- VIC Priority Levels -->
+                        <ul class="priority-list region-content vic-content" style="display:none;">
+                            <li><span class="priority high">CONTROLLED</span> State/Regionally Prohibited or Controlled. Report to Agriculture VIC.</li>
+                            <li><span class="priority medium">WATCH</span> Emerging threat or restricted pest. Document & report.</li>
+                            <li><span class="priority low">NATIVE</span> Normal VIC fouling — no report needed.</li>
+                        </ul>
+                        <!-- TAS Priority Levels -->
+                        <ul class="priority-list region-content tas-content" style="display:none;">
+                            <li><span class="priority high">DECLARED</span> Declared pest under TAS Biosecurity Act. Report to Biosecurity TAS.</li>
+                            <li><span class="priority medium">WATCH</span> Emerging threat. Document & report.</li>
+                            <li><span class="priority low">NATIVE</span> Normal TAS fouling — no report needed.</li>
+                        </ul>
+                        <!-- QLD Priority Levels -->
+                        <ul class="priority-list region-content qld-content" style="display:none;">
+                            <li><span class="priority high">PROHIBITED</span> Prohibited/Restricted under QLD Biosecurity Act. Report to Biosecurity QLD.</li>
+                            <li><span class="priority medium">WATCH</span> General biosecurity obligation applies. Document & report.</li>
+                            <li><span class="priority low">NATIVE</span> Normal QLD fouling — no report needed.</li>
+                        </ul>
+                        <!-- SA Priority Levels -->
+                        <ul class="priority-list region-content sa-content" style="display:none;">
+                            <li><span class="priority high">DECLARED</span> Declared pest under Landscape SA Act. Report to PIRSA/Fishwatch.</li>
+                            <li><span class="priority medium">WATCH</span> Emerging threat. Document & report.</li>
+                            <li><span class="priority low">NATIVE</span> Normal SA fouling — no report needed.</li>
+                        </ul>
+                        <!-- NT Priority Levels -->
+                        <ul class="priority-list region-content nt-content" style="display:none;">
+                            <li><span class="priority high">CLASS A/B</span> Declared under NT Weeds Management Act. Report to NT Fisheries.</li>
+                            <li><span class="priority medium">WATCH</span> Emerging threat. Document & report.</li>
+                            <li><span class="priority low">NATIVE</span> Normal NT fouling — no report needed.</li>
+                        </ul>
+                        <p class="region-content wa-content has-sl-override" style="font-size: 0.85em; color: var(--gray-600); margin-top: 10px;"><em>Key species from WA noxious list. Full list: fish.wa.gov.au (Schedule 5)</em></p>
+                        <p class="region-content sl-content" style="display:none; font-size: 0.85em; color: var(--gray-600); margin-top: 10px;"><em>Aligned with the IMO Biofouling Guidelines (resolution MEPC.378(80)) and the GEF-UNDP-IMO GloFouling / IMO–Norad TEST Biofouling Project.</em></p>
+                        <p class="region-content nsw-content" style="display:none; font-size: 0.85em; color: var(--gray-600); margin-top: 10px;"><em>Species listed under NSW Biosecurity Act 2015</em></p>
+                        <p class="region-content vic-content" style="display:none; font-size: 0.85em; color: var(--gray-600); margin-top: 10px;"><em>Species under Catchment & Land Protection Act 1994</em></p>
+                        <p class="region-content tas-content" style="display:none; font-size: 0.85em; color: var(--gray-600); margin-top: 10px;"><em>Species under TAS Biosecurity Act 2019</em></p>
+                        <p class="region-content qld-content" style="display:none; font-size: 0.85em; color: var(--gray-600); margin-top: 10px;"><em>Species under QLD Biosecurity Act 2014</em></p>
+                        <p class="region-content sa-content" style="display:none; font-size: 0.85em; color: var(--gray-600); margin-top: 10px;"><em>Species under Landscape South Australia Act 2019</em></p>
+                        <p class="region-content nt-content" style="display:none; font-size: 0.85em; color: var(--gray-600); margin-top: 10px;"><em>Species under NT Weeds Management Act 2001</em></p>
+                    </div>
+                </div>
+                
+                <!-- WA Alert -->
+                <div class="alert region-content wa-content has-sl-override">
+                    <h4>⚠️ Suspect a Noxious Species?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — cease work until DPIRD advises</li>
+                        <li>Take photos - close-up + wide shot, use your hand for scale</li>
+                        <li>Note where on the hull (bow distance, depth, port/starboard)</li>
+                        <li><strong>DON'T scrape it off</strong> — leave specimen intact</li>
+                        <li>Report to <strong>DPIRD FishWatch 1800 815 507</strong> within 24 hours</li>
+                    </ul>
+                </div>
+
+                <!-- Sri Lanka Alert -->
+                <div class="alert region-content sl-content" style="display:none;">
+                    <h4>⚠️ Suspect an Invasive Marine Species?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — pause in-water work until MEPA advises</li>
+                        <li>Take photos - close-up + wide shot, use your hand for scale</li>
+                        <li>Note where on the hull (sea chest, niche area, depth, port/starboard) and the vessel's last ports</li>
+                        <li><strong>DON'T scrape it off</strong> — keep the specimen intact for identification</li>
+                        <li>Report to the <strong>Marine Environment Protection Authority (MEPA)</strong> — Tel <strong>+94 11 2554373</strong> / <strong>+94 11 2554006</strong>, email <strong>info@mepa.gov.lk</strong> (mepa.gov.lk)</li>
+                    </ul>
+                </div>
+                
+                <!-- NSW Alert -->
+                <div class="alert region-content nsw-content" style="display:none;">
+                    <h4>⚠️ Suspect a Prohibited Species?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — cease work until NSW DPI advises</li>
+                        <li>Take photos - close-up + wide shot, use your hand for scale</li>
+                        <li>Note where on the hull (bow distance, depth, port/starboard)</li>
+                        <li><strong>DON'T scrape it off</strong> — leave specimen intact</li>
+                        <li>Report to <strong>NSW DPI 1800 675 888</strong> immediately</li>
+                    </ul>
+                </div>
+                
+                <!-- VIC Alert -->
+                <div class="alert region-content vic-content" style="display:none;">
+                    <h4>⚠️ Suspect a Marine Pest?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — cease work until Agriculture VIC advises</li>
+                        <li>Take photos - close-up + wide shot, use your hand for scale</li>
+                        <li>Note where on the hull (bow distance, depth, port/starboard)</li>
+                        <li><strong>DON'T scrape it off</strong> — leave specimen intact</li>
+                        <li>Report to <strong>Agriculture Victoria 136 186</strong></li>
+                    </ul>
+                </div>
+                
+                <!-- TAS Alert -->
+                <div class="alert region-content tas-content" style="display:none;">
+                    <h4>⚠️ Suspect a Declared Pest?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — cease work until Biosecurity TAS advises</li>
+                        <li>Take photos - close-up + wide shot, use your hand for scale</li>
+                        <li>Note where on the hull (bow distance, depth, port/starboard)</li>
+                        <li><strong>DON'T scrape it off</strong> — leave specimen intact</li>
+                        <li>Report to <strong>Biosecurity Tasmania 03 6165 3777</strong></li>
+                    </ul>
+                </div>
+                
+                <!-- QLD Alert -->
+                <div class="alert region-content qld-content" style="display:none;">
+                    <h4>⚠️ Suspect a Biosecurity Risk?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — cease work until Biosecurity QLD advises</li>
+                        <li>Take photos - close-up + wide shot, use your hand for scale</li>
+                        <li>Note where on the hull (bow distance, depth, port/starboard)</li>
+                        <li><strong>DON'T scrape it off</strong> — leave specimen intact</li>
+                        <li>Report to <strong>Biosecurity Queensland 13 25 23</strong> </li>
+                    </ul>
+                </div>
+                
+                <!-- SA Alert -->
+                <div class="alert region-content sa-content" style="display:none;">
+                    <h4>⚠️ Suspect a Declared Pest?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — cease work until PIRSA advises</li>
+                        <li>Take photos - close-up + wide shot, use your hand for scale</li>
+                        <li>Note where on the hull (bow distance, depth, port/starboard)</li>
+                        <li><strong>DON'T scrape it off</strong> — leave specimen intact</li>
+                        <li>Report to <strong>PIRSA Fishwatch 1800 065 522</strong></li>
+                    </ul>
+                </div>
+                
+                <!-- NT Alert -->
+                <div class="alert region-content nt-content" style="display:none;">
+                    <h4>⚠️ Suspect an Aquatic Pest?</h4>
+                    <ul>
+                        <li><strong>STOP cleaning</strong> — cease work until NT Fisheries advises</li>
+                        <li>Take photos - close-up + wide shot, use your hand for scale</li>
+                        <li>Note where on the hull (bow distance, depth, port/starboard)</li>
+                        <li><strong>DON'T scrape it off</strong> — leave specimen intact</li>
+                        <li>Report to <strong>NT Fishwatch 1800 891 136</strong></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Invasive Hull Foulers Section -->
+            <section id="invasive">
+                <h2 class="section-title danger">Part 1: Invasive Hull Foulers — The Bad Stuff</h2>
+                <p style="margin-bottom: 20px; color: var(--gray-600);">These are the pests that stick to hulls and need reporting. If you see any of these, follow your reporting protocol.</p>
+                
+                <input type="text" class="search-box" id="invasive-search" placeholder="Search species..." onkeyup="filterSpecies('invasive')">
+                
+                <div class="species-grid" id="invasive-grid">
+                    
+                    <!-- Didemnum vexillum - Carpet Sea Squirt -->
+                    <div class="species-card invasive" data-name="didemnum vexillum carpet sea squirt" data-images="assets/dvex1.jpg,assets/dvex2.webp,assets/dvex3.png">
+                        <div class="species-image"><img src="assets/dvex1.jpg" alt="Carpet Sea Squirt"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Carpet Sea Squirt</div>
+                                    <div class="species-scientific">Didemnum vexillum</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority high region-content nsw-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content nt-content" style="display:none;">CLASS A/B</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Sea Squirt • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Sea Squirt</span>
+                            <p class="species-description region-content wa-content has-sl-override">Nicknamed "sea vomit" - and it looks like it. Creamy-tan carpet that grows over everything. <strong>Already found at HMAS Stirling and Henderson.</strong></p>
+                            <p class="species-description region-content sl-content" style="display:none;">Nicknamed "sea vomit" - and it looks like it. Creamy-tan carpet that grows over everything. <strong>A serious hull and niche-area fouler — report any sightings.</strong></p>
+                            <p class="species-description region-content nsw-content" style="display:none;">Nicknamed "sea vomit" - and it looks like it. Creamy-tan carpet that grows over everything. <strong>HIGH priority pest - report any sightings in NSW waters immediately.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Creamy/tan/orange colour - like old wax</li>
+                                    <li>Veiny look - like varicose veins</li>
+                                    <li>Feels leathery, NOT slimy</li>
+                                    <li>Can drip down like melted candle wax</li>
+                                    <li>Tiny holes (siphons) all over surface</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Don't confuse with:</strong> Native colonial sea squirts - those are thinner, more gelatinous, and don't have the veiny/waxy texture.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Didemnum perlucidum REMOVED per DPIRD feedback - not a concern for most of WA, may be delisted -->
+                    
+                    <!-- Perna viridis - Asian Green Mussel -->
+                    <div class="species-card invasive" data-name="perna viridis asian green mussel" data-images="assets/AsianGreenLipMuscle.webp,assets/AsianGreen01.jpeg,assets/AsianGreen02.jpg,assets/AsianGreen03.jpg,assets/AsianGreen04.jpg,assets/AsianGreen05.jpg">
+                        <div class="species-image"><img src="assets/AsianGreenLipMuscle.webp" alt="Asian Green Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Asian Green Mussel</div>
+                                    <div class="species-scientific">Perna viridis</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority high region-content nsw-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content nt-content" style="display:none;">CLASS A/B</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Mussel • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Mussel • NSW Prohibited</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Mussel • VIC Priority Pest</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Mussel • TAS Declared</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Mussel • QLD Prohibited</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Mussel • SA Declared</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Mussel • NT Priority</span>
+                            <p class="species-description">Big mussel with bright green shell. Common on ships coming from Asia. Check sea chests carefully - they love them.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Young ones = bright emerald green</li>
+                                    <li>Older ones = brownish-green</li>
+                                    <li>Big - 80-165mm (hand-sized)</li>
+                                    <li>Inside is blue-green when open</li>
+                                    <li>Beak points down</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Don't confuse with:</strong> NZ Green-lipped Mussel - NZ ones are MUCH bigger (240mm vs 165mm), have a distinct green "lip" on shell edge, and are dark brown-green not bright emerald. Blue mussel (native) - those are blue-black, not green.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mytilopsis sallei - Black-striped Mussel -->
+                    <div class="species-card invasive" data-name="mytilopsis sallei black-striped false mussel" data-images="assets/BlackStripedFalseMus01.png,assets/BlackStripedFalseMus02.jpg,assets/BlackStripedFalseMus03.png">
+                        <div class="species-image"><img src="assets/BlackStripedFalseMus01.png" alt="Black-striped False Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Black-striped False Mussel</div>
+                                    <div class="species-scientific">Mytilopsis sallei</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority high region-content nsw-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content nt-content" style="display:none;">CLASS A/B</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Mussel • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Mussel • NSW Prohibited</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Mussel • VIC Priority Pest</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Mussel • TAS Declared</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Mussel • QLD Prohibited</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Mussel • SA Declared</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Mussel • NT Priority</span>
+                            <p class="species-description">Small stripy mussel that forms thick clusters. Loves brackish water so check sea chests and anywhere with mixed water.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Small - only up to 25mm (thumbnail-sized)</li>
+                                    <li>Dark stripes on shell</li>
+                                    <li>Packs together in thick layers</li>
+                                    <li>Often found inside sea chests</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mytella strigata - Charru Mussel (Sri Lanka) -->
+                    <div class="species-card invasive region-content sl-content" style="display:none;" data-name="mytella strigata charru mussel black mussel" data-images="assets/charru_mussel.svg">
+                        <div class="species-image"><img src="assets/charru_mussel.svg" alt="Charru Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Charru Mussel</div>
+                                    <div class="species-scientific">Mytella strigata</div>
+                                </div>
+                                <span class="priority high">HIGH RISK</span>
+                            </div>
+                            <span class="species-group">Mussel</span>
+                            <p class="species-description">A small dark mussel that has recently invaded Sri Lanka — first found in 2023 in shrimp farms near the Anawilundawa Ramsar wetland on the north-west coast. Forms dense clusters that foul aquaculture gear, clog nets and intakes, and smother native bivalves. Tolerates brackish water, so check sea chests, internal seawater systems and low-salinity niche areas.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Small — usually 20-40mm long</li>
+                                    <li>Dark olive-brown to blackish, sometimes with faint rays</li>
+                                    <li>Glossy, smooth shell with a pointed beak</li>
+                                    <li>Packs into thick clumps on hard surfaces and on each other</li>
+                                    <li>Thrives in estuaries, lagoons and brackish water</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Don't confuse with:</strong> Young Asian green mussels (those are green-tinged and grow much larger) and the black-striped false mussel <em>Mytilopsis sallei</em> (which has internal shelf-like "teeth" inside the shell hinge). If unsure, keep the specimen and report it.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Perna perna - Brown Mussel - Multiple Regions -->
+                    <div class="species-card invasive region-content wa-content vic-content tas-content sa-content qld-content" data-name="perna perna brown mussel" data-images="assets/brownmuscle01.webp,assets/brownmuscle02.jpg,assets/brownmuscle03.jpg">
+                        <div class="species-image"><img src="assets/brownmuscle01.webp" alt="Brown Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Brown Mussel</div>
+                                    <div class="species-scientific">Perna perna</div>
+                                </div>
+                                <span class="priority medium region-content wa-content">WATCH</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Mussel • Watch Species</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Mussel • VIC Priority Pest</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Mussel • TAS Declared</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Mussel • SA Declared</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Mussel • QLD Prohibited</span>
+                            <p class="species-description">Heavy-duty fouler from Africa/South America. Forms thick mats that are hard to scrape. <strong>NOT in Australia.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Dark brown to black shell</li>
+                                    <li>Up to 90mm (fist-sized)</li>
+                                    <li>Builds up in dense clumps</li>
+                                    <li>Thick shell, hard to break</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Perna canaliculus - NZ Green-lipped Mussel -->
+                    <div class="species-card invasive" data-name="perna canaliculus nz green-lipped mussel" data-images="assets/NZGreenLippedMuscle01.jpg,assets/NZGreenLippedMuscle02.jpg,assets/NZGreenLippedMuscle03.png,assets/NZGreenLippedMuscle04.png">
+                        <div class="species-image"><img src="assets/NZGreenLippedMuscle01.jpg" alt="NZ Green-lipped Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">NZ Green-lipped Mussel</div>
+                                    <div class="species-scientific">Perna canaliculus</div>
+                                </div>
+                                <span class="priority medium region-content wa-content">WATCH</span>
+                                <span class="priority medium region-content nsw-content" style="display:none;">WATCH</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority medium region-content qld-content" style="display:none;">WATCH</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority medium region-content nt-content" style="display:none;">WATCH</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Mussel • Watch Species</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Mussel • Watch Species</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Mussel • VIC Priority Pest</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Mussel • TAS Declared</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Mussel • Watch Species</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Mussel • SA Declared</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Mussel • Watch Species</span>
+                            <p class="species-description">Big mussel from NZ. Look for vessels that have been to New Zealand recently. <strong>NOT in Australia.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Green "lip" around shell edge - key ID feature</li>
+                                    <li>Brown-green shell outside</li>
+                                    <li>Massive - up to 240mm (bigger than your hand)</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Don't confuse with:</strong> Asian Green Mussel - Asian ones are smaller (max 165mm), bright emerald green when young, and lack the distinctive green "lip" on shell edge.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Large Oysters - General (updated per DPIRD feedback - hard to ID in situ) -->
+                    <div class="species-card invasive region-content wa-content nsw-content vic-content tas-content sa-content" data-name="magallana oyster pacific black scar suminoe">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Crassostrea_gigas_p1040848.jpg?width=400" alt="Large Oysters"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Large Non-Native Oysters</div>
+                                    <div class="species-scientific">Magallana spp.</div>
+                                </div>
+                                <span class="priority medium">WATCH</span>
+                            </div>
+                            <span class="species-group">Oyster • Hard to ID in-situ</span>
+                            <p class="species-description">Large oysters are virtually impossible to identify to species in the water. Includes Pacific (M. gigas), Black Scar (M. bilineata) and Suminoe (M. ariakensis) oysters. <strong>Photograph any large oysters for lab ID.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Messy irregular shell - no neat shape</li>
+                                    <li>Can get huge - up to 400mm</li>
+                                    <li>Rough frilly edges - sharp!</li>
+                                    <li>Glued flat to the surface</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Magallana bilineata - Black Scar Oyster (NT/QLD specific - NIMPIS) -->
+                    <div class="species-card invasive region-content nt-content qld-content" data-name="magallana bilineata black scar oyster" style="display:none;">
+                        <div class="species-image"><img src="assets/MBilineata.jpg" alt="Black Scar Oyster"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Black Scar Oyster</div>
+                                    <div class="species-scientific">Magallana bilineata</div>
+                                </div>
+                                <span class="priority medium region-content nt-content" style="display:none;">PRESENT</span>
+                                <span class="priority medium region-content qld-content" style="display:none;">ESTABLISHED</span>
+                            </div>
+                            <span class="species-group region-content nt-content" style="display:none;">Oyster • Present in NT</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Oyster • Established in North QLD</span>
+                            <p class="species-description region-content qld-content" style="display:none;">Large tropical oyster now <strong>established on the north Queensland coast from Townsville to Cape Bedford.</strong> First detected in 2019 (Cairns, Port Douglas, Cooktown). <strong>Distinctive dark adductor muscle scar on both valves.</strong> Report any new sightings outside known range.</p>
+                            <p class="species-description region-content nt-content" style="display:none;">Large tropical oyster <strong>present in one marina in the NT.</strong> Also established on the north QLD coast. <strong>Distinctive dark adductor muscle scar on both valves.</strong> Report any sightings.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Large — up to 212mm shell length</li>
+                                    <li><strong>Dark adductor scar on BOTH valves</strong></li>
+                                    <li>Pale yellow or purplish shell</li>
+                                    <li>Thin, flaky shell layers</li>
+                                    <li>Green iridescent hinge (when fresh)</li>
+                                    <li>Found in estuaries on rocks/pilings</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Don't confuse with:</strong> Sydney Rock Oyster or Pacific Oyster — Black Scar has distinctive dark muscle scar visible on both shell valves. No chomata (shell margin pits).
+                            </div>
+                            <p style="font-size: 0.7em; color: var(--gray-500); margin-top: 8px;">Photo: NIMPIS</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Sabella spallanzanii - European Fan Worm -->
+                    <div class="species-card invasive" data-name="sabella spallanzanii european fan worm">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/CSIRO_ScienceImage_866_Sabella_spallanzanii_European_fanworm.jpg?width=400" alt="European Fan Worm"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">European Fan Worm</div>
+                                    <div class="species-scientific">Sabella spallanzanii</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority medium region-content nsw-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority medium region-content vic-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority medium region-content tas-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority medium region-content qld-content" style="display:none;">WATCH</span>
+                                <span class="priority medium region-content sa-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority medium region-content nt-content" style="display:none;">WATCH</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Tube Worm • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Tube Worm • Established in NSW</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Tube Worm • Established in VIC</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Tube Worm • Established in TAS</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Tube Worm • Not in QLD</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Tube Worm • Established in SA</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Tube Worm • Not in NT</span>
+                            <p class="species-description region-content wa-content has-sl-override">Big feathery worm in a leathery tube. The fan is much bigger than native tube worms. <strong>Already established in WA — still report.</strong></p>
+                            <p class="species-description region-content sl-content" style="display:none;">Big feathery worm in a leathery tube. The fan is much bigger than native tube worms. <strong>A known hull fouler — report any sightings.</strong></p>
+                            <p class="species-description region-content nsw-content" style="display:none;">Big feathery worm in a leathery tube. The fan is much bigger than native tube worms. <strong>Established in NSW ports including Sydney Harbour.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Fan is HUGE - 45-60mm across</li>
+                                    <li>Fan spirals in (not flat like natives)</li>
+                                    <li>Stripy - orange/purple/white bands</li>
+                                    <li>Tube is brown and leathery</li>
+                                    <li>Fan pulls in when you get close</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Don't confuse with:</strong> Native serpulid worms - those have smaller white/pink fans and white hard tubes.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Styela clava REMOVED per DPIRD feedback - not on WA noxious list -->
+                    
+                    <!-- Styela plicata REMOVED per DPIRD feedback - not on WA noxious list -->
+                    
+                    <!-- Ciona intestinalis REMOVED per DPIRD feedback - not on WA noxious list -->
+                    
+                    <!-- Undaria pinnatifida - Japanese Kelp -->
+                    <div class="species-card invasive" data-name="undaria pinnatifida japanese kelp wakame">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/CSIRO_ScienceImage_867_Undaria_pinnatifida_Japanese_kelp.jpg?width=400" alt="Japanese Kelp"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Japanese Kelp (Wakame)</div>
+                                    <div class="species-scientific">Undaria pinnatifida</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority medium region-content nsw-content" style="display:none;">WATCH</span>
+                                <span class="priority medium region-content vic-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority medium region-content tas-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority medium region-content sa-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority low region-content nt-content" style="display:none;">UNLIKELY TO PERSIST</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Kelp • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Kelp • Not in NSW</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Kelp • Established in VIC</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Kelp • Established in TAS</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Kelp • QLD Priority</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Kelp • Established in SA</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Kelp • Cold-water Species — Not on NT Declared Weeds List</span>
+                            <p class="species-description region-content wa-content has-sl-override">Big brown seaweed with a central spine. <strong>Established in VIC, TAS, SA but NOT yet detected in WA.</strong> Report any sightings in WA waters.</p>
+                            <p class="species-description region-content sl-content" style="display:none;">Big brown seaweed with a central spine. <strong>A cold-temperate kelp — unlikely to establish in tropical Sri Lanka, but transiting vessels may carry it.</strong> Report any sightings.</p>
+                            <p class="species-description region-content nsw-content" style="display:none;">Big brown seaweed with a central spine. Not in NSW yet but watch for it on vessels from southern Australia.</p>
+                            <p class="species-description region-content vic-content" style="display:none;">Big brown seaweed with a central spine. <strong>ESTABLISHED in VIC - prevent further spread.</strong></p>
+                            <p class="species-description region-content tas-content" style="display:none;">Big brown seaweed with a central spine. <strong>ESTABLISHED in TAS - prevent further spread.</strong></p>
+                            <p class="species-description region-content sa-content" style="display:none;">Big brown seaweed with a central spine. <strong>ESTABLISHED in SA - prevent further spread.</strong></p>
+                            <p class="species-description region-content nt-content" style="display:none;">Big brown seaweed with a central spine. <strong>This cold-water species will not survive in NT tropical waters</strong> and is <strong>not on the NT declared weeds list.</strong> However, know what it looks like — transiting vessels carrying biofouling from southern Australia or across the equator may carry it. Unlikely to establish in warm waters long-term.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Big brown fronds with a midrib spine</li>
+                                    <li>Wavy ruffled edges</li>
+                                    <li>Can be up to 3m long</li>
+                                    <li>Frilly reproductive bit at the base</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Caulerpa taxifolia - Killer Algae -->
+                    <div class="species-card invasive" data-name="caulerpa taxifolia feather algae killer algae">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Caulerpa_taxifolia_Feather_algae.jpg?width=400" alt="Feather Algae"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Killer Algae</div>
+                                    <div class="species-scientific">Caulerpa taxifolia</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority medium region-content nsw-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority low region-content qld-content" style="display:none;">NATIVE</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority low region-content nt-content" style="display:none;">NATIVE</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Algae • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Algae</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Algae • Native to North QLD</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Algae • Native to Northern Australia</span>
+                            <p class="species-description region-content wa-content has-sl-override">Bright green feathery algae. Called "killer algae" because it smothers everything. <strong>WA Noxious listed — not yet in WA.</strong></p>
+                            <p class="species-description region-content sl-content" style="display:none;">Bright green feathery algae. Called "killer algae" because it smothers everything. <strong>An aggressive smothering weed — report any sightings.</strong></p>
+                            <p class="species-description region-content nsw-content" style="display:none;">Bright green feathery algae. <strong>CLASS 1 NOXIOUS in NSW - established in 14+ estuaries including Sydney Harbour.</strong> Illegal to possess.</p>
+                            <p class="species-description region-content qld-content" style="display:none;">Bright green feathery algae. <strong>Native to northern Australia</strong> — not considered a pest in QLD waters. The invasive aquarium strain is a concern in temperate southern states (e.g. NSW), but the native form is part of the natural tropical ecosystem here.</p>
+                            <p class="species-description region-content nt-content" style="display:none;">Bright green feathery algae. <strong>Native to northern Australia</strong> — not considered a pest in the NT and <strong>not on the NT declared weeds list.</strong> The invasive aquarium strain is a concern in temperate southern states, but the native form is part of the natural tropical ecosystem here.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Bright green - stands out</li>
+                                    <li>Feather-shaped fronds</li>
+                                    <li>Spreads with creeping runners</li>
+                                    <li>Can get 65cm tall</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== NORTHERN PACIFIC SEASTAR - WA & NSW ==================== -->
+                    
+                    <!-- Northern Pacific Seastar - WA NOXIOUS -->
+                    <div class="species-card invasive region-content wa-content" data-name="asterias amurensis northern pacific seastar">
+                        <div class="species-image"><img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Northern Pacific Seastar</div>
+                                    <div class="species-scientific">Asterias amurensis</div>
+                                </div>
+                                <span class="priority high">NOXIOUS</span>
+                            </div>
+                            <span class="species-group">Seastar • WA Noxious Listed</span>
+                            <p class="species-description">Large voracious seastar. <strong>WA Noxious Listed — NOT established in WA.</strong> Would devastate WA shellfish and seafloor ecosystems.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Large — up to 50cm diameter</li>
+                                    <li>5 arms with distinctive upturned tips</li>
+                                    <li>Yellow-orange body with purple markings</li>
+                                    <li>Undersides completely yellow</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Northern Pacific Seastar - NSW -->
+                    <div class="species-card invasive region-content nsw-content" data-name="asterias amurensis northern pacific seastar" style="display:none;">
+                        <div class="species-image"><img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Northern Pacific Seastar</div>
+                                    <div class="species-scientific">Asterias amurensis</div>
+                                </div>
+                                <span class="priority high">PROHIBITED</span>
+                            </div>
+                            <span class="species-group">Seastar • NSW Prohibited Matter</span>
+                            <p class="species-description">Large seastar - a voracious predator. <strong>Prohibited Matter in NSW. Estimated $1 billion loss to Tasmanian fisheries.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Large - up to 50cm diameter</li>
+                                    <li>5 arms with distinctive upturned tips</li>
+                                    <li>Yellow-orange body with purple/red markings</li>
+                                    <li>Undersides completely yellow</li>
+                                    <li>Small central disc</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Northern Pacific Seastar - VIC (ESTABLISHED) -->
+                    <div class="species-card invasive region-content vic-content" data-name="asterias amurensis northern pacific seastar" style="display:none;">
+                        <div class="species-image"><img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Northern Pacific Seastar</div>
+                                    <div class="species-scientific">Asterias amurensis</div>
+                                </div>
+                                <span class="priority critical">CRITICAL</span>
+                            </div>
+                            <span class="species-group">Seastar • ESTABLISHED in VIC</span>
+                            <p class="species-description">Large voracious seastar. <strong>ESTABLISHED in Port Phillip Bay. Report new locations - prevent spread.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Large - up to 50cm diameter</li>
+                                    <li>5 arms with distinctive upturned tips</li>
+                                    <li>Yellow-orange body with purple markings</li>
+                                    <li>Undersides completely yellow</li>
+                                    <li>Small central disc</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Northern Pacific Seastar - TAS (ESTABLISHED) -->
+                    <div class="species-card invasive region-content tas-content" data-name="asterias amurensis northern pacific seastar" style="display:none;">
+                        <div class="species-image"><img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Northern Pacific Seastar</div>
+                                    <div class="species-scientific">Asterias amurensis</div>
+                                </div>
+                                <span class="priority critical">CRITICAL</span>
+                            </div>
+                            <span class="species-group">Seastar • ESTABLISHED in TAS</span>
+                            <p class="species-description">Large voracious seastar. <strong>ESTABLISHED in Derwent Estuary. Report new locations - devastating impact on shellfish.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Large - up to 50cm diameter</li>
+                                    <li>5 arms with distinctive upturned tips</li>
+                                    <li>Yellow-orange body with purple markings</li>
+                                    <li>Undersides completely yellow</li>
+                                    <li>Small central disc</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Northern Pacific Seastar - QLD -->
+                    <div class="species-card invasive region-content qld-content" data-name="asterias amurensis northern pacific seastar" style="display:none;">
+                        <div class="species-image"><img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Northern Pacific Seastar</div>
+                                    <div class="species-scientific">Asterias amurensis</div>
+                                </div>
+                                <span class="priority high">PROHIBITED</span>
+                            </div>
+                            <span class="species-group">Seastar • QLD Prohibited</span>
+                            <p class="species-description">Large voracious seastar. <strong>NOT in QLD - check vessels from VIC/TAS.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Large - up to 50cm diameter</li>
+                                    <li>5 arms with distinctive upturned tips</li>
+                                    <li>Yellow-orange body with purple markings</li>
+                                    <li>Undersides completely yellow</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Northern Pacific Seastar - SA -->
+                    <div class="species-card invasive region-content sa-content" data-name="asterias amurensis northern pacific seastar" style="display:none;">
+                        <div class="species-image"><img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Northern Pacific Seastar</div>
+                                    <div class="species-scientific">Asterias amurensis</div>
+                                </div>
+                                <span class="priority high">DECLARED</span>
+                            </div>
+                            <span class="species-group">Seastar • SA Declared</span>
+                            <p class="species-description">Large voracious seastar. <strong>NOT in SA - major threat to aquaculture. Check vessels from VIC/TAS.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Large - up to 50cm diameter</li>
+                                    <li>5 arms with distinctive upturned tips</li>
+                                    <li>Yellow-orange body with purple markings</li>
+                                    <li>Undersides completely yellow</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Northern Pacific Seastar - NT -->
+                    <div class="species-card invasive region-content nt-content" data-name="asterias amurensis northern pacific seastar" style="display:none;">
+                        <div class="species-image"><img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Northern Pacific Seastar</div>
+                                    <div class="species-scientific">Asterias amurensis</div>
+                                </div>
+                                <span class="priority low">UNLIKELY TO PERSIST</span>
+                            </div>
+                            <span class="species-group">Seastar • Cold-water Species — Won't Survive in NT</span>
+                            <p class="species-description">Large voracious seastar. <strong>This cold-water species will not survive in NT tropical waters long-term.</strong> However, know what it looks like — transiting vessels carrying biofouling from VIC/TAS or across the equator may carry live specimens. Report if seen on vessel hulls, but unlikely to establish in warm waters.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Large - up to 50cm diameter</li>
+                                    <li>5 arms with distinctive upturned tips</li>
+                                    <li>Yellow-orange body with purple markings</li>
+                                    <li>Undersides completely yellow</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Asian Date/Bag Mussel - Multiple Regions -->
+                    <div class="species-card invasive" data-name="musculista senhousia asian date bag mussel arcuatula">
+                        <div class="species-image"><img src="assets/AsianDateMussel.jpg" alt="Asian Date Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Asian Date/Bag Mussel</div>
+                                    <div class="species-scientific">Arcuatula senhousia</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority high region-content nsw-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority medium region-content vic-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority medium region-content tas-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority medium region-content sa-content" style="display:none;">ESTABLISHED</span>
+                                <span class="priority high region-content nt-content" style="display:none;">CLASS A/B</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Mussel • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Mussel • NSW Prohibited</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Mussel • Established in VIC</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Mussel • Established in TAS</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Mussel • QLD Prohibited</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Mussel • Established in SA</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Mussel • NT Priority</span>
+                            <p class="species-description region-content wa-content has-sl-override">Small mussel that forms extremely dense mats. <strong>WA Noxious Listed. Established in VIC, TAS, SA.</strong></p>
+                            <p class="species-description region-content sl-content" style="display:none;">Small mussel that forms extremely dense mats that smother surfaces. <strong>A spreading fouler of warm and temperate waters — report any sightings.</strong></p>
+                            <p class="species-description region-content nsw-content" style="display:none;">Small mussel that forms extremely dense mats. <strong>Prohibited Matter in NSW. Established in VIC, TAS, SA, WA.</strong></p>
+                            <p class="species-description region-content vic-content" style="display:none;">Small mussel that forms extremely dense mats. <strong>ESTABLISHED in VIC - prevent further spread.</strong></p>
+                            <p class="species-description region-content tas-content" style="display:none;">Small mussel that forms extremely dense mats. <strong>ESTABLISHED in TAS - prevent further spread.</strong></p>
+                            <p class="species-description region-content sa-content" style="display:none;">Small mussel that forms extremely dense mats. <strong>ESTABLISHED in SA - prevent further spread.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Small - up to 30mm</li>
+                                    <li>Thin, fragile, easily crushed shell</li>
+                                    <li>Greenish with zigzag markings</li>
+                                    <li>Iridescent radiating bands</li>
+                                    <li>Forms dense mats (thousands per m²)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Charru Mussel - Multiple Regions -->
+                    <div class="species-card invasive" data-name="mytella strigata charru mussel" data-images="assets/charu1.png,assets/charu2.jpg">
+                        <div class="species-image"><img src="assets/charu1.png" alt="Charru Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Charru Mussel</div>
+                                    <div class="species-scientific">Mytella strigata</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority high region-content nsw-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content nt-content" style="display:none;">CLASS A/B</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Mussel • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Mussel • NSW Prohibited</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Mussel • VIC Priority Pest</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Mussel • TAS Declared</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Mussel • QLD Prohibited</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Mussel • SA Declared</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Mussel • NT Priority</span>
+                            <p class="species-description">Medium mussel with variable external colours. <strong>NOT in Australia. Forms extremely dense colonies.</strong> Key giveaway: <strong>distinctive blue-purple opalescent interior and yellowish flesh</strong> — open the shell to confirm ID.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Medium 22-50mm</li>
+                                    <li>Variable exterior: black, brown, grey, orange</li>
+                                    <li>Zigzags, spots, or concentric bands on shell</li>
+                                    <li><strong>Blue-purple opalescent interior — distinctive giveaway</strong></li>
+                                    <li><strong>Yellowish flesh — key ID feature</strong></li>
+                                    <li>Forms extremely dense colonies</li>
+                                </ul>
+                            </div>
+                            <p style="font-size: 0.7em; color: var(--gray-500); margin-top: 8px;">Reference: <a href="https://nimpis.marinepests.gov.au" target="_blank" style="color: var(--gray-500);">NIMPIS</a> — see NIMPIS for additional reference photos showing internal coloration.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chinese Mitten Crab - Multiple Regions -->
+                    <div class="species-card invasive" data-name="eriocheir sinensis chinese mitten crab">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Eriocheir_sinensis.jpg?width=400" alt="Chinese Mitten Crab"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Chinese Mitten Crab</div>
+                                    <div class="species-scientific">Eriocheir sinensis</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority high region-content nsw-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content nt-content" style="display:none;">CLASS A/B</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Crab • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Crab • NSW Prohibited</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Crab • VIC Priority Pest</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Crab • TAS Declared</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Crab • QLD Prohibited</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Crab • SA Declared</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Crab • NT Priority</span>
+                            <p class="species-description">Medium crab with distinctive hairy "mittens" on claws. <strong>NOT in Australia. Can carry lung fluke parasite.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Dense patches of dark hair on claws ("mittens")</li>
+                                    <li>White-tipped claws</li>
+                                    <li>Up to 80mm carapace</li>
+                                    <li>Olive-brown shell</li>
+                                    <li>4 spines either side of eyes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Harris Mud Crab - QLD Priority -->
+                    <div class="species-card invasive region-content qld-content nt-content sa-content tas-content" data-name="rhithropanopeus harrisii harris mud crab" style="display:none;">
+                        <div class="species-image"><img src="assets/harris-mud-crab1.jpg" alt="Harris Mud Crab"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Harris Mud Crab</div>
+                                    <div class="species-scientific">Rhithropanopeus harrisii</div>
+                                </div>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content nt-content" style="display:none;">CLASS A/B</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                            </div>
+                            <span class="species-group region-content qld-content" style="display:none;">Crab • QLD Prohibited</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Crab • NT Priority</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Crab • SA Declared</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Crab • TAS Declared</span>
+                            <p class="species-description">Small estuarine crab that spreads via ballast water and hull fouling. <strong>NOT in Australia. Can carry crustacean diseases.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Very small: only 20-25mm carapace</li>
+                                    <li>Dark brown/olive coloured</li>
+                                    <li>3 teeth either side behind eyes</li>
+                                    <li>White-tipped claws with dark spots</li>
+                                    <li>Found in brackish/estuarine waters</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- White Colonial Sea Squirt - ESTABLISHED QLD -->
+                    <div class="species-card invasive region-content qld-content" data-name="didemnum perlucidum white colonial sea squirt" style="display:none;">
+                        <div class="species-image"><img src="assets/didemnum_perlucidum.jpg" alt="White Colonial Sea Squirt"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">White Colonial Sea Squirt</div>
+                                    <div class="species-scientific">Didemnum perlucidum</div>
+                                </div>
+                                <span class="priority medium region-content qld-content" style="display:none;">ESTABLISHED</span>
+                            </div>
+                            <span class="species-group region-content qld-content" style="display:none;">Sea Squirt • ESTABLISHED in QLD</span>
+                            <p class="species-description">Thin, white encrusting colonial sea squirt. <strong>ESTABLISHED in QLD waters.</strong> Report new sightings outside known areas.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Thin white/cream sheets (1-2mm thick)</li>
+                                    <li>Semi-transparent appearance</li>
+                                    <li>Encrusts hard surfaces</li>
+                                    <li>Smooth, leathery texture</li>
+                                    <li>Small pores visible on surface</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            
+            <!-- Niche Area Hitchhikers Section -->
+            <section id="niche">
+                <h2 class="section-title niche">Part 2: Niche Area Hitchhikers</h2>
+                <p style="margin-bottom: 20px; color: var(--gray-600);">These aren't foulers - they don't grow on the hull. But they hide in sea chests, rope guards, gratings and other nooks. You might find them when inspecting those areas.</p>
+                
+                <div class="species-grid" id="niche-grid">
+                    
+                    <!-- Carcinus maenas - European Shore Crab - WA NOXIOUS -->
+                    <div class="species-card niche-species" data-name="carcinus maenas european shore crab green crab">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Carcinus_maenas.jpg?width=400" alt="European Shore Crab"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">European Shore Crab</div>
+                                    <div class="species-scientific">Carcinus maenas</div>
+                                </div>
+                                <span class="priority high region-content wa-content">NOXIOUS</span>
+                                <span class="priority medium region-content nsw-content" style="display:none;">WATCH</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Crab • WA Noxious Listed</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Crab</span>
+                            <p class="species-description region-content wa-content has-sl-override">Green crab that hides in sea chests and rope guards. <strong>NOT established in WA - remains on the noxious list. Report to DPIRD immediately.</strong></p>
+                            <p class="species-description region-content sl-content" style="display:none;">Green crab that hides in sea chests and rope guards. <strong>A temperate invader — most likely on vessels from cooler waters. Report any sightings.</strong></p>
+                            <p class="species-description region-content nsw-content" style="display:none;">Green crab that hides in sea chests and rope guards. Already established in some Australian waters.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Green shell (can be orange underneath)</li>
+                                    <li>5 spines each side behind the eyes</li>
+                                    <li>Up to 90mm across</li>
+                                    <li>Check sea chests and niche areas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Charybdis japonica - Asian Paddle Crab -->
+                    <div class="species-card niche-species" data-name="charybdis japonica asian paddle crab">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Charybdis_japonica.jpg?width=400" alt="Asian Paddle Crab"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Asian Paddle Crab</div>
+                                    <div class="species-scientific">Charybdis japonica</div>
+                                </div>
+                                <span class="priority medium region-content wa-content">WATCH</span>
+                                <span class="priority high region-content nsw-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content vic-content" style="display:none;">CONTROLLED</span>
+                                <span class="priority high region-content tas-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content qld-content" style="display:none;">PROHIBITED</span>
+                                <span class="priority high region-content sa-content" style="display:none;">DECLARED</span>
+                                <span class="priority high region-content nt-content" style="display:none;">CLASS A/B</span>
+                            </div>
+                            <span class="species-group region-content wa-content">Crab • Watch Species</span>
+                            <span class="species-group region-content nsw-content" style="display:none;">Crab • NSW Prohibited</span>
+                            <span class="species-group region-content vic-content" style="display:none;">Crab • VIC Priority Pest</span>
+                            <span class="species-group region-content tas-content" style="display:none;">Crab • TAS Declared</span>
+                            <span class="species-group region-content qld-content" style="display:none;">Crab • QLD Prohibited</span>
+                            <span class="species-group region-content sa-content" style="display:none;">Crab • SA Declared</span>
+                            <span class="species-group region-content nt-content" style="display:none;">Crab • NT Priority</span>
+                            <p class="species-description region-content wa-content">Swimming crab with paddle-shaped back legs. Can shelter in niche areas on vessels.</p>
+                            <p class="species-description region-content nsw-content" style="display:none;">Swimming crab with paddle-shaped back legs. <strong>Prohibited Matter in NSW. Carries White Spot Syndrome Virus!</strong></p>
+                            <p class="species-description region-content vic-content" style="display:none;">Swimming crab with paddle-shaped back legs. <strong>VIC Priority Pest - report immediately.</strong></p>
+                            <p class="species-description region-content tas-content" style="display:none;">Swimming crab with paddle-shaped back legs. <strong>TAS Declared - report immediately.</strong></p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Back legs are flat paddles (for swimming)</li>
+                                    <li>6 spines between the eyes</li>
+                                    <li>5 spines on each claw</li>
+                                    <li>Up to 120mm across</li>
+                                    <li>Olive-brown colour</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            
+            <!-- Native Species Section -->
+            <section id="native">
+                <h2 class="section-title success">Part 3: Native Hull Fouling — The Normal Stuff</h2>
+                <p style="margin-bottom: 20px; color: var(--gray-600);" class="region-content wa-content">This is what you'll see most of the time. It's the normal WA marine growth. Knowing it helps you spot when something's wrong.</p>
+                <p style="margin-bottom: 20px; color: var(--gray-600); display:none;" class="region-content nsw-content">This is what you'll see most of the time. It's the normal NSW marine growth. Knowing it helps you spot when something's wrong.</p>
+                
+                <input type="text" class="search-box" id="native-search" placeholder="Search native species..." onkeyup="filterSpecies('native')">
+                
+                <div class="species-grid" id="native-grid">
+                    
+                    <!-- Blue Mussel -->
+                    <div class="species-card native" data-name="mytilus galloprovincialis blue mussel">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Mytilus_galloprovincialis.jpg?width=400" alt="Blue Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Blue Mussel</div>
+                                    <div class="species-scientific">Mytilus galloprovincialis</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Mussel</span>
+                            <p class="species-description">Your everyday Aussie mussel. Blue-black shell in clumps. You'll scrape heaps of these.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Blue-black to dark brown shell</li>
+                                    <li>Pointy triangle shape</li>
+                                    <li>Clumps together with threads</li>
+                                    <li>NOT green - that's the Asian one</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Acorn Barnacles -->
+                    <div class="species-card native" data-name="balanidae acorn barnacles">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Balanus_improvisus.jpg?width=400" alt="Acorn Barnacles"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Acorn Barnacles</div>
+                                    <div class="species-scientific">Balanidae family</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Barnacle</span>
+                            <p class="species-description">The classic white barnacle cones. All over hulls, props, sea chests. Everywhere.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>White/grey cone shapes</li>
+                                    <li>Diamond-shaped opening at top</li>
+                                    <li>Glued directly to surface</li>
+                                    <li>Can be packed solid</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Large Red Barnacles -->
+                    <div class="species-card native" data-name="megabalanus large red barnacles">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Megabalanus_coccopoma.jpg?width=400" alt="Large Red Barnacles"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Large Red Barnacles</div>
+                                    <div class="species-scientific">Megabalanus spp.</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Barnacle</span>
+                            <p class="species-description">Big pink/red barnacles. Same deal as the white ones but bigger and coloured.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Big cones - up to 50mm across</li>
+                                    <li>Red/pink colour</li>
+                                    <li>Ridged shell plates</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Serpulid Tube Worms -->
+                    <div class="species-card native" data-name="serpulidae spirorbidae serpulid tube worms">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Spirobranchus_giganteus_(Christmastree_Worm_-_yellow_variation).jpg?width=400" alt="Serpulid Worms"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Serpulid Tube Worms</div>
+                                    <div class="species-scientific">Serpulidae & Spirorbidae</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Tube Worm</span>
+                            <p class="species-description">White calcareous tubes with small feathery fans. Tiny spiral ones (spirorbids) and bigger straight ones.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Hard white tubes (calcium)</li>
+                                    <li>Spirorbids are tiny coils - 3mm</li>
+                                    <li>Larger serpulids are straight/curved</li>
+                                    <li>Small feathery fan - NOT the big spiral fan of European fan worm</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sydney Coral Tube Worm -->
+                    <div class="species-card native" data-name="galeolaria caespitosa sydney coral tube worm">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Tube_worm_long_reef.jpg?width=400" alt="Sydney Coral Tube Worm"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Sydney Coral / Tube Worm</div>
+                                    <div class="species-scientific">Galeolaria caespitosa</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Tube Worm</span>
+                            <p class="species-description">White tube worm that builds up in reef-like masses. Pink feathery tentacles.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>White calcified tubes in clumps</li>
+                                    <li>Builds up in reef-like masses</li>
+                                    <li>Pink feeding tentacles</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bushy Bryozoans -->
+                    <div class="species-card native" data-name="bugula bushy bryozoans moss animals">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Bugula_neritina.jpg?width=400" alt="Bushy Bryozoans"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Bushy Bryozoans</div>
+                                    <div class="species-scientific">Bugula spp.</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Bryozoan</span>
+                            <p class="species-description">Feathery purple/brown tufts. Looks like a fuzzy bush or seaweed but it's actually tiny animals.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Purple/brown colour</li>
+                                    <li>Bushy branching shape</li>
+                                    <li>Delicate and feathery</li>
+                                    <li>Flexible - waves in current</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Red-rust Bryozoan -->
+                    <div class="species-card native" data-name="watersipora red-rust bryozoan encrusting">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Watersipora_subtorquata_(d'Orbigny_1852).jpg?width=400" alt="Red-rust Bryozoan"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Red-rust Bryozoan</div>
+                                    <div class="species-scientific">Watersipora spp.</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Bryozoan</span>
+                            <p class="species-description">Flat orangey-red crust that spreads over surfaces. Very common hull fouler.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Red/rust/orange sheets</li>
+                                    <li>Flat encrusting growth</li>
+                                    <li>Dark black edge where it's growing</li>
+                                    <li>Hard calcified surface</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chalky Bryozoans -->
+                    <div class="species-card native" data-name="celleporaria chalky bryozoans white">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Celleporaria_(YPM_IZ_089175).jpeg?width=400" alt="Chalky Bryozoans"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Chalky Bryozoans</div>
+                                    <div class="species-scientific">Celleporaria spp.</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Bryozoan</span>
+                            <p class="species-description">White/pink lumpy crusts. Looks like someone splattered plaster on the hull.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>White/pink colour</li>
+                                    <li>Chalky texture</li>
+                                    <li>Lumpy irregular growth</li>
+                                    <li>Hard surface</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Encrusting Sponges -->
+                    <div class="species-card native" data-name="demospongiae encrusting sponges">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Encrusting_sponge_at_Partridge_Point_P7190482.JPG?width=400" alt="Encrusting Sponges"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Encrusting Sponges</div>
+                                    <div class="species-scientific">Demospongiae</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Sponge</span>
+                            <p class="species-description">Soft spongy sheets in various colours. Orange, yellow, grey. Has tiny holes (oscules) all over. <strong>Note:</strong> In the photo, the <strong>pink encrusting growth is the sponge</strong> — other organisms in the image (e.g. smooth rubbery sheets) may be colonial ascidians, which can look similar at first glance.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Sheet or cushion growth on hard surfaces</li>
+                                    <li>Various colours — often orange, pink, yellow, grey</li>
+                                    <li>Soft and spongy to touch (not rubbery like ascidians)</li>
+                                    <li>Tiny pores (oscules) visible — key difference from ascidians</li>
+                                    <li>Crumbly texture when broken (ascidians are more rubbery)</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Don't confuse with:</strong> Colonial ascidians (sea squirts) — ascidians are smooth and rubbery, squirt water when squeezed, and lack the tiny pores. Sponges are softer, more crumbly, and have visible pore openings.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Native Colonial Sea Squirts -->
+                    <div class="species-card native" data-name="didemnidae native colonial sea squirts ascidian">
+                        <div class="species-image"><img src="assets/didemnum_perlucidum.jpg" alt="Native Colonial Sea Squirts"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Native Colonial Sea Squirts</div>
+                                    <div class="species-scientific">Didemnidae (native)</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Sea Squirt</span>
+                            <p class="species-description">Thin jelly-like mats. Similar to the invasive Didemnum but thinner and more gelatinous. Be careful with ID.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Thin gelatinous mats</li>
+                                    <li>Various colours</li>
+                                    <li>Thinner than invasive carpet sea squirt</li>
+                                    <li>No veiny/waxy texture</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Could be confused with:</strong> Carpet sea squirt (invasive) - if in doubt, report it. The invasive one is thicker, veiny, and feels leathery not slimy.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Solitary Sea Squirts -->
+                    <div class="species-card native" data-name="cnemidocarpa solitary sea squirts native">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Broadbase_Tunicate_(Cnemidocarpa_finmarkiensis)_-_Lincoln_Park_(Seattle).jpg?width=400" alt="Solitary Sea Squirts"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Solitary Sea Squirts (Native)</div>
+                                    <div class="species-scientific">Cnemidocarpa spp.</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Sea Squirt</span>
+                            <p class="species-description">Single blob-shaped animals, orange or white. Two holes on top (siphons).</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Orange/white colour</li>
+                                    <li>Single blobs, not colonies</li>
+                                    <li>Two openings on top</li>
+                                    <li>Leathery skin</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sea Lettuce -->
+                    <div class="species-card native" data-name="ulva australis sea lettuce green algae">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Ulva_lactuca.jpeg?width=400" alt="Sea Lettuce"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Sea Lettuce</div>
+                                    <div class="species-scientific">Ulva australis</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Algae</span>
+                            <p class="species-description">Bright green thin sheets. Looks like salad leaves. Common in nutrient-rich ports.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Bright green</li>
+                                    <li>Thin see-through sheets</li>
+                                    <li>Ruffled wavy edges</li>
+                                    <li>Soft like lettuce</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Green Hair Algae -->
+                    <div class="species-card native" data-name="cladophora green hair algae filamentous">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Cladophora.JPG?width=400" alt="Green Hair Algae"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Green Hair Algae</div>
+                                    <div class="species-scientific">Cladophora spp.</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Algae</span>
+                            <p class="species-description">Stringy green filaments in tangled mats. Like green hair or cotton wool.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Bright green filaments</li>
+                                    <li>Branching threads</li>
+                                    <li>Tangled mats</li>
+                                    <li>Coarse stringy texture</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Brown Slime Algae -->
+                    <div class="species-card native" data-name="hincksia brown filamentous algae slime">
+                        <div class="species-image"><img src="assets/Hincksia.jpeg" alt="Brown Filamentous Algae"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Brown Slime Algae</div>
+                                    <div class="species-scientific">Hincksia spp.</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Algae</span>
+                            <p class="species-description">Fine brown fuzz. First thing to grow on new fouling. Forms a fuzzy coating.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Fine brown filaments</li>
+                                    <li>Fuzzy appearance</li>
+                                    <li>Early coloniser - first to appear</li>
+                                    <li>Soft and delicate</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Red Algae -->
+                    <div class="species-card native" data-name="gracilaria gelidium red algae">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Red_algae_(Gracilaria_sp.)_(48737220543).jpg?width=400" alt="Red Algae"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Red Algae</div>
+                                    <div class="species-scientific">Gracilaria & Gelidium spp.</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Algae</span>
+                            <p class="species-description">Red/purple branching seaweed. Rubbery texture. Common on hulls.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Red/purple colour</li>
+                                    <li>Branching fronds</li>
+                                    <li>Rubbery cartilage texture</li>
+                                    <li>Common in subtidal zone</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hairy Mussel -->
+                    <div class="species-card native" data-name="trichomya hirsuta hairy mussel">
+                        <div class="species-image"><img src="https://en.wikipedia.org/wiki/Special:FilePath/Naturalis_Biodiversity_Center_-_RMNH.MOL.316227_-_Trichomya_hirsuta_(Lamarck,_1819)_-_Mytilidae_-_Mollusc_shell.jpeg?width=400" alt="Hairy Mussel"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Hairy Mussel</div>
+                                    <div class="species-scientific">Trichomya hirsuta</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Mussel</span>
+                            <p class="species-description">Native mussel with fuzzy hairy shell. Brown/black with distinctive bristly covering.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Hairy/fuzzy shell covering</li>
+                                    <li>Brown/black colour</li>
+                                    <li>Dense clumps</li>
+                                    <li>Up to 60mm</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sydney Rock Oyster - NSW ONLY -->
+                    <div class="species-card native region-content nsw-content" data-name="saccostrea glomerata sydney rock oyster" style="display:none;">
+                        <div class="species-image"><img src="assets/SydneyRockOyster.jpg" alt="Sydney Rock Oyster"></div>
+                        <div class="species-content">
+                            <div class="species-header">
+                                <div>
+                                    <div class="species-name">Sydney Rock Oyster</div>
+                                    <div class="species-scientific">Saccostrea glomerata</div>
+                                </div>
+                            </div>
+                            <span class="species-group">Native NSW Oyster</span>
+                            <p class="species-description">Native NSW oyster. Rounder and smaller than the invasive Pacific Oyster. Less frilly edges.</p>
+                            <div class="species-features">
+                                <h4>How to Spot It</h4>
+                                <ul>
+                                    <li>Rounder and smaller than Pacific Oyster</li>
+                                    <li>Usually less than 80mm</li>
+                                    <li>Less frilly edges</li>
+                                    <li>Native to NSW waters</li>
+                                </ul>
+                            </div>
+                            <div class="lookalike-box">
+                                <strong>Compare with:</strong> Pacific Oyster (invasive) - larger, more irregular shape, very frilly sharp edges.
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            
+            <!-- Quick Reference Section -->
+            <section id="reference" class="region-content wa-content has-sl-override">
+                <h2 class="section-title">Quick Reference — WA Noxious Species</h2>
+                
+                <p class="ref-note"><em>Key species from WA noxious fish list (Schedule 5, Fish Resources Management Regulations 1995). <a href="https://www.fish.wa.gov.au" target="_blank">Full list at fish.wa.gov.au</a></em></p>
+                
+                <h3 class="ref-section-title noxious">🛑 WA Noxious Listed — Report to DPIRD</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="invasive-header">Type</th>
+                                <th class="invasive-header">Species</th>
+                                <th class="invasive-header">Quick ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Sea Squirt</td><td><strong>Carpet Sea Squirt</strong></td><td>Creamy veiny mat, waxy texture, dripping tendrils</td></tr>
+                            <tr><td>Mussel</td><td><strong>Asian Green Mussel</strong></td><td>Bright green shell (young), big 80-165mm</td></tr>
+                            <tr><td>Mussel</td><td><strong>Black-striped False Mussel</strong></td><td>Small 25mm, dark stripes, in sea chests</td></tr>
+                            <tr><td>Tube Worm</td><td><strong>European Fan Worm</strong></td><td>Big spiral fan 45-60mm, stripy, brown tube</td></tr>
+                            <tr><td>Crab</td><td><strong>European Shore Crab</strong></td><td>Green shell, 5 spines each side — NOT in WA</td></tr>
+                            <tr><td>Seastar</td><td><strong>N. Pacific Seastar</strong></td><td>Large 5-arm, yellow-orange, up to 50cm</td></tr>
+                            <tr><td>Algae</td><td><strong>Killer Algae</strong></td><td>Bright green feathery fronds</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3 class="ref-section-title watch">⚠️ Watch List — Emerging Threats</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="niche-header">Type</th>
+                                <th class="niche-header">Species</th>
+                                <th class="niche-header">Quick ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Kelp</td><td><strong>Japanese Kelp (Wakame)</strong></td><td>Big brown fronds with spine — NOT in WA</td></tr>
+                            <tr><td>Oyster</td><td><strong>Large Oysters</strong></td><td>Messy shell, sharp — photo for lab ID</td></tr>
+                            <tr><td>Crab</td><td><strong>Asian Paddle Crab</strong></td><td>Paddle-shaped back legs, 6 spines between eyes</td></tr>
+                            <tr><td>Mussel</td><td><strong>NZ Green-lipped Mussel</strong></td><td>Green lip on shell edge, massive 240mm</td></tr>
+                            <tr><td>Mussel</td><td><strong>Brown Mussel</strong></td><td>Dark brown/black, big 90mm, thick clusters</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Quick Reference Section - Sri Lanka -->
+            <section id="reference-sl" class="region-content sl-content" style="display:none;">
+                <h2 class="section-title">Quick Reference — Sri Lanka IMS of Concern</h2>
+
+                <p class="ref-note"><em>Invasive marine species of interest or concern to Sri Lanka. Aligned with the IMO Biofouling Guidelines and the GEF-UNDP-IMO GloFouling / IMO–Norad TEST Biofouling Project. Report sightings to MEPA.</em></p>
+
+                <h3 class="ref-section-title noxious">🛑 High Risk — Report to MEPA</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="invasive-header">Type</th>
+                                <th class="invasive-header">Species</th>
+                                <th class="invasive-header">Quick ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Mussel</td><td><strong>Charru Mussel</strong> (<em>Mytella strigata</em>)</td><td>Small 20-40mm, dark olive-black, glossy, dense brackish-water clumps — new invader</td></tr>
+                            <tr><td>Mussel</td><td><strong>Asian Green Mussel</strong> (<em>Perna viridis</em>)</td><td>Bright green shell (young), big 80-165mm, in sea chests</td></tr>
+                            <tr><td>Mussel</td><td><strong>Black-striped False Mussel</strong> (<em>Mytilopsis sallei</em>)</td><td>Small 25mm, dark stripes, brackish, in sea chests</td></tr>
+                            <tr><td>Mussel</td><td><strong>Brown Mussel</strong> (<em>Perna perna</em>)</td><td>Dark brown/black, up to 90mm, thick clusters</td></tr>
+                            <tr><td>Tube Worm</td><td><strong>European Fan Worm</strong> (<em>Sabella spallanzanii</em>)</td><td>Big spiral fan 45-60mm, stripy, leathery brown tube</td></tr>
+                            <tr><td>Oyster</td><td><strong>Pacific Oyster</strong> (<em>Magallana gigas</em>)</td><td>Irregular shell, sharp frilly edges</td></tr>
+                            <tr><td>Sea Squirt</td><td><strong>Carpet Sea Squirt</strong> (<em>Didemnum vexillum</em>)</td><td>Creamy veiny mat, waxy texture, dripping tendrils</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="ref-section-title watch">⚠️ Watch List — Know What They Look Like</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="niche-header">Type</th>
+                                <th class="niche-header">Species</th>
+                                <th class="niche-header">Quick ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Sea Squirt</td><td><strong>White Colonial Sea Squirt</strong> (<em>Didemnum perlucidum</em>)</td><td>White/translucent thin sheets on hull and niches</td></tr>
+                            <tr><td>Barnacles</td><td><strong>Fouling Barnacles</strong> (<em>Amphibalanus</em> spp.)</td><td>Hard cone shells in dense crusts — common tropical foulers</td></tr>
+                            <tr><td>Cold-water</td><td><strong>Wakame / N. Pacific Seastar</strong></td><td>Unlikely to establish in tropical waters, but transiting vessels may carry them</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact">
+                <h2 class="section-title">Report It</h2>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>MarineStream</h3>
+                        <p><strong>Biofouling Manager:</strong> Mat Harvey</p>
+                        <p><strong>Operations Manager:</strong> Sam Diamond</p>
+                        <p><strong>Website:</strong> <a href="https://www.marinestream.com.au" style="color: inherit;">www.marinestream.com.au</a></p>
+                    </div>
+                    
+                    <div class="contact-card aus-only">
+                        <h3>National Reporting</h3>
+                        <p><strong>Marine Pests Australia</strong></p>
+                        <p><a href="https://www.marinepests.gov.au/report" target="_blank" style="color: inherit;">www.marinepests.gov.au/report</a></p>
+                        <p style="margin-top: 10px;"><em>Use your state contacts below for fastest response</em></p>
+                    </div>
+
+                    <!-- Sri Lanka National Reporting -->
+                    <div class="contact-card region-content sl-content" style="display:none;">
+                        <h3>IMO TEST Biofouling</h3>
+                        <p><strong>GEF-UNDP-IMO GloFouling / IMO–Norad TEST Biofouling Project</strong></p>
+                        <p>Delivered in Sri Lanka with MEPA &amp; MTCC Africa (JKUAT)</p>
+                        <p><a href="https://www.glofouling.imo.org" target="_blank" style="color: inherit;">glofouling.imo.org</a></p>
+                    </div>
+
+                    <!-- Sri Lanka State Contacts -->
+                    <div class="contact-card region-content sl-content" style="display:none;">
+                        <h3>MEPA Sri Lanka</h3>
+                        <div class="hotline">📞 +94 11 2554373</div>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Marine Environment Protection Authority (also +94 11 2554006)</p>
+                        <p><strong>Email:</strong> <a href="mailto:info@mepa.gov.lk" style="color: inherit;">info@mepa.gov.lk</a></p>
+                        <p><strong>Web:</strong> <a href="https://mepa.gov.lk" target="_blank" style="color: inherit;">mepa.gov.lk</a></p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">No.177, Nawala Road, Narahenpita, Colombo 05</p>
+                    </div>
+
+                    <!-- WA State Contacts -->
+                    <div class="contact-card region-content wa-content">
+                        <h3>DPIRD Western Australia</h3>
+                        <div class="hotline">📞 1800 815 507</div>
+                        <p style="font-size: 0.85em; margin-top: 5px;">FishWatch 24-hour hotline</p>
+                        <p><strong>Email:</strong> <a href="mailto:aquatic.biosecurity@dpird.wa.gov.au" style="color: inherit;">aquatic.biosecurity@dpird.wa.gov.au</a></p>
+                        <p><strong>App:</strong> MyPestGuide Reporter</p>
+                    </div>
+                    
+                    <!-- NSW State Contacts -->
+                    <div class="contact-card region-content nsw-content" style="display:none;">
+                        <h3>NSW DPI</h3>
+                        <div class="hotline">📞 1800 675 888</div>
+                        <p style="font-size: 0.85em; margin-top: 5px;">24-hour hotline</p>
+                        <p><strong>Email:</strong> <a href="mailto:aquatic.biosecurity@dpird.nsw.gov.au" style="color: inherit;">aquatic.biosecurity@dpird.nsw.gov.au</a></p>
+                        <p><strong>Online:</strong> <a href="https://forms.bfs.dpi.nsw.gov.au/forms/9247" target="_blank" style="color: inherit;">Report Form</a></p>
+                    </div>
+                    
+                    <!-- VIC State Contacts -->
+                    <div class="contact-card region-content vic-content" style="display:none;">
+                        <h3>Agriculture Victoria</h3>
+                        <div class="hotline">📞 136 186</div>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Agriculture Victoria</p>
+                        <p><strong>Email:</strong> <a href="mailto:marine.pests@agriculture.vic.gov.au" style="color: inherit;">marine.pests@agriculture.vic.gov.au</a></p>
+                        <p><strong>Online:</strong> <a href="https://agriculture.vic.gov.au/biosecurity/marine-pests/report-a-marine-pest-sighting" target="_blank" style="color: inherit;">Report Form</a></p>
+                    </div>
+                    
+                    <!-- TAS State Contacts -->
+                    <div class="contact-card region-content tas-content" style="display:none;">
+                        <h3>Biosecurity Tasmania</h3>
+                        <div class="hotline">📞 03 6165 3777</div>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Alt: 1300 368 550</p>
+                        <p><strong>Email:</strong> <a href="mailto:invasivespecies@nre.tas.gov.au" style="color: inherit;">invasivespecies@nre.tas.gov.au</a></p>
+                        <p><strong>Alt Email:</strong> <a href="mailto:biosecurity.tasmania@nre.tas.gov.au" style="color: inherit;">biosecurity.tasmania@nre.tas.gov.au</a></p>
+                    </div>
+                    
+                    <!-- QLD State Contacts -->
+                    <div class="contact-card region-content qld-content" style="display:none;">
+                        <h3>Biosecurity Queensland</h3>
+                        <div class="hotline">📞 13 25 23</div>
+                        <p style="font-size: 0.85em; margin-top: 5px;">DAF Call Centre</p>
+                        <p><strong>Email:</strong> <a href="mailto:marinepests@daf.qld.gov.au" style="color: inherit;">marinepests@daf.qld.gov.au</a></p>
+                        <p><strong>Online:</strong> <a href="https://www.daf.qld.gov.au/contact/report-a-biosecurity-pest-or-disease" target="_blank" style="color: inherit;">Report Form</a></p>
+                    </div>
+                    
+                    <!-- SA State Contacts -->
+                    <div class="contact-card region-content sa-content" style="display:none;">
+                        <h3>PIRSA South Australia</h3>
+                        <div class="hotline">📞 1800 065 522</div>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Fishwatch 24-hour hotline</p>
+                        <p><strong>App:</strong> <a href="https://pir.sa.gov.au/recreational_fishing/recfishingapp" target="_blank" style="color: inherit;">SA Fishing App</a></p>
+                        <p><strong>Web:</strong> <a href="https://pir.sa.gov.au/biosecurity/aquatics/aquatic_pests" target="_blank" style="color: inherit;">SA Aquatic Pests</a></p>
+                    </div>
+                    
+                    <!-- NT State Contacts -->
+                    <div class="contact-card region-content nt-content" style="display:none;">
+                        <h3>NT Fisheries</h3>
+                        <div class="hotline">📞 1800 891 136</div>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Fishwatch 24-hour hotline</p>
+                        <p><strong>Email:</strong> <a href="mailto:aquaticbiosecurity@nt.gov.au" style="color: inherit;">aquaticbiosecurity@nt.gov.au</a></p>
+                        <p><strong>App:</strong> <a href="https://nt.gov.au/marine/recreational-fishing/get-the-app" target="_blank" style="color: inherit;">NT Fishing Mate</a></p>
+                    </div>
+                </div>
+                
+                <!-- WA Additional Info -->
+                <div class="region-content wa-content" style="margin-top: 25px;">
+                    <div class="alert" style="border-left-color: var(--primary); background: #e3f2fd;">
+                        <h4 style="color: var(--primary);">📍 WA Reporting Notes</h4>
+                        <ul>
+                            <li><strong>HMAS Stirling &amp; Henderson:</strong> Carpet sea squirt (CSS) detected - heightened surveillance</li>
+                            <li><strong>European Shore Crab:</strong> NOT established in WA - remains noxious listed - report immediately</li>
+                            <li><strong>Wakame:</strong> In VIC/TAS/SA but NOT detected in WA - watch for it</li>
+                            <li>Report to DPIRD within 24hrs. Cease work until advised how to proceed.</li>
+                            <li>This guide shows key species. Full noxious list: <a href="https://www.fish.wa.gov.au" target="_blank">fish.wa.gov.au</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- NSW Additional Info -->
+                <div class="region-content nsw-content" style="display:none; margin-top: 25px;">
+                    <div class="alert" style="border-left-color: var(--primary); background: #e3f2fd;">
+                        <h4 style="color: var(--primary);">📍 NSW Reporting Notes</h4>
+                        <ul>
+                            <li><strong>Sydney Harbour:</strong> Carpet sea squirt outbreak detected 2023 (Fleet Base East)</li>
+                            <li><strong>Caulerpa taxifolia:</strong> Prohibited matter - established in 14+ NSW estuaries</li>
+                            <li><strong>European Fan Worm:</strong> Established in Eden, Botany Bay, Sydney Harbour</li>
+                            <li><strong>Northern Pacific Seastar:</strong> Prohibited matter - report immediately</li>
+                            <li>Report via online form or call 1800 675 888. Cease work until advised.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- VIC Additional Info -->
+                <div class="region-content vic-content" style="display:none; margin-top: 25px;">
+                    <div class="alert" style="border-left-color: var(--primary); background: #e3f2fd;">
+                        <h4 style="color: var(--primary);">📍 VIC Reporting Notes</h4>
+                        <ul>
+                            <li><strong>Northern Pacific Seastar:</strong> Established in Port Phillip Bay - still report new sightings</li>
+                            <li><strong>European Fan Worm:</strong> Established in Victorian waters</li>
+                            <li><strong>Wakame (Japanese Kelp):</strong> Established - report dense new infestations</li>
+                            <li>Species are classified as State Prohibited, Regionally Prohibited, or Restricted</li>
+                            <li>Report via 136 186 or <a href="mailto:marine.pests@agriculture.vic.gov.au">email</a>. Include photos &amp; location.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- TAS Additional Info -->
+                <div class="region-content tas-content" style="display:none; margin-top: 25px;">
+                    <div class="alert" style="border-left-color: var(--primary); background: #e3f2fd;">
+                        <h4 style="color: var(--primary);">📍 TAS Reporting Notes</h4>
+                        <ul>
+                            <li><strong>Northern Pacific Seastar:</strong> Established in Derwent Estuary - devastating impact on shellfish</li>
+                            <li><strong>Wakame (Japanese Kelp):</strong> Established - report new locations</li>
+                            <li><strong>European Fan Worm:</strong> Present in Tasmanian waters</li>
+                            <li>Report to Biosecurity Tasmania - phone or email</li>
+                            <li>Take photos, note GPS location, and depth if underwater</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- QLD Additional Info -->
+                <div class="region-content qld-content" style="display:none; margin-top: 25px;">
+                    <div class="alert" style="border-left-color: var(--primary); background: #e3f2fd;">
+                        <h4 style="color: var(--primary);">📍 QLD Reporting Notes</h4>
+                        <ul>
+                            <li><strong>General Biosecurity Obligation:</strong> Under QLD Biosecurity Act 2014, everyone has a duty to report</li>
+                            <li><strong>Asian Green Mussel:</strong> Previously detected in QLD - high priority</li>
+                            <li><strong>Black-striped Mussel:</strong> Prohibited matter - report immediately</li>
+                            <li><strong>Black Scar Oyster:</strong> Established on north QLD coast (Townsville to Cape Bedford) - report sightings outside known range</li>
+                            <li><strong>Harris Mud Crab:</strong> QLD priority pest - not yet in Australia</li>
+                            <li><strong>Wakame (Japanese Kelp):</strong> QLD priority - not yet in QLD waters</li>
+                            <li><strong>Caulerpa taxifolia:</strong> Native to northern Australia - not a pest in QLD</li>
+                            <li><strong>White Colonial Sea Squirt:</strong> Already established in QLD</li>
+                            <li>Report to Biosecurity Queensland via 13 25 23</li>
+                            <li>More info: <a href="https://www.qld.gov.au/environment/coasts-waterways/marine-pests" target="_blank">qld.gov.au marine pests</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- SA Additional Info -->
+                <div class="region-content sa-content" style="display:none; margin-top: 25px;">
+                    <div class="alert" style="border-left-color: var(--primary); background: #e3f2fd;">
+                        <h4 style="color: var(--primary);">📍 SA Reporting Notes</h4>
+                        <ul>
+                            <li><strong>European Fan Worm:</strong> Established in SA waters</li>
+                            <li><strong>Wakame (Japanese Kelp):</strong> Established in SA - report new dense patches</li>
+                            <li><strong>Pacific Oyster:</strong> Established - feral populations exist</li>
+                            <li>Report via Fishwatch 1800 065 522 or SA Fishing App</li>
+                            <li>PIRSA manages aquatic pests under Landscape SA Act 2019</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- NT Additional Info -->
+                <div class="region-content nt-content" style="display:none; margin-top: 25px;">
+                    <div class="alert" style="border-left-color: var(--primary); background: #e3f2fd;">
+                        <h4 style="color: var(--primary);">📍 NT Reporting Notes</h4>
+                        <ul>
+                            <li><strong>Asian Green Mussel:</strong> Previously detected in Darwin - high vigilance required</li>
+                            <li><strong>Black-striped Mussel:</strong> Darwin 1999 outbreak - watch sea chests carefully</li>
+                            <li><strong>Black Scar Oyster:</strong> Present in one NT marina - report new sightings</li>
+                            <li><strong>Asian Paddle Crab:</strong> Not yet in NT - report any swimming crabs</li>
+                            <li><strong>Cold-water species (Wakame, Northern Pacific Seastar):</strong> Won't survive in NT tropical waters, but know what they look like — transiting vessels from southern ports or across the equator may carry them</li>
+                            <li><strong>Caulerpa taxifolia &amp; Wakame:</strong> Not on NT declared weeds list. Caulerpa is native to northern Australia</li>
+                            <li>Report via Fishwatch 1800 891 136 or NT Fishing Mate app</li>
+                            <li>NT tropical waters have unique biosecurity risks - report anything unusual</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sri Lanka Additional Info -->
+                <div class="region-content sl-content" style="display:none; margin-top: 25px;">
+                    <div class="alert" style="border-left-color: var(--primary); background: #e3f2fd;">
+                        <h4 style="color: var(--primary);">📍 Sri Lanka Reporting Notes</h4>
+                        <ul>
+                            <li><strong>Charru mussel (<em>Mytella strigata</em>):</strong> New invader — first recorded 2023 near the Anawilundawa Ramsar wetland. Report any dense dark-mussel clusters.</li>
+                            <li><strong>Asian green mussel (<em>Perna viridis</em>):</strong> Widespread in the region and a major hull/sea-chest fouler.</li>
+                            <li><strong>Black-striped false mussel (<em>Mytilopsis sallei</em>):</strong> Brackish-water pest — check sea chests and internal seawater systems.</li>
+                            <li><strong>Pathways:</strong> Hull biofouling, sea chests and ballast water. Sri Lanka is implementing the IMO Biofouling Guidelines through the TEST Biofouling Project.</li>
+                            <li>Report suspected invasive marine species to <strong>MEPA</strong> (+94 11 2554373, info@mepa.gov.lk). Keep the specimen, photos and the vessel's recent port history.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <p>© 2026 MarineStream</p>
+                <p class="region-content wa-content has-sl-override">Info from DAFF, DPIRD WA, NIMPIS</p>
+                <p class="region-content sl-content" style="display:none;">Info from IMO Biofouling Guidelines, MEPA Sri Lanka, GloFouling / TEST Biofouling</p>
+                <p class="region-content nsw-content" style="display:none;">Info from DAFF, NSW DPI, NIMPIS</p>
+                <p class="region-content vic-content" style="display:none;">Info from DAFF, Agriculture Victoria, NIMPIS</p>
+                <p class="region-content tas-content" style="display:none;">Info from DAFF, Biosecurity Tasmania, NIMPIS</p>
+                <p class="region-content qld-content" style="display:none;">Info from DAFF, Biosecurity Queensland, NIMPIS</p>
+                <p class="region-content sa-content" style="display:none;">Info from DAFF, PIRSA, NIMPIS</p>
+                <p class="region-content nt-content" style="display:none;">Info from DAFF, NT Fisheries, NIMPIS</p>
+            </div>
+            
+            <!-- Developer Contact -->
+            <div class="dev-contact">
+                <div class="dev-contact-inner">
+                    <span class="dev-contact-icon">🧬</span>
+                    <div class="dev-contact-text">
+                        <span class="dev-contact-label">Developed by Marine Scientist & Developer</span>
+                        <span class="dev-contact-name">Mat Harvey</span>
+                    </div>
+                    <div class="dev-contact-links">
+                        <a href="mailto:mharvey@franmarine.com.au" class="dev-link" title="Email Mat">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/mathew-harvey" target="_blank" class="dev-link" title="GitHub Profile">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Gallery Modal -->
+    <div class="gallery-overlay" id="gallery-overlay">
+        <div class="gallery-container">
+            <div class="gallery-header" id="gallery-header">
+                <div class="gallery-header-text">
+                    <h2 class="gallery-title" id="gallery-title"></h2>
+                    <div class="gallery-scientific" id="gallery-scientific"></div>
+                </div>
+                <button class="gallery-close" id="gallery-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="gallery-body">
+                <div class="gallery-image-container">
+                    <img class="gallery-main-image" id="gallery-image" src="" alt="">
+                </div>
+                <div class="gallery-thumbnails" id="gallery-thumbnails" style="display: none;"></div>
+                <div class="gallery-info">
+                    <h4>Description</h4>
+                    <p class="gallery-description" id="gallery-description"></p>
+                    <div class="gallery-features" id="gallery-features"></div>
+                    <div class="gallery-lookalike" id="gallery-lookalike" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

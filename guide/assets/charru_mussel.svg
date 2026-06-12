@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Charru mussel illustration">
+  <defs>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e3a52"/>
+      <stop offset="1" stop-color="#06212f"/>
+    </linearGradient>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a2f25"/>
+      <stop offset="0.5" stop-color="#1d150f"/>
+      <stop offset="1" stop-color="#0c0907"/>
+    </linearGradient>
+    <linearGradient id="shell2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a3b2a"/>
+      <stop offset="1" stop-color="#15100b"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#water)"/>
+  <g opacity="0.9">
+    <!-- mussel 1 -->
+    <g transform="translate(300 210) rotate(-18)">
+      <path d="M0 0 C -30 -120 60 -150 95 -120 C 150 -70 70 80 0 95 C -55 60 -25 60 0 0 Z" fill="url(#shell)" stroke="#000" stroke-width="3"/>
+      <path d="M5 -5 C -10 -95 55 -120 80 -100" fill="none" stroke="#6b5a44" stroke-width="2" opacity="0.6"/>
+      <ellipse cx="55" cy="-60" rx="9" ry="22" fill="#7a6648" opacity="0.35" transform="rotate(25 55 -60)"/>
+    </g>
+    <!-- mussel 2 -->
+    <g transform="translate(210 250) rotate(28) scale(0.85)">
+      <path d="M0 0 C -30 -120 60 -150 95 -120 C 150 -70 70 80 0 95 C -55 60 -25 60 0 0 Z" fill="url(#shell2)" stroke="#000" stroke-width="3"/>
+      <ellipse cx="55" cy="-60" rx="9" ry="22" fill="#8a7252" opacity="0.35" transform="rotate(25 55 -60)"/>
+    </g>
+    <!-- mussel 3 small -->
+    <g transform="translate(400 280) rotate(5) scale(0.6)">
+      <path d="M0 0 C -30 -120 60 -150 95 -120 C 150 -70 70 80 0 95 C -55 60 -25 60 0 0 Z" fill="url(#shell)" stroke="#000" stroke-width="3"/>
+    </g>
+  </g>
+  <text x="300" y="376" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="20" fill="#cfe3ee" opacity="0.85">Mytella strigata — charru mussel</text>
+</svg>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <title>Hull Biofouling ID Poster - Queensland | MarineStream</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A3 landscape; margin: 8mm; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: white;
+            color: #1a1a1a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .poster {
+            width: 420mm; height: 297mm; padding: 5mm;
+            background: white; display: flex; flex-direction: column;
+        }
+        .poster-header {
+            background: linear-gradient(135deg, #7b2cbf 0%, #9d4edd 100%);
+            color: white; padding: 6px 15px; border-radius: 6px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 4px; flex-shrink: 0;
+        }
+        .poster-title { display: flex; align-items: center; gap: 15px; }
+        .poster-title h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        .alert-icon { background: rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 6px; font-size: 18px; }
+        .poster-subtitle { font-size: 11px; opacity: 0.95; text-align: right; }
+        .poster-subtitle strong { display: block; font-size: 13px; }
+        .species-grid {
+            display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 1fr);
+            gap: 4px; flex: 1; min-height: 0;
+        }
+        .species-item {
+            background: #fff; border: 2px solid #e0e0e0; border-radius: 5px;
+            overflow: hidden; display: flex; flex-direction: column;
+            position: relative; min-height: 0;
+        }
+        .species-item.high-priority { border-color: #CC0000; border-width: 2.5px; }
+        .species-item.medium-priority { border-color: #FF8C00; border-width: 2px; }
+        .species-image { flex: 1; min-height: 0; background: #f0f0f0; overflow: hidden; position: relative; }
+        .species-image img { width: 100%; height: 100%; object-fit: cover; }
+        .priority-badge {
+            position: absolute; top: 3px; right: 3px; padding: 2px 6px; border-radius: 3px;
+            font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .priority-badge.high { background: #CC0000; color: white; }
+        .priority-badge.medium { background: #FF8C00; color: white; }
+        .species-content { padding: 3px 5px 4px; display: flex; flex-direction: column; flex-shrink: 0; }
+        .species-name { font-size: 8.5px; font-weight: 700; color: #1a1a1a; line-height: 1.1; }
+        .species-scientific { font-size: 6.5px; font-style: italic; color: #666; margin-bottom: 1px; }
+        .species-group { display: inline-block; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; font-size: 5.5px; color: #666; margin-bottom: 2px; align-self: flex-start; }
+        .species-features ul { list-style: none; padding: 0; margin: 0; }
+        .species-features li { font-size: 6px; color: #444; padding-left: 7px; position: relative; line-height: 1.25; }
+        .species-features li::before { content: "•"; position: absolute; left: 0; color: #7b2cbf; font-weight: bold; }
+        .poster-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 4px; padding: 5px 10px; background: #7b2cbf;
+            color: white; border-radius: 5px; font-size: 9px; flex-shrink: 0;
+        }
+        .footer-left { display: flex; align-items: center; gap: 15px; }
+        .footer-action { background: #CC0000; padding: 4px 10px; border-radius: 4px; font-weight: 600; }
+        .footer-right { text-align: right; font-size: 8px; opacity: 0.9; }
+        .legend { display: flex; gap: 15px; align-items: center; }
+        .legend-item { display: flex; align-items: center; gap: 4px; font-size: 8px; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+        .legend-dot.high { background: #CC0000; }
+        .legend-dot.medium { background: #FF8C00; }
+        @media print { body { margin: 0; padding: 0; } .poster { margin: 0; padding: 6mm; } }
+        @media screen { body { background: #888; padding: 20px; display: flex; justify-content: center; } .poster { box-shadow: 0 10px 40px rgba(0,0,0,0.3); } }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="poster-header">
+            <div class="poster-title">
+                <span class="alert-icon">⚠️</span>
+                <h1>HULL BIOFOULING — What to Look For</h1>
+            </div>
+            <div class="poster-subtitle">
+                <strong>Found Something Dodgy? STOP & REPORT</strong>
+                Queensland Hull Cleaning Quick Reference — Tropical Focus / GBR Protection
+            </div>
+        </div>
+        
+        <div class="species-grid">
+            <!-- 1. Asian Green Mussel - CRITICAL QLD -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/AsianGreenLipMuscle.webp" alt="Asian Green Mussel">
+                    <span class="priority-badge high">⚠️ PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Asian Green Mussel</div>
+                    <div class="species-scientific">Perna viridis</div>
+                    <span class="species-group">PROHIBITED - Tropical Threat</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Bright green shell (young)</li>
+                            <li>Brownish-green (older)</li>
+                            <li>Big: 80-165mm</li>
+                            <li>Major threat to GBR!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2. Harris Mud Crab - HIGH QLD Priority - Photo © Melissa Frey, Queensland Government -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/Harris-Mud-crab-front-side-photo-Melissa-Freysm.jpg" alt="Harris Mud Crab">
+                    <span class="priority-badge high">⚠️ PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Harris Mud Crab</div>
+                    <div class="species-scientific">Rhithropanopeus harrisii</div>
+                    <span class="species-group">PROHIBITED - QLD Priority</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Small (up to 25mm)</li>
+                            <li>3 spines each side</li>
+                            <li>White-tipped claws</li>
+                            <li>Estuarine/sea chests</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3. Carpet Sea Squirt -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/dvex1.jpg" alt="Carpet Sea Squirt">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Carpet Sea Squirt</div>
+                    <div class="species-scientific">Didemnum vexillum</div>
+                    <span class="species-group">PROHIBITED - Sea Squirt</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Creamy/tan like old wax</li>
+                            <li>Veiny like varicose veins</li>
+                            <li>Leathery, NOT slimy</li>
+                            <li>Drips like candle wax</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 4. Black-striped False Mussel -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/BlackStripedFalseMus01.png" alt="Black-striped False Mussel">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Black-striped False Mussel</div>
+                    <div class="species-scientific">Mytilopsis sallei</div>
+                    <span class="species-group">PROHIBITED - Mussel</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Small: only 25mm</li>
+                            <li>Dark stripes on shell</li>
+                            <li>Likes brackish water</li>
+                            <li>Check sea chests!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 5. Charru Mussel -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/charu1.png" alt="Charru Mussel">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Charru Mussel</div>
+                    <div class="species-scientific">Mytella strigata</div>
+                    <span class="species-group">PROHIBITED - Not in AUS</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Medium: 22-50mm</li>
+                            <li>Variable exterior colours</li>
+                            <li><strong>Blue-purple interior — key ID</strong></li>
+                            <li><strong>Yellowish flesh</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 6. Caulerpa taxifolia - NATIVE in QLD -->
+            <div class="species-item low-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Caulerpa_taxifolia_Feather_algae.jpg?width=400" alt="Caulerpa">
+                    <span class="priority-badge low" style="background: #228B22;">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Caulerpa (Native)</div>
+                    <div class="species-scientific">Caulerpa taxifolia</div>
+                    <span class="species-group">NATIVE - Not a pest in QLD</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Bright green feathery algae</li>
+                            <li>Native to northern Australia</li>
+                            <li>Invasive strain is southern issue</li>
+                            <li>Not a QLD biosecurity concern</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 2 -->
+            
+            <!-- 7. Japanese Kelp Wakame - QLD Priority - Photo © DEECA Victoria -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/Wakame.png" alt="Japanese Kelp Wakame">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Japanese Kelp (Wakame)</div>
+                    <div class="species-scientific">Undaria pinnatifida</div>
+                    <span class="species-group">PROHIBITED - Not in QLD</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Large brown fronds 1-3m</li>
+                            <li>Prominent midrib</li>
+                            <li>Wavy/ruffled edges</li>
+                            <li>Report any sighting!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 8. Brown Mussel - QLD PRIORITY PEST -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/brownmuscle01.webp" alt="Brown Mussel">
+                    <span class="priority-badge high">⚠️ PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Brown Mussel</div>
+                    <div class="species-scientific">Perna perna</div>
+                    <span class="species-group">PROHIBITED - Africa/S. America</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Dark brown to black shell</li>
+                            <li>Up to 90mm (fist-sized)</li>
+                            <li>Thick shell, hard to break</li>
+                            <li>Dense clumps on hulls</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 9. Chinese Mitten Crab -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Eriocheir_sinensis.jpg?width=400" alt="Chinese Mitten Crab">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Chinese Mitten Crab</div>
+                    <div class="species-scientific">Eriocheir sinensis</div>
+                    <span class="species-group">PROHIBITED - Crab</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Hairy "mittens" on claws</li>
+                            <li>White-tipped claws</li>
+                            <li>Up to 80mm carapace</li>
+                            <li>NOT in Australia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 10. Black Scar Oyster - ESTABLISHED QLD -->
+            <div class="species-item medium-priority">
+                <div class="species-image">
+                    <img src="assets/MBilineata.jpg" alt="Black Scar Oyster">
+                    <span class="priority-badge medium">ESTABLISHED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Black Scar Oyster</div>
+                    <div class="species-scientific">Magallana bilineata</div>
+                    <span class="species-group">ESTABLISHED - Townsville to Cape Bedford</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Large: up to 212mm</li>
+                            <li><strong>Dark scar on BOTH valves</strong></li>
+                            <li>Established north QLD coast</li>
+                            <li>Report outside known range!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 11. NZ Green-lipped Mussel -->
+            <div class="species-item medium-priority">
+                <div class="species-image">
+                    <img src="assets/NZGreenLippedMuscle01.jpg" alt="NZ Green-lipped Mussel">
+                    <span class="priority-badge medium">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">NZ Green-lipped Mussel</div>
+                    <div class="species-scientific">Perna canaliculus</div>
+                    <span class="species-group">PROHIBITED - Mussel</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Green lip on edge</li>
+                            <li>Brown-green shell</li>
+                            <li>MASSIVE: up to 240mm</li>
+                            <li>Check NZ vessels</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 12. White Colonial Sea Squirt - ESTABLISHED QLD -->
+            <div class="species-item medium-priority">
+                <div class="species-image">
+                    <img src="assets/didemnum_perlucidum.jpg" alt="White Colonial Sea Squirt">
+                    <span class="priority-badge medium">ESTABLISHED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">White Colonial Sea Squirt</div>
+                    <div class="species-scientific">Didemnum perlucidum</div>
+                    <span class="species-group">ESTABLISHED - QLD</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Thin white/cream sheets</li>
+                            <li>Semi-transparent</li>
+                            <li>Encrusts hard surfaces</li>
+                            <li>Report new locations!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 3 -->
+            
+            <!-- 13. Pleated Sea Squirt -->
+            <div class="species-item medium-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Styela_plicata.jpg?width=400" alt="Pleated Sea Squirt">
+                    <span class="priority-badge medium">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Pleated Sea Squirt</div>
+                    <div class="species-scientific">Styela plicata</div>
+                    <span class="species-group">WATCH - Sea Squirt</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Ridged like a brain</li>
+                            <li>Grey-brown colour</li>
+                            <li>Golf ball size: 70mm</li>
+                            <li>Sits alone</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 14. European Shore Crab -->
+            <div class="species-item medium-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Carcinus_maenas.jpg?width=400" alt="European Shore Crab">
+                    <span class="priority-badge medium">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">European Shore Crab</div>
+                    <div class="species-scientific">Carcinus maenas</div>
+                    <span class="species-group">PROHIBITED - Niche Hitchhiker</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Green shell</li>
+                            <li>5 spines each side of eyes</li>
+                            <li>Up to 90mm across</li>
+                            <li>Hides in sea chests</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 15. Asian Date Mussel - QLD PRIORITY PEST -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/AsianDateMussel.jpg" alt="Asian Date Mussel">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Asian Date/Bag Mussel</div>
+                    <div class="species-scientific">Arcuatula senhousia</div>
+                    <span class="species-group">PROHIBITED - QLD Priority</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Small: up to 30mm</li>
+                            <li>Thin fragile shell</li>
+                            <li>Greenish with zigzags</li>
+                            <li>Forms dense mats</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NATIVE 16, 17, 18 -->
+            <div class="species-item" style="border-color: #006400; border-width: 2px;">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Mytilus_galloprovincialis.jpg?width=400" alt="Blue Mussel">
+                    <span class="priority-badge" style="background: #006400;">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Blue Mussel ✓</div>
+                    <div class="species-scientific">Mytilus galloprovincialis</div>
+                    <span class="species-group">Common - No Report</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Blue-black shell</li>
+                            <li>NOT green</li>
+                            <li>Pointy triangle shape</li>
+                            <li>Normal QLD fouling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="species-item" style="border-color: #006400; border-width: 2px;">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Spirobranchus_giganteus_(Christmastree_Worm_-_yellow_variation).jpg?width=400" alt="Native Tube Worms">
+                    <span class="priority-badge" style="background: #006400;">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Native Tube Worms ✓</div>
+                    <div class="species-scientific">Serpulidae</div>
+                    <span class="species-group">Common - No Report</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>SMALL fan (not 45-60mm)</li>
+                            <li>White hard tubes</li>
+                            <li>NOT brown leathery tube</li>
+                            <li>Normal QLD fouling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="species-item" style="border-color: #006400; border-width: 2px;">
+                <div class="species-image">
+                    <img src="assets/didemnum_perlucidum.jpg" alt="Native Sea Squirts">
+                    <span class="priority-badge" style="background: #006400;">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Native Sea Squirts ✓</div>
+                    <div class="species-scientific">Didemnidae</div>
+                    <span class="species-group">Compare Carefully!</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Thin jelly-like mat</li>
+                            <li>NOT veiny/waxy</li>
+                            <li>Slimy, not leathery</li>
+                            <li>If unsure - REPORT IT</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="poster-footer">
+            <div class="footer-left">
+                <a href="https://www.marinestream.com.au"><img src="assets/marinestream_logo_white.png" alt="MarineStream" style="height: 24px;"></a>
+                <div class="legend">
+                    <div class="legend-item"><div class="legend-dot high"></div><span>PROHIBITED - Stop & Report</span></div>
+                    <div class="legend-item"><div class="legend-dot medium"></div><span>WATCH - Report 24hrs</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #006400;"></div><span>NATIVE - Normal Fouling</span></div>
+                </div>
+            </div>
+            <div class="footer-action">
+                📞 Found Something? STOP CLEANING — Call Biosecurity QLD: 13 25 23
+            </div>
+            <div class="footer-right">Hull Biofouling ID Guide v3.0<br>Queensland • Print A3 Landscape</div>
+        </div>
+    </div>
+</body>
+</html>
+

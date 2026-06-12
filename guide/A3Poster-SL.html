@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <title>Hull Biofouling ID Poster — Sri Lanka | MarineStream</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A3 landscape;
+            margin: 8mm;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: white;
+            color: #1a1a1a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .poster {
+            width: 420mm;
+            height: 297mm;
+            padding: 5mm;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .poster-header {
+            background: linear-gradient(135deg, #8B0000 0%, #CC0000 100%);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+        
+        .poster-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .poster-title h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        .alert-icon {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 18px;
+        }
+        
+        .poster-subtitle {
+            font-size: 11px;
+            opacity: 0.95;
+            text-align: right;
+        }
+        
+        .poster-subtitle strong {
+            display: block;
+            font-size: 13px;
+        }
+        
+        /* Species Grid */
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 4px;
+            flex: 1;
+            min-height: 0;
+        }
+        
+        .species-item {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 0;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        
+        .species-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .species-item.noxious {
+            border-color: #CC0000;
+            border-width: 2.5px;
+        }
+        
+        .species-item.watch {
+            border-color: #FF8C00;
+            border-width: 2px;
+        }
+        
+        .species-item.native {
+            border-color: #006400;
+            border-width: 2px;
+        }
+        
+        .species-image {
+            flex: 1;
+            min-height: 0;
+            background: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .species-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .priority-badge {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 7px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .priority-badge.noxious {
+            background: #CC0000;
+            color: white;
+        }
+        
+        .priority-badge.watch {
+            background: #FF8C00;
+            color: white;
+        }
+        
+        .priority-badge.native {
+            background: #006400;
+            color: white;
+        }
+        
+        .species-content {
+            padding: 3px 5px 4px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        
+        .species-name {
+            font-size: 8.5px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.1;
+        }
+        
+        .species-scientific {
+            font-size: 6.5px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1px;
+        }
+        
+        .species-group {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-size: 5.5px;
+            color: #666;
+            margin-bottom: 2px;
+            align-self: flex-start;
+        }
+        
+        .species-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .species-features li {
+            font-size: 6px;
+            color: #444;
+            padding-left: 7px;
+            position: relative;
+            line-height: 1.25;
+        }
+        
+        .species-features li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #8B0000;
+            font-weight: bold;
+        }
+        
+        .species-item.native .species-features li::before {
+            color: #006400;
+        }
+        
+        .species-item.watch .species-features li::before {
+            color: #FF8C00;
+        }
+        
+        /* Footer */
+        .poster-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+            padding: 5px 10px;
+            background: #003366;
+            color: white;
+            border-radius: 5px;
+            font-size: 9px;
+            flex-shrink: 0;
+        }
+        
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        .footer-logo span {
+            color: #7fb3d5;
+        }
+        
+        .footer-action {
+            background: #CC0000;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .footer-right {
+            text-align: right;
+            font-size: 8px;
+            opacity: 0.9;
+        }
+        
+        .legend {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 8px;
+        }
+        
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+        
+        .legend-dot.noxious {
+            background: #CC0000;
+        }
+        
+        .legend-dot.watch {
+            background: #FF8C00;
+        }
+        
+        .legend-dot.native {
+            background: #006400;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            .poster {
+                margin: 0;
+                padding: 6mm;
+            }
+            
+            .species-item {
+                break-inside: avoid;
+            }
+        }
+        
+        /* Screen preview styles */
+        @media screen {
+            body {
+                background: #888;
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+            }
+            
+            .poster {
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            }
+        }
+        
+        /* Gallery Modal */
+        .gallery-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .gallery-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .gallery-container {
+            width: 100%;
+            max-width: 700px;
+            max-height: calc(100vh - 40px);
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        
+        .gallery-overlay.active .gallery-container {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .gallery-header {
+            padding: 16px 20px;
+            background: #003366;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .gallery-header.noxious {
+            background: #CC0000;
+        }
+        
+        .gallery-header.watch {
+            background: #FF8C00;
+        }
+        
+        .gallery-header.native {
+            background: #006400;
+        }
+        
+        .gallery-header-text {
+            min-width: 0;
+        }
+        
+        .gallery-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .gallery-scientific {
+            font-style: italic;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+        
+        .gallery-close {
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+        }
+        
+        .gallery-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .gallery-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        
+        .gallery-image-container {
+            position: relative;
+            background: #f0f0f0;
+            border-radius: 8px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-main-image {
+            width: 100%;
+            max-height: 45vh;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #f0f0f0;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .gallery-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid transparent;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+        
+        .gallery-thumb:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .gallery-thumb.active {
+            border-color: #003366;
+            opacity: 1;
+            box-shadow: 0 2px 8px rgba(0, 51, 102, 0.3);
+        }
+        
+        .gallery-info {
+            margin-top: 16px;
+        }
+        
+        .gallery-info h4 {
+            color: #003366;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .gallery-features ul {
+            padding-left: 18px;
+            color: #444;
+            font-size: 0.9rem;
+        }
+        
+        .gallery-features li {
+            margin-bottom: 4px;
+        }
+        
+        @media print {
+            .gallery-overlay {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <!-- Header -->
+        <div class="poster-header">
+            <div class="poster-title">
+                <span class="alert-icon">⚠️</span>
+                <h1>HULL BIOFOULING — IMS of Concern</h1>
+            </div>
+            <div class="poster-subtitle">
+                <strong>Found Something? STOP & REPORT to MEPA</strong>
+                Report within 24hrs • Cease work until advised
+            </div>
+        </div>
+        
+        <!-- Species Grid - 6 columns x 3 rows = 18 species -->
+        <div class="species-grid">
+            <!-- Row 1: HIGH RISK SPECIES -->
+            
+            <!-- 1. Carpet Sea Squirt -->
+            <div class="species-item noxious" data-images="assets/dvex1.jpg,assets/dvex2.webp,assets/dvex3.png">
+                <div class="species-image">
+                    <img src="assets/dvex1.jpg" alt="Carpet Sea Squirt">
+                    <span class="priority-badge noxious">HIGH RISK</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Carpet Sea Squirt</div>
+                    <div class="species-scientific">Didemnum vexillum</div>
+                    <span class="species-group">Sea Squirt • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Creamy/tan like old wax</li>
+                            <li>Veiny like varicose veins</li>
+                            <li>Leathery, NOT slimy</li>
+                            <li><strong>At Stirling & Henderson</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2. Asian Green Mussel -->
+            <div class="species-item noxious" data-images="assets/AsianGreenLipMuscle.webp,assets/AsianGreen01.jpeg,assets/AsianGreen02.jpg,assets/AsianGreen03.jpg,assets/AsianGreen04.jpg,assets/AsianGreen05.jpg">
+                <div class="species-image">
+                    <img src="assets/AsianGreenLipMuscle.webp" alt="Asian Green Mussel">
+                    <span class="priority-badge noxious">HIGH RISK</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Asian Green Mussel</div>
+                    <div class="species-scientific">Perna viridis</div>
+                    <span class="species-group">Mussel • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Bright green shell (young)</li>
+                            <li>Brownish-green (older)</li>
+                            <li>Big: 80-165mm</li>
+                            <li><strong>NOT established in WA</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3. European Fan Worm -->
+            <div class="species-item noxious">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/CSIRO_ScienceImage_866_Sabella_spallanzanii_European_fanworm.jpg?width=400" alt="European Fan Worm">
+                    <span class="priority-badge noxious">HIGH RISK</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">European Fan Worm</div>
+                    <div class="species-scientific">Sabella spallanzanii</div>
+                    <span class="species-group">Tube Worm • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>HUGE spiral fan: 45-60mm</li>
+                            <li>Stripy orange/purple/white</li>
+                            <li>Brown leathery tube</li>
+                            <li><strong>Established — still report</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 4. Black-striped False Mussel -->
+            <div class="species-item noxious" data-images="assets/BlackStripedFalseMus01.png,assets/BlackStripedFalseMus02.jpg,assets/BlackStripedFalseMus03.png">
+                <div class="species-image">
+                    <img src="assets/BlackStripedFalseMus01.png" alt="Black-striped False Mussel">
+                    <span class="priority-badge noxious">HIGH RISK</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Black-striped False Mussel</div>
+                    <div class="species-scientific">Mytilopsis sallei</div>
+                    <span class="species-group">Mussel • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Small: only 25mm</li>
+                            <li>Dark stripes on shell</li>
+                            <li>Likes brackish water</li>
+                            <li><strong>Check sea chests!</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 5. European Shore Crab -->
+            <div class="species-item noxious">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Carcinus_maenas.jpg?width=400" alt="European Shore Crab">
+                    <span class="priority-badge noxious">HIGH RISK</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">European Shore Crab</div>
+                    <div class="species-scientific">Carcinus maenas</div>
+                    <span class="species-group">Crab • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Green shell</li>
+                            <li>5 spines each side of eyes</li>
+                            <li>Up to 90mm across</li>
+                            <li><strong>NOT established in WA!</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 6. Northern Pacific Seastar -->
+            <div class="species-item noxious">
+                <div class="species-image">
+                    <img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar">
+                    <span class="priority-badge noxious">HIGH RISK</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Northern Pacific Seastar</div>
+                    <div class="species-scientific">Asterias amurensis</div>
+                    <span class="species-group">Seastar • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Large: up to 50cm</li>
+                            <li>5 arms, upturned tips</li>
+                            <li>Yellow-orange body</li>
+                            <li><strong>Devastating if arrives!</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 2: WATCH SPECIES -->
+            
+            <!-- 7. Japanese Kelp (Wakame) -->
+            <div class="species-item watch">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/CSIRO_ScienceImage_867_Undaria_pinnatifida_Japanese_kelp.jpg?width=400" alt="Japanese Kelp">
+                    <span class="priority-badge watch">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Japanese Kelp (Wakame)</div>
+                    <div class="species-scientific">Undaria pinnatifida</div>
+                    <span class="species-group">Kelp • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Big brown fronds</li>
+                            <li>Central spine/midrib</li>
+                            <li>Wavy ruffled edges</li>
+                            <li><strong>In VIC/TAS/SA — NOT WA</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 8. Killer Algae -->
+            <div class="species-item watch">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Caulerpa_taxifolia_Feather_algae.jpg?width=400" alt="Killer Algae">
+                    <span class="priority-badge watch">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Killer Algae</div>
+                    <div class="species-scientific">Caulerpa taxifolia</div>
+                    <span class="species-group">Algae • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Bright green - stands out</li>
+                            <li>Feather-shaped fronds</li>
+                            <li>Creeping runners</li>
+                            <li><strong>In NSW — NOT in WA</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 9. Asian Paddle Crab -->
+            <div class="species-item watch">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Charybdis_japonica.jpg?width=400" alt="Asian Paddle Crab">
+                    <span class="priority-badge watch">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Asian Paddle Crab</div>
+                    <div class="species-scientific">Charybdis japonica</div>
+                    <span class="species-group">Crab • IMS Concern</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Paddle-shaped back legs</li>
+                            <li>6 spines between eyes</li>
+                            <li>Up to 120mm across</li>
+                            <li><strong>Can spread disease</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 10. Large Oysters -->
+            <div class="species-item watch">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Crassostrea_gigas_p1040848.jpg?width=400" alt="Large Oysters">
+                    <span class="priority-badge watch">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Large Non-Native Oysters</div>
+                    <div class="species-scientific">Magallana spp.</div>
+                    <span class="species-group">Oyster • Hard to ID</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Messy irregular shell</li>
+                            <li>Sharp frilly edges!</li>
+                            <li>Up to 400mm</li>
+                            <li><strong>Photo for lab ID</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 11. NZ Green-lipped Mussel -->
+            <div class="species-item watch" data-images="assets/NZGreenLippedMuscle01.jpg,assets/NZGreenLippedMuscle02.jpg,assets/NZGreenLippedMuscle03.png,assets/NZGreenLippedMuscle04.png">
+                <div class="species-image">
+                    <img src="assets/NZGreenLippedMuscle01.jpg" alt="NZ Green-lipped Mussel">
+                    <span class="priority-badge watch">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">NZ Green-lipped Mussel</div>
+                    <div class="species-scientific">Perna canaliculus</div>
+                    <span class="species-group">Mussel • Emerging</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Green lip on edge</li>
+                            <li>Brown-green shell</li>
+                            <li>MASSIVE: up to 240mm</li>
+                            <li><strong>Check NZ vessels</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 12. Brown Mussel -->
+            <div class="species-item watch" data-images="assets/brownmuscle01.webp,assets/brownmuscle02.jpg,assets/brownmuscle03.jpg">
+                <div class="species-image">
+                    <img src="assets/brownmuscle01.webp" alt="Brown Mussel">
+                    <span class="priority-badge watch">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Brown Mussel</div>
+                    <div class="species-scientific">Perna perna</div>
+                    <span class="species-group">Mussel • Emerging</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Dark brown/black shell</li>
+                            <li>Up to 90mm</li>
+                            <li>Dense thick clumps</li>
+                            <li><strong>From Africa/S.America</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 3: NICHE INFO + NATIVE COMPARISON -->
+            
+            <!-- 13. Niche Areas Info Card -->
+            <div class="species-item" style="border-color: #5a4080; border-width: 2px; background: #f8f5fc;">
+                <div class="species-content" style="flex: 1; justify-content: center; padding: 8px;">
+                    <div class="species-name" style="font-size: 9px; color: #5a4080; margin-bottom: 4px;">🔍 CHECK NICHE AREAS</div>
+                    <div class="species-features">
+                        <ul style="font-size: 6.5px;">
+                            <li style="color: #5a4080;">Sea chests — crabs, mussels hide</li>
+                            <li style="color: #5a4080;">Rope guards — crab shelter</li>
+                            <li style="color: #5a4080;">Gratings — sediment accumulates</li>
+                            <li style="color: #5a4080;">Rudder/prop gaps</li>
+                            <li style="color: #5a4080;">Bilge keel ends</li>
+                            <li style="color: #5a4080;">Anchor wells</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 14. Reporting Info Card -->
+            <div class="species-item" style="border-color: #CC0000; border-width: 2px; background: #fef5f5;">
+                <div class="species-content" style="flex: 1; justify-content: center; padding: 8px;">
+                    <div class="species-name" style="font-size: 9px; color: #CC0000; margin-bottom: 4px;">📞 REPORT TO MEPA</div>
+                    <div class="species-features">
+                        <ul style="font-size: 6.5px;">
+                            <li><strong>MEPA: +94 11 2554373</strong></li>
+                            <li>info@mepa.gov.lk</li>
+                            <li>MyPestGuide Reporter App</li>
+                            <li style="margin-top: 3px; color: #CC0000;"><strong>Report within 24 hours</strong></li>
+                            <li style="color: #CC0000;"><strong>Cease work until advised</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 15. Noxious List Note -->
+            <div class="species-item" style="border-color: #f0c040; border-width: 2px; background: #fffbf0;">
+                <div class="species-content" style="flex: 1; justify-content: center; padding: 8px;">
+                    <div class="species-name" style="font-size: 9px; color: #a06000; margin-bottom: 4px;">⚠️ NOTE</div>
+                    <div class="species-features">
+                        <ul style="font-size: 6.5px; color: #7a5a00;">
+                            <li>This shows KEY species only</li>
+                            <li>IMO Biofouling Guidelines &</li>
+                            <li><strong>mepa.gov.lk</strong></li>
+                            <li>Schedule 5, Fish Resources</li>
+                            <li>Management Regulations 1995</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NATIVE COMPARISON - 16, 17, 18 -->
+            
+            <!-- 16. Blue Mussel (Native - for comparison) -->
+            <div class="species-item native">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Mytilus_galloprovincialis.jpg?width=400" alt="Blue Mussel">
+                    <span class="priority-badge native">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Blue Mussel ✓</div>
+                    <div class="species-scientific">Mytilus galloprovincialis</div>
+                    <span class="species-group">Common - No Report</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Blue-black shell</li>
+                            <li>NOT green</li>
+                            <li>Pointy triangle shape</li>
+                            <li>Normal WA fouling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 17. Native Tube Worms (for comparison) -->
+            <div class="species-item native">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Spirobranchus_giganteus_(Christmastree_Worm_-_yellow_variation).jpg?width=400" alt="Native Tube Worms">
+                    <span class="priority-badge native">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Native Tube Worms ✓</div>
+                    <div class="species-scientific">Serpulidae</div>
+                    <span class="species-group">Common - No Report</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>SMALL fan (not 45-60mm)</li>
+                            <li>White hard tubes</li>
+                            <li>NOT brown leathery tube</li>
+                            <li>Normal WA fouling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 18. Native Colonial Sea Squirts (for comparison) -->
+            <div class="species-item native">
+                <div class="species-image">
+                    <img src="assets/didemnum_perlucidum.jpg" alt="Native Sea Squirts">
+                    <span class="priority-badge native">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Native Sea Squirts ✓</div>
+                    <div class="species-scientific">Didemnidae</div>
+                    <span class="species-group">Compare Carefully!</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Thin jelly-like mat</li>
+                            <li>NOT veiny/waxy</li>
+                            <li>Slimy, not leathery</li>
+                            <li><strong>If unsure - REPORT IT</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="poster-footer">
+            <div class="footer-left">
+                <a href="https://www.marinestream.com.au" class="footer-logo"><img src="assets/marinestream_logo_white.png" alt="MarineStream" style="height: 24px;"></a>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-dot noxious"></div>
+                        <span>HIGH RISK - Report to MEPA</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot watch"></div>
+                        <span>WATCH - Emerging Threat</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot native"></div>
+                        <span>NATIVE - Normal Fouling</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-action">
+                📞 MEPA: +94 11 2554373 • info@mepa.gov.lk
+            </div>
+            <div class="footer-right">
+                Hull Biofouling ID Guide v3.0 • WA<br>
+                © 2026 MarineStream • Images: CSIRO, NIMPIS, Wikipedia
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gallery Modal -->
+    <div class="gallery-overlay" id="gallery-overlay">
+        <div class="gallery-container">
+            <div class="gallery-header" id="gallery-header">
+                <div class="gallery-header-text">
+                    <h2 class="gallery-title" id="gallery-title"></h2>
+                    <div class="gallery-scientific" id="gallery-scientific"></div>
+                </div>
+                <button class="gallery-close" id="gallery-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="gallery-body">
+                <div class="gallery-image-container">
+                    <img class="gallery-main-image" id="gallery-image" src="" alt="">
+                </div>
+                <div class="gallery-thumbnails" id="gallery-thumbnails" style="display: none;"></div>
+                <div class="gallery-info">
+                    <div class="gallery-features" id="gallery-features"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Gallery Modal functionality
+        const galleryOverlay = document.getElementById('gallery-overlay');
+        const galleryHeader = document.getElementById('gallery-header');
+        const galleryTitle = document.getElementById('gallery-title');
+        const galleryScientific = document.getElementById('gallery-scientific');
+        const galleryImage = document.getElementById('gallery-image');
+        const galleryFeatures = document.getElementById('gallery-features');
+        const galleryThumbnails = document.getElementById('gallery-thumbnails');
+        const galleryClose = document.getElementById('gallery-close');
+        
+        function setGalleryImage(src, alt, index) {
+            galleryImage.src = src;
+            galleryImage.alt = alt;
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+                thumb.classList.remove('active');
+                if (i === index) {
+                    thumb.classList.add('active');
+                }
+            });
+        }
+        
+        document.querySelectorAll('.species-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const name = this.querySelector('.species-name').textContent;
+                const scientific = this.querySelector('.species-scientific');
+                const scientificText = scientific ? scientific.textContent : '';
+                const img = this.querySelector('.species-image img');
+                const imgSrc = img ? img.src : '';
+                const imgAlt = img ? img.alt : name;
+                
+                const imagesData = this.getAttribute('data-images');
+                const images = imagesData ? imagesData.split(',').map(s => s.trim()) : [];
+                
+                const featuresList = this.querySelector('.species-features ul');
+                const featuresHTML = featuresList ? '<h4>How to Spot It</h4>' + featuresList.outerHTML : '';
+                
+                galleryHeader.className = 'gallery-header';
+                if (this.classList.contains('noxious')) {
+                    galleryHeader.classList.add('noxious');
+                } else if (this.classList.contains('watch')) {
+                    galleryHeader.classList.add('watch');
+                } else if (this.classList.contains('native')) {
+                    galleryHeader.classList.add('native');
+                }
+                
+                galleryTitle.textContent = name;
+                galleryScientific.textContent = scientificText;
+                galleryFeatures.innerHTML = featuresHTML;
+                
+                if (images.length > 1) {
+                    galleryThumbnails.innerHTML = '';
+                    images.forEach((imageSrc, index) => {
+                        const thumb = document.createElement('img');
+                        thumb.src = imageSrc;
+                        thumb.alt = imgAlt + ' - Photo ' + (index + 1);
+                        thumb.className = 'gallery-thumb' + (index === 0 ? ' active' : '');
+                        thumb.dataset.index = index;
+                        thumb.addEventListener('click', function() {
+                            setGalleryImage(this.src, this.alt, parseInt(this.dataset.index));
+                        });
+                        galleryThumbnails.appendChild(thumb);
+                    });
+                    galleryThumbnails.style.display = 'flex';
+                    galleryImage.src = images[0];
+                    galleryImage.alt = imgAlt;
+                } else {
+                    galleryThumbnails.style.display = 'none';
+                    galleryThumbnails.innerHTML = '';
+                    galleryImage.src = imgSrc;
+                    galleryImage.alt = imgAlt;
+                }
+                
+                galleryOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        function closeGallery() {
+            galleryOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        galleryClose.addEventListener('click', closeGallery);
+        
+        galleryOverlay.addEventListener('click', function(e) {
+            if (e.target === galleryOverlay) {
+                closeGallery();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && galleryOverlay.classList.contains('active')) {
+                closeGallery();
+            }
+        });
+    </script>
+</body>
+</html>

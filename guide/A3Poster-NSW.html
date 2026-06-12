@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <title>Hull Biofouling ID Poster - NSW | MarineStream</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A3 landscape;
+            margin: 8mm;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: white;
+            color: #1a1a1a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .poster {
+            width: 420mm;
+            height: 297mm;
+            padding: 5mm;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .poster-header {
+            background: linear-gradient(135deg, #8B0000 0%, #CC0000 100%);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+        
+        .poster-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .poster-title h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        .alert-icon {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 18px;
+        }
+        
+        .poster-subtitle {
+            font-size: 11px;
+            opacity: 0.95;
+            text-align: right;
+        }
+        
+        .poster-subtitle strong {
+            display: block;
+            font-size: 13px;
+        }
+        
+        .region-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        /* Species Grid */
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 4px;
+            flex: 1;
+            min-height: 0;
+        }
+        
+        .species-item {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 0;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        
+        .species-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .species-item.high-priority {
+            border-color: #CC0000;
+            border-width: 2.5px;
+        }
+        
+        .species-item.medium-priority {
+            border-color: #FF8C00;
+            border-width: 2px;
+        }
+        
+        .species-item.established {
+            border-color: #5a4080;
+            border-width: 2px;
+        }
+        
+        .species-image {
+            flex: 1;
+            min-height: 0;
+            background: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .species-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .priority-badge {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 7px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .priority-badge.high {
+            background: #CC0000;
+            color: white;
+        }
+        
+        .priority-badge.medium {
+            background: #FF8C00;
+            color: white;
+        }
+        
+        .priority-badge.established {
+            background: #5a4080;
+            color: white;
+        }
+        
+        .species-content {
+            padding: 3px 5px 4px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        
+        .species-name {
+            font-size: 8.5px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.1;
+        }
+        
+        .species-scientific {
+            font-size: 6.5px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1px;
+        }
+        
+        .species-group {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-size: 5.5px;
+            color: #666;
+            margin-bottom: 2px;
+            align-self: flex-start;
+        }
+        
+        .species-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .species-features li {
+            font-size: 6px;
+            color: #444;
+            padding-left: 7px;
+            position: relative;
+            line-height: 1.25;
+        }
+        
+        .species-features li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #8B0000;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        .poster-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+            padding: 5px 10px;
+            background: #1a4f7a;
+            color: white;
+            border-radius: 5px;
+            font-size: 9px;
+            flex-shrink: 0;
+        }
+        
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        .footer-logo span {
+            color: #7fb3d5;
+        }
+        
+        .footer-action {
+            background: #CC0000;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .footer-right {
+            text-align: right;
+            font-size: 8px;
+            opacity: 0.9;
+        }
+        
+        .legend {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 8px;
+        }
+        
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+        
+        .legend-dot.high {
+            background: #CC0000;
+        }
+        
+        .legend-dot.medium {
+            background: #FF8C00;
+        }
+        
+        .legend-dot.established {
+            background: #5a4080;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            .poster {
+                margin: 0;
+                padding: 6mm;
+            }
+            
+            .species-item {
+                break-inside: avoid;
+            }
+        }
+        
+        /* Screen preview styles */
+        @media screen {
+            body {
+                background: #888;
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+            }
+            
+            .poster {
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            }
+        }
+        
+        /* Gallery Modal */
+        .gallery-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .gallery-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .gallery-container {
+            width: 100%;
+            max-width: 700px;
+            max-height: calc(100vh - 40px);
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        
+        .gallery-overlay.active .gallery-container {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .gallery-header {
+            padding: 16px 20px;
+            background: #1a4f7a;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .gallery-header.high-priority {
+            background: #CC0000;
+        }
+        
+        .gallery-header.medium-priority {
+            background: #FF8C00;
+        }
+        
+        .gallery-header.native {
+            background: #006400;
+        }
+        
+        .gallery-header.established {
+            background: #5a4080;
+        }
+        
+        .gallery-header-text {
+            min-width: 0;
+        }
+        
+        .gallery-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .gallery-scientific {
+            font-style: italic;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+        
+        .gallery-close {
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+        }
+        
+        .gallery-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .gallery-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        
+        .gallery-image-container {
+            position: relative;
+            background: #f0f0f0;
+            border-radius: 8px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-main-image {
+            width: 100%;
+            max-height: 45vh;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #f0f0f0;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .gallery-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid transparent;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+        
+        .gallery-thumb:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .gallery-thumb.active {
+            border-color: #1a4f7a;
+            opacity: 1;
+            box-shadow: 0 2px 8px rgba(26, 79, 122, 0.3);
+        }
+        
+        .gallery-info {
+            margin-top: 16px;
+        }
+        
+        .gallery-info h4 {
+            color: #1a4f7a;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .gallery-features ul {
+            padding-left: 18px;
+            color: #444;
+            font-size: 0.9rem;
+        }
+        
+        .gallery-features li {
+            margin-bottom: 4px;
+        }
+        
+        @media print {
+            .gallery-overlay {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <!-- Header -->
+        <div class="poster-header">
+            <div class="poster-title">
+                <span class="alert-icon">⚠️</span>
+                <h1>HULL BIOFOULING — What to Look For</h1>
+                <span class="region-badge">📍 NEW SOUTH WALES</span>
+            </div>
+            <div class="poster-subtitle">
+                <strong>Found Something Dodgy? STOP & REPORT</strong>
+                NSW Hull Cleaning Quick Reference
+            </div>
+        </div>
+        
+        <!-- Species Grid - 6 columns x 3 rows = 18 species -->
+        <div class="species-grid">
+            <!-- Row 1: HIGH PRIORITY - Exotic/Not Established -->
+            
+            <!-- 1. Carpet Sea Squirt -->
+            <div class="species-item high-priority" data-images="assets/dvex1.jpg,assets/dvex2.webp,assets/dvex3.png">
+                <div class="species-image">
+                    <img src="assets/dvex1.jpg" alt="Carpet Sea Squirt">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Carpet Sea Squirt</div>
+                    <div class="species-scientific">Didemnum vexillum</div>
+                    <span class="species-group">OUTBREAK - Sydney Harbour 2023</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Creamy/tan waxy, veiny texture</li>
+                            <li>Leathery, NOT slimy</li>
+                            <li>Can thicken to 10cm</li>
+                            <li>Tendrils up to 1m long</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2. Northern Pacific Seastar -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/NorthernPacSeaStar.jpg" alt="Northern Pacific Seastar">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Northern Pacific Seastar</div>
+                    <div class="species-scientific">Asterias amurensis</div>
+                    <span class="species-group">Prohibited in NSW</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Large - up to 50cm diameter</li>
+                            <li>5 arms with upturned tips</li>
+                            <li>Yellow-orange with purple marks</li>
+                            <li>Undersides completely yellow</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3. Asian Green Mussel -->
+            <div class="species-item high-priority" data-images="assets/AsianGreen01.jpeg,assets/AsianGreen02.jpg,assets/AsianGreen03.jpg,assets/AsianGreen04.jpg,assets/AsianGreen05.jpg,assets/AsianGreenLipMuscle.webp">
+                <div class="species-image">
+                    <img src="assets/AsianGreen01.jpeg" alt="Asian Green Mussel">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Asian Green Mussel</div>
+                    <div class="species-scientific">Perna viridis</div>
+                    <span class="species-group">APMPL Listed</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Bright green shell (young)</li>
+                            <li>Big: 80-165mm</li>
+                            <li>Blue-green iridescent inside</li>
+                            <li>Check sea chests!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 4. Black-striped False Mussel -->
+            <div class="species-item high-priority" data-images="assets/BlackStripedFalseMus01.png,assets/BlackStripedFalseMus02.jpg,assets/BlackStripedFalseMus03.png">
+                <div class="species-image">
+                    <img src="assets/BlackStripedFalseMus01.png" alt="Black-striped False Mussel">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Black-striped False Mussel</div>
+                    <div class="species-scientific">Mytilopsis sallei</div>
+                    <span class="species-group">APMPL Listed</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Small: 20-25mm only</li>
+                            <li>Dark radiating stripes</li>
+                            <li>Prefers brackish water</li>
+                            <li>Darwin cost $2.2M to eradicate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 5. Asian Paddle Crab -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Charybdis_japonica.jpg" alt="Asian Paddle Crab">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Asian Paddle Crab</div>
+                    <div class="species-scientific">Charybdis japonica</div>
+                    <span class="species-group">Prohibited in NSW</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Paddle-shaped rear legs</li>
+                            <li>6 spines either side of eyes</li>
+                            <li>Up to 120mm carapace</li>
+                            <li>Carries White Spot Virus!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 6. Asian Date Mussel -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="assets/AsianDateMussel.jpg" alt="Asian Date Mussel">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Asian Date/Bag Mussel</div>
+                    <div class="species-scientific">Arcuatula senhousia</div>
+                    <span class="species-group">Prohibited in NSW</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Small: up to 30mm</li>
+                            <li>Thin, fragile shell</li>
+                            <li>Zigzag markings</li>
+                            <li>Forms dense mats (1000s/m²)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 2: MORE HIGH + MEDIUM PRIORITY -->
+            
+            <!-- 7. Charru Mussel -->
+            <div class="species-item high-priority" data-images="assets/charu1.png,assets/charu2.jpg">
+                <div class="species-image">
+                    <img src="assets/charu1.png" alt="Charru Mussel">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Charru Mussel</div>
+                    <div class="species-scientific">Mytella strigata</div>
+                    <span class="species-group">APMPL Listed 2020</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>22-50mm, variable colours</li>
+                            <li>Zigzags, spots, or bands</li>
+                            <li>Blue-purple opalescent inside</li>
+                            <li>Yellowish flesh</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 8. Chinese Mitten Crab -->
+            <div class="species-item high-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Eriocheir_sinensis.jpg" alt="Chinese Mitten Crab">
+                    <span class="priority-badge high">PROHIBITED</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Chinese Mitten Crab</div>
+                    <div class="species-scientific">Eriocheir sinensis</div>
+                    <span class="species-group">Prohibited</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Dense hair "mittens" on claws</li>
+                            <li>White-tipped claws</li>
+                            <li>Up to 80mm carapace</li>
+                            <li>4 spines each side of eyes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 9. NZ Green-lipped Mussel -->
+            <div class="species-item medium-priority" data-images="assets/NZGreenLippedMuscle01.jpg,assets/NZGreenLippedMuscle02.jpg,assets/NZGreenLippedMuscle03.png,assets/NZGreenLippedMuscle04.png">
+                <div class="species-image">
+                    <img src="assets/NZGreenLippedMuscle01.jpg" alt="NZ Green-lipped Mussel">
+                    <span class="priority-badge medium">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">NZ Green-lipped Mussel</div>
+                    <div class="species-scientific">Perna canaliculus</div>
+                    <span class="species-group">Watch Species</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Green lip on shell edge</li>
+                            <li>MASSIVE: up to 240mm</li>
+                            <li>Dark brown to green shell</li>
+                            <li>Check vessels from NZ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 10. Japanese Kelp -->
+            <div class="species-item medium-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/CSIRO_ScienceImage_867_Undaria_pinnatifida_Japanese_kelp.jpg" alt="Japanese Kelp">
+                    <span class="priority-badge medium">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Japanese Kelp (Wakame)</div>
+                    <div class="species-scientific">Undaria pinnatifida</div>
+                    <span class="species-group">APMPL - Watch for NSW</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>1-3m long brown fronds</li>
+                            <li>Central midrib full length</li>
+                            <li>Wavy ruffled edges</li>
+                            <li>Frilly sporophyll at base</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 11. Stalked Sea Squirt -->
+            <div class="species-item medium-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Styela_clava.JPG" alt="Stalked Sea Squirt">
+                    <span class="priority-badge medium">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Stalked Sea Squirt</div>
+                    <div class="species-scientific">Styela clava</div>
+                    <span class="species-group">Watch Species</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Brown pickle on a stalk</li>
+                            <li>Leathery, wrinkled texture</li>
+                            <li>50-160mm tall</li>
+                            <li>Stands alone</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 12. Vase Tunicate -->
+            <div class="species-item medium-priority">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Cionaintestinalis.jpg" alt="Vase Tunicate">
+                    <span class="priority-badge medium">WATCH</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Vase Tunicate</div>
+                    <div class="species-scientific">Ciona intestinalis</div>
+                    <span class="species-group">Watch Species</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Translucent yellow-green</li>
+                            <li>Tube/vase shaped</li>
+                            <li>Two siphons at top</li>
+                            <li>Soft and squishy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 3: ESTABLISHED IN NSW + NATIVE COMPARISON -->
+            
+            <!-- 13. Caulerpa - Established -->
+            <div class="species-item established">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Caulerpa_taxifolia_Feather_algae.jpg" alt="Caulerpa">
+                    <span class="priority-badge established">CLASS 1</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Caulerpa (Killer Algae)</div>
+                    <div class="species-scientific">Caulerpa taxifolia</div>
+                    <span class="species-group">NOXIOUS - 14+ NSW estuaries</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Bright green feathery fronds</li>
+                            <li>Up to 30cm in NSW</li>
+                            <li>Creeping stolons/runners</li>
+                            <li>Sydney Hbr, Pittwater, etc.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 14. European Shore Crab -->
+            <div class="species-item established">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Carcinus_maenas.jpg" alt="European Shore Crab">
+                    <span class="priority-badge established">EST</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">European Shore Crab</div>
+                    <div class="species-scientific">Carcinus maenas</div>
+                    <span class="species-group">Notifiable - Southern NSW</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Green shell, 50-90mm</li>
+                            <li>3 blunt spines on rostrum</li>
+                            <li>5 spines each side of eyes</li>
+                            <li>NO swimming paddles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 15. European Fan Worm -->
+            <div class="species-item established">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/CSIRO_ScienceImage_866_Sabella_spallanzanii_European_fanworm.jpg" alt="European Fan Worm">
+                    <span class="priority-badge established">EST</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">European Fan Worm</div>
+                    <div class="species-scientific">Sabella spallanzanii</div>
+                    <span class="species-group">Established - Eden, Botany Bay</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Spiral fan crown 45-150mm</li>
+                            <li>Banded orange/purple/white</li>
+                            <li>Brown leathery tube</li>
+                            <li>Body up to 400mm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 16. Pacific Oyster -->
+            <div class="species-item established">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Crassostrea_gigas_p1040848.jpg" alt="Pacific Oyster">
+                    <span class="priority-badge established">EST</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Pacific Oyster</div>
+                    <div class="species-scientific">Magallana gigas</div>
+                    <span class="species-group">Movement Controls Apply</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Large up to 400mm</li>
+                            <li>Irregular, frilly sharp edges</li>
+                            <li>Grey-white to purple</li>
+                            <li>Competes with Sydney Rock</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NATIVE COMPARISON -->
+            
+            <!-- 17. Blue Mussel -->
+            <div class="species-item" style="border-color: #006400; border-width: 2px;">
+                <div class="species-image">
+                    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Mytilus_galloprovincialis.jpg" alt="Blue Mussel">
+                    <span class="priority-badge" style="background: #006400;">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Blue Mussel ✓</div>
+                    <div class="species-scientific">Mytilus galloprovincialis</div>
+                    <span class="species-group">Common - No Report</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Blue-black shell</li>
+                            <li>50-100mm, triangular</li>
+                            <li>NOT green</li>
+                            <li>Normal NSW fouling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 18. Sydney Rock Oyster -->
+            <div class="species-item" style="border-color: #006400; border-width: 2px;">
+                <div class="species-image">
+                    <img src="assets/SydneyRockOyster.jpg" alt="Sydney Rock Oyster">
+                    <span class="priority-badge" style="background: #006400;">NATIVE</span>
+                </div>
+                <div class="species-content">
+                    <div class="species-name">Sydney Rock Oyster ✓</div>
+                    <div class="species-scientific">Saccostrea glomerata</div>
+                    <span class="species-group">Native NSW Oyster</span>
+                    <div class="species-features">
+                        <ul>
+                            <li>Rounder, smaller <80mm</li>
+                            <li>Less frilly than Pacific</li>
+                            <li>Native to NSW</li>
+                            <li>Normal NSW fouling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="poster-footer">
+            <div class="footer-left">
+                <a href="https://www.marinestream.com.au" class="footer-logo"><img src="assets/marinestream_logo_white.png" alt="MarineStream" style="height: 24px;"></a>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-dot high"></div>
+                        <span>PROHIBITED - Stop & Report</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot medium"></div>
+                        <span>WATCH - Report 24hrs</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot established"></div>
+                        <span>ESTABLISHED - Prevent Spread</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #006400;"></div>
+                        <span>NATIVE</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-action">
+                📞 Found Something? STOP CLEANING — NSW DPI: 1800 675 888
+            </div>
+            <div class="footer-right">
+                Hull Biofouling ID Guide v3.0 NSW<br>
+                Print A3 Landscape
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gallery Modal -->
+    <div class="gallery-overlay" id="gallery-overlay">
+        <div class="gallery-container">
+            <div class="gallery-header" id="gallery-header">
+                <div class="gallery-header-text">
+                    <h2 class="gallery-title" id="gallery-title"></h2>
+                    <div class="gallery-scientific" id="gallery-scientific"></div>
+                </div>
+                <button class="gallery-close" id="gallery-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="gallery-body">
+                <div class="gallery-image-container">
+                    <img class="gallery-main-image" id="gallery-image" src="" alt="">
+                </div>
+                <div class="gallery-thumbnails" id="gallery-thumbnails" style="display: none;"></div>
+                <div class="gallery-info">
+                    <div class="gallery-features" id="gallery-features"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Gallery Modal functionality
+        const galleryOverlay = document.getElementById('gallery-overlay');
+        const galleryHeader = document.getElementById('gallery-header');
+        const galleryTitle = document.getElementById('gallery-title');
+        const galleryScientific = document.getElementById('gallery-scientific');
+        const galleryImage = document.getElementById('gallery-image');
+        const galleryFeatures = document.getElementById('gallery-features');
+        const galleryThumbnails = document.getElementById('gallery-thumbnails');
+        const galleryClose = document.getElementById('gallery-close');
+        
+        // Function to set main image and update active thumbnail
+        function setGalleryImage(src, alt, index) {
+            galleryImage.src = src;
+            galleryImage.alt = alt;
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+                thumb.classList.remove('active');
+                if (i === index) {
+                    thumb.classList.add('active');
+                }
+            });
+        }
+        
+        // Open modal when clicking a species item
+        document.querySelectorAll('.species-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const name = this.querySelector('.species-name').textContent;
+                const scientific = this.querySelector('.species-scientific').textContent;
+                const img = this.querySelector('.species-image img');
+                const imgSrc = img ? img.src : '';
+                const imgAlt = img ? img.alt : name;
+                
+                // Get multiple images if available
+                const imagesData = this.getAttribute('data-images');
+                const images = imagesData ? imagesData.split(',').map(s => s.trim()) : [];
+                
+                const featuresList = this.querySelector('.species-features ul');
+                const featuresHTML = featuresList ? '<h4>How to Spot It</h4>' + featuresList.outerHTML : '';
+                
+                galleryHeader.className = 'gallery-header';
+                if (this.classList.contains('high-priority')) {
+                    galleryHeader.classList.add('high-priority');
+                } else if (this.classList.contains('medium-priority')) {
+                    galleryHeader.classList.add('medium-priority');
+                } else if (this.classList.contains('established')) {
+                    galleryHeader.classList.add('established');
+                } else if (this.style.borderColor === 'rgb(0, 100, 0)') {
+                    galleryHeader.classList.add('native');
+                }
+                
+                const badge = this.querySelector('.priority-badge');
+                if (badge && badge.textContent.trim() === 'NATIVE') {
+                    galleryHeader.classList.add('native');
+                }
+                
+                galleryTitle.textContent = name;
+                galleryScientific.textContent = scientific;
+                galleryFeatures.innerHTML = featuresHTML;
+                
+                // Handle multiple images
+                if (images.length > 1) {
+                    galleryThumbnails.innerHTML = '';
+                    images.forEach((imageSrc, index) => {
+                        const thumb = document.createElement('img');
+                        thumb.src = imageSrc;
+                        thumb.alt = imgAlt + ' - Photo ' + (index + 1);
+                        thumb.className = 'gallery-thumb' + (index === 0 ? ' active' : '');
+                        thumb.dataset.index = index;
+                        thumb.addEventListener('click', function() {
+                            setGalleryImage(this.src, this.alt, parseInt(this.dataset.index));
+                        });
+                        galleryThumbnails.appendChild(thumb);
+                    });
+                    galleryThumbnails.style.display = 'flex';
+                    galleryImage.src = images[0];
+                    galleryImage.alt = imgAlt;
+                } else {
+                    galleryThumbnails.style.display = 'none';
+                    galleryThumbnails.innerHTML = '';
+                    galleryImage.src = imgSrc;
+                    galleryImage.alt = imgAlt;
+                }
+                
+                galleryOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        function closeGallery() {
+            galleryOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        galleryClose.addEventListener('click', closeGallery);
+        
+        galleryOverlay.addEventListener('click', function(e) {
+            if (e.target === galleryOverlay) {
+                closeGallery();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && galleryOverlay.classList.contains('active')) {
+                closeGallery();
+            }
+        });
+    </script>
+</body>
+</html>
+

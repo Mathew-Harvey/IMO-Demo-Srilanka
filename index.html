@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participant Portal | Sri Lanka National Technology Demonstration &amp; Training Workshop</title>
+    <meta name="description" content="Participant portal for the Sri Lanka National Technology Demonstration & Training Workshop under the IMO–Norad TEST Biofouling Project. Colombo, 23–26 June 2026.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --imo-navy: #0b2e4f;
+            --imo-navy-2: #103a63;
+            --un-blue: #0093d3;
+            --teal: #0fa39b;
+            --gold: #f2a900;
+            --maroon: #8d153a;
+            --ink: #14202b;
+            --muted: #5a6b78;
+            --line: #e4ebf1;
+            --bg: #f5f8fb;
+            --white: #ffffff;
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(11,46,79,.10);
+            --shadow-lg: 0 22px 50px rgba(11,46,79,.18);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { width: min(1140px, 92vw); margin: 0 auto; }
+        a { color: inherit; }
+
+        /* ===== Top bar ===== */
+        .topbar {
+            background: var(--imo-navy);
+            color: #cfe2f1;
+            font-size: .82rem;
+            letter-spacing: .02em;
+        }
+        .topbar .container {
+            display: flex; flex-wrap: wrap; gap: 8px 18px;
+            align-items: center; justify-content: space-between;
+            padding: 9px 0;
+        }
+        .topbar strong { color: #fff; }
+        .topbar .tag { color: var(--gold); font-weight: 600; }
+
+        /* ===== Hero ===== */
+        .hero {
+            position: relative;
+            color: #fff;
+            background:
+                radial-gradient(1200px 500px at 80% -20%, rgba(0,147,211,.55), transparent 60%),
+                linear-gradient(135deg, var(--imo-navy) 0%, var(--imo-navy-2) 45%, #0c4a73 100%);
+            overflow: hidden;
+        }
+        .hero .container { position: relative; z-index: 2; padding: 56px 0 130px; }
+        .hero-wave { position: absolute; bottom: -1px; left: 0; width: 100%; z-index: 1; display: block; }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,.10);
+            border: 1px solid rgba(255,255,255,.20);
+            padding: 7px 14px; border-radius: 999px;
+            font-size: .8rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+            backdrop-filter: blur(6px);
+        }
+        .eyebrow .flag { width: 22px; height: 14px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,.3); }
+        .hero h1 {
+            font-size: clamp(1.9rem, 4.4vw, 3.1rem);
+            font-weight: 800; line-height: 1.12; margin: 20px 0 14px;
+            max-width: 16ch;
+        }
+        .hero h1 .accent { color: var(--gold); }
+        .hero-sub { font-size: clamp(1rem, 1.6vw, 1.18rem); color: #d7e7f4; max-width: 60ch; }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+        .meta-chip {
+            display: inline-flex; align-items: center; gap: 9px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.18);
+            padding: 10px 16px; border-radius: 12px; font-weight: 600; font-size: .92rem;
+        }
+        .meta-chip .ic { font-size: 1.05rem; }
+
+        /* ===== Section ===== */
+        section { padding: 64px 0; }
+        .section-head { text-align: center; max-width: 62ch; margin: 0 auto 38px; }
+        .section-head .kicker {
+            color: var(--teal); font-weight: 700; letter-spacing: .12em;
+            text-transform: uppercase; font-size: .78rem;
+        }
+        .section-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; margin: 8px 0 10px; color: var(--imo-navy); }
+        .section-head p { color: var(--muted); }
+
+        /* ===== Tool cards ===== */
+        .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; }
+        .tool {
+            position: relative; display: flex; flex-direction: column;
+            background: var(--white); border: 1px solid var(--line);
+            border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease;
+            text-decoration: none; color: inherit;
+        }
+        .tool:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .tool-banner { height: 130px; display: flex; align-items: center; justify-content: center; font-size: 3.4rem; }
+        .tool-banner.guide { background: linear-gradient(135deg, #0fa39b, #0b6e74); }
+        .tool-banner.calc  { background: linear-gradient(135deg, #1E4D78, #0b2e4f); }
+        .tool-body { padding: 24px 24px 26px; flex: 1; display: flex; flex-direction: column; }
+        .tool-body h3 { font-size: 1.28rem; font-weight: 800; color: var(--imo-navy); }
+        .tool-body .lede { color: var(--muted); margin: 8px 0 16px; flex: 1; }
+        .tool-body ul { list-style: none; margin: 0 0 20px; display: grid; gap: 7px; }
+        .tool-body li { position: relative; padding-left: 24px; font-size: .92rem; color: #33444f; }
+        .tool-body li::before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: 800; }
+        .tool-cta {
+            display: inline-flex; align-items: center; gap: 9px; align-self: flex-start;
+            background: var(--imo-navy); color: #fff; font-weight: 700;
+            padding: 11px 20px; border-radius: 10px; font-size: .95rem;
+            transition: background .15s ease, gap .15s ease;
+        }
+        .tool:hover .tool-cta { background: var(--un-blue); gap: 13px; }
+
+        /* ===== Workshop info ===== */
+        .info { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
+        .info-card { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+        .info-card .ic { font-size: 1.6rem; }
+        .info-card h4 { margin: 10px 0 6px; color: var(--imo-navy); font-size: 1.05rem; }
+        .info-card p { color: var(--muted); font-size: .92rem; }
+
+        /* ===== Report banner ===== */
+        .report {
+            background: linear-gradient(135deg, var(--maroon), #5e0d27);
+            color: #fff; border-radius: var(--radius); padding: 30px 32px;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px;
+        }
+        .report h3 { font-size: 1.25rem; margin-bottom: 4px; }
+        .report p { color: #ffd9e4; font-size: .95rem; }
+        .report .num {
+            background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+            padding: 12px 20px; border-radius: 12px; font-weight: 800; font-size: 1.05rem; white-space: nowrap;
+        }
+
+        /* ===== Partners ===== */
+        .partners { text-align: center; }
+        .partner-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 6px; }
+        .partner {
+            display: flex; flex-direction: column; gap: 2px; align-items: center; justify-content: center;
+            min-width: 150px; padding: 16px 20px;
+            background: var(--white); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow);
+        }
+        .partner .mark { font-weight: 800; font-size: 1.15rem; color: var(--imo-navy); letter-spacing: .02em; }
+        .partner .sub { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+        /* ===== Footer ===== */
+        footer { background: var(--imo-navy); color: #b9d0e2; padding: 40px 0 30px; font-size: .9rem; }
+        footer .container { display: grid; gap: 18px; }
+        footer .f-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+        footer strong { color: #fff; }
+        footer .muted { color: #7fa0bb; font-size: .82rem; }
+        footer a.link { color: var(--gold); text-decoration: none; font-weight: 600; }
+        .disclaimer { border-top: 1px solid rgba(255,255,255,.12); padding-top: 16px; color: #7fa0bb; font-size: .8rem; }
+
+        @media (max-width: 640px) {
+            .hero .container { padding: 40px 0 110px; }
+            .report { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top bar -->
+    <div class="topbar">
+        <div class="container">
+            <span><strong>IMO–Norad TEST Biofouling Project</strong> · National Demonstration &amp; Training</span>
+            <span class="tag">Participant Portal — no login required</span>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container">
+            <span class="eyebrow">
+                <img class="flag" src="assets/sl_flag.svg" alt="Flag of Sri Lanka">
+                Sri Lanka · Colombo
+            </span>
+            <h1>Sri Lanka National Technology Demonstration &amp; <span class="accent">Training Workshop</span></h1>
+            <p class="hero-sub">Strengthening biofouling management capacity in Sri Lanka — in-water inspection, biofouling risk assessment, and in-water cleaning guidance, with a live ROV inspection demonstration in the Port of Colombo.</p>
+            <div class="hero-meta">
+                <span class="meta-chip"><span class="ic">📅</span> 23–26 June 2026</span>
+                <span class="meta-chip"><span class="ic">📍</span> Colombo Dockyard, Colombo</span>
+                <span class="meta-chip"><span class="ic">🤝</span> IMO PCU · MTCC Africa · MEPA</span>
+            </div>
+        </div>
+        <svg class="hero-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="#f5f8fb" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path>
+        </svg>
+    </header>
+
+    <!-- Tools -->
+    <section id="tools">
+        <div class="container">
+            <div class="section-head">
+                <div class="kicker">Workshop Resources</div>
+                <h2>Your participant toolkit</h2>
+                <p>Two practical, browser-based tools used in the demonstration. No sign-in, no install — open them on your phone, tablet or laptop.</p>
+            </div>
+            <div class="tools">
+                <a class="tool" href="guide/index.html">
+                    <div class="tool-banner guide">🦪</div>
+                    <div class="tool-body">
+                        <h3>Biofouling Identification Guide</h3>
+                        <p class="lede">A visual field guide for spotting invasive marine species on ship hulls — set to the <strong>Sri Lanka</strong> edition, covering species of concern such as the charru mussel and Asian green mussel.</p>
+                        <ul>
+                            <li>Photo galleries &amp; "how to spot it" tips</li>
+                            <li>Sri Lanka IMS list with MEPA reporting</li>
+                            <li>Printable A3 poster &amp; A5 pocket booklet</li>
+                        </ul>
+                        <span class="tool-cta">Open the guide →</span>
+                    </div>
+                </a>
+                <a class="tool" href="calculator/index.html">
+                    <div class="tool-banner calc">📊</div>
+                    <div class="tool-body">
+                        <h3>Hull Fouling Cost Calculator</h3>
+                        <p class="lede">Estimate the added fuel, cost and greenhouse-gas penalty of hull fouling for a vessel — making the case for proactive biofouling management.</p>
+                        <ul>
+                            <li>Fuel &amp; emissions impact by fouling level</li>
+                            <li>Based on UoM hull-scanning drag research</li>
+                            <li>Interactive charts &amp; scenario comparison</li>
+                        </ul>
+                        <span class="tool-cta">Open the calculator →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshop info -->
+    <section class="info">
+        <div class="container">
+            <div class="section-head">
+                <div class="kicker">About the Workshop</div>
+                <h2>What the demonstration covers</h2>
+                <p>Delivered through the IMO TEST Biofouling Project Coordination Unit (PCU), MTCC Africa (JKUAT), the Marine Environment Protection Authority (MEPA) of Sri Lanka, and international technical experts and technology providers.</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="ic">🔍</div>
+                    <h4>In-water inspection</h4>
+                    <p>Methodologies and digital reporting for assessing hull and niche-area biofouling.</p>
+                </div>
+                <div class="info-card">
+                    <div class="ic">📋</div>
+                    <h4>Risk assessment</h4>
+                    <p>Biofouling risk assessment aligned with the IMO Biofouling Guidelines.</p>
+                </div>
+                <div class="info-card">
+                    <div class="ic">🧽</div>
+                    <h4>In-water cleaning</h4>
+                    <p>IWC considerations and guidelines to support informed decision-making.</p>
+                </div>
+                <div class="info-card">
+                    <div class="ic">🤖</div>
+                    <h4>Live ROV demo</h4>
+                    <p>Remotely Operated Vehicle inspection in a real operational setting in the Port of Colombo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report banner -->
+    <section>
+        <div class="container">
+            <div class="report">
+                <div>
+                    <h3>Spotted a suspect invasive species?</h3>
+                    <p>Keep the specimen and photos, note the vessel's recent ports, and report to the Marine Environment Protection Authority (MEPA).</p>
+                </div>
+                <div class="num">📞 +94 11 2554373 &nbsp;·&nbsp; info@mepa.gov.lk</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners">
+        <div class="container">
+            <div class="section-head">
+                <div class="kicker">Delivered in partnership</div>
+                <h2>Project partners</h2>
+            </div>
+            <div class="partner-row">
+                <div class="partner"><span class="mark">IMO</span><span class="sub">Int'l Maritime Org.</span></div>
+                <div class="partner"><span class="mark">Norad</span><span class="sub">Funding Partner</span></div>
+                <div class="partner"><span class="mark">TEST Biofouling</span><span class="sub">IMO Project</span></div>
+                <div class="partner"><span class="mark">GloFouling</span><span class="sub">GEF·UNDP·IMO</span></div>
+                <div class="partner"><span class="mark">MTCC Africa</span><span class="sub">JKUAT</span></div>
+                <div class="partner"><span class="mark">MEPA</span><span class="sub">Sri Lanka</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="f-top">
+                <div>
+                    <strong>Sri Lanka National Technology Demonstration &amp; Training Workshop</strong><br>
+                    <span class="muted">Under the IMO–Norad TEST Biofouling Project · Colombo, 23–26 June 2026</span>
+                </div>
+                <div>
+                    <a class="link" href="https://www.glofouling.imo.org" target="_blank" rel="noopener">glofouling.imo.org</a> &nbsp;·&nbsp;
+                    <a class="link" href="https://mepa.gov.lk" target="_blank" rel="noopener">mepa.gov.lk</a>
+                </div>
+            </div>
+            <div class="disclaimer">
+                This participant portal is an educational resource prepared for the workshop. Identification guide and cost calculator tools provided by MarineStream. Logos and names of partner organisations are used for identification of the project partnership only. The official event page is hosted by MTCC Africa (mtccafrica.jkuat.ac.ke).
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
