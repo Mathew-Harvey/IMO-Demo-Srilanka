@@ -11,7 +11,8 @@
         { id: 'portal', href: base + 'index.html', icon: '🏠', label: 'Portal' },
         { id: 'guide', href: base + 'guide/index.html', icon: '🦪', label: 'ID Guide' },
         { id: 'calculator', href: base + 'calculator/index.html', icon: '📊', label: 'Calculator' },
-        { id: 'report', href: base + 'report/index.html', icon: '📋', label: 'Inspection Report' }
+        { id: 'report', href: base + 'report/index.html', icon: '📋', label: 'Inspection Report' },
+        { id: 'bfmp', href: base + 'bfmp/index.html', icon: '📄', label: 'BFMP Generator' }
     ];
 
     var chrome = document.createElement('div');

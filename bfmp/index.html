@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFMP Generator | Sri Lanka Workshop Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/portal.css">
+    <link rel="stylesheet" href="bfmp.css">
+</head>
+
+<body class="bfmp-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div id="portal-chrome" data-active="bfmp" data-base="../"></div>
+
+    <header class="portal-page-hero bfmp-hero">
+        <div class="container">
+            <span class="eyebrow">
+                <img class="flag" src="../assets/sl_flag.svg" alt="Flag of Sri Lanka">
+                Sri Lanka · Colombo
+            </span>
+            <h1>Biofouling Management Plan Generator</h1>
+            <p class="hero-sub">Create vessel-specific BFMP and Biofouling Record Book documents aligned with IMO Resolution MEPC.207(62) — part of the Sri Lanka workshop portal supporting MEPA and the IMO TEST Biofouling Project.</p>
+            <div class="hero-meta">
+                <span class="meta-chip"><i class="fas fa-list-ol" aria-hidden="true"></i> 5-step wizard</span>
+                <span class="meta-chip"><i class="fas fa-print" aria-hidden="true"></i> Print / save as PDF</span>
+            </div>
+        </div>
+        <svg class="hero-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="#f5f8fb" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path>
+        </svg>
+    </header>
+
+    <section class="intro-section" id="about-bfmp">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-icon">
+                    <i class="fas fa-ship" aria-hidden="true"></i>
+                </div>
+                <h2>Why You Need a Biofouling Management Plan</h2>
+                <p>
+                    A Biofouling Management Plan (BFMP) outlines how a vessel minimises the accumulation of marine growth
+                    on submerged surfaces. For Sri Lanka, effective biofouling management supports MEPA's mandate to protect
+                    marine ecosystems and helps prevent the spread of invasive species such as the charru mussel and Asian
+                    green mussel through hull fouling pathways.
+                </p>
+                <p>
+                    This workshop tool follows IMO Resolution MEPC.207(62) and supports implementation of the IMO Biofouling
+                    Guidelines through the GEF-UNDP-IMO GloFouling / IMO–Norad TEST Biofouling Project. Complete the guided
+                    steps below to produce a vessel-specific plan and optional Biofouling Record Book for your fleet or
+                    training exercise.
+                </p>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="benefit-text">IMO-Aligned Documentation</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="benefit-text">MEPA &amp; Environmental Protection</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-gas-pump"></i></div>
+                        <div class="benefit-text">Reduced Fuel Consumption</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-anchor"></i></div>
+                        <div class="benefit-text">Port Compliance Readiness</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main id="main-content" class="main-content">
+        <div class="container">
+            <div class="generator-content" id="generator">
+                <div class="progress-indicator" aria-hidden="true">
+                    <div class="progress-step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Vessel Details</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Operating Profile</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Anti-fouling Systems</span>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-label">Management Procedures</span>
+                    </div>
+                    <div class="progress-step" data-step="5">
+                        <span class="step-number">5</span>
+                        <span class="step-label">Generate Plan</span>
+                    </div>
+                </div>
+
+                <div class="tabs" role="tablist" aria-label="BFMP steps">
+                    <button class="tab-btn active" data-tab="vessel-details" role="tab" aria-controls="vessel-details"
+                        aria-selected="true">Vessel Details</button>
+                    <button class="tab-btn" data-tab="operating-profile" role="tab" aria-controls="operating-profile"
+                        aria-selected="false">Operating Profile</button>
+                    <button class="tab-btn" data-tab="anti-fouling" role="tab" aria-controls="anti-fouling"
+                        aria-selected="false">Anti-fouling Systems</button>
+                    <button class="tab-btn" data-tab="management" role="tab" aria-controls="management"
+                        aria-selected="false">Management Procedures</button>
+                    <button class="tab-btn" data-tab="generate" role="tab" aria-controls="generate"
+                        aria-selected="false">Generate Plan</button>
+                </div>
+
+                <div class="tab-content">
+                    <div id="vessel-details" class="tab-pane active" role="tabpanel" aria-labelledby="vessel-details-tab">
+                        <h4>Vessel Particulars</h4>
+                        <div class="info-note">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Complete all required vessel particulars to
+                                meet the IMO Biofouling Management Plan guidance.</p>
+                        </div>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label for="vesselName">Vessel Name*</label>
+                                <input type="text" id="vesselName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="imoNumber">IMO Number*</label>
+                                <input type="text" id="imoNumber" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="callSign">Call Sign*</label>
+                                <input type="text" id="callSign" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="officialNumber">Official Number</label>
+                                <input type="text" id="officialNumber" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="constructionDate">Date of Construction*</label>
+                                <input type="date" id="constructionDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="portOfRegistry">Port of Registry*</label>
+                                <input type="text" id="portOfRegistry" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="vesselType">Vessel Type*</label>
+                                <select id="vesselType" class="form-control" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Cargo Ship">Cargo Ship</option>
+                                    <option value="Tanker">Tanker</option>
+                                    <option value="Bulk Carrier">Bulk Carrier</option>
+                                    <option value="Container Ship">Container Ship</option>
+                                    <option value="Passenger Vessel">Passenger Vessel</option>
+                                    <option value="Fishing Vessel">Fishing Vessel</option>
+                                    <option value="Tug/Offshore">Tug/Offshore</option>
+                                    <option value="Naval Vessel">Naval Vessel</option>
+                                    <option value="Research Vessel">Research Vessel</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="vesselClass">Vessel Class</label>
+                                <input type="text" id="vesselClass" class="form-control" placeholder="e.g., Ice Class 1A">
+                            </div>
+                            <div class="form-group">
+                                <label for="grossTonnage">Gross Tonnage*</label>
+                                <input type="number" id="grossTonnage" class="form-control" min="0" step="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="netTonnage">Net Tonnage</label>
+                                <input type="number" id="netTonnage" class="form-control" min="0" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="deadweight">Deadweight Tonnage (DWT)</label>
+                                <input type="number" id="deadweight" class="form-control" min="0" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="beam">Beam (m)*</label>
+                                <input type="number" id="beam" class="form-control" min="0" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="length">Length Overall (m)*</label>
+                                <input type="number" id="length" class="form-control" min="0" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lengthBP">Length Between Perpendiculars (m)</label>
+                                <input type="number" id="lengthBP" class="form-control" min="0" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="maxDraft">Maximum Draft (m)*</label>
+                                <input type="number" id="maxDraft" class="form-control" min="0" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="minDraft">Minimum Draft (m)*</label>
+                                <input type="number" id="minDraft" class="form-control" min="0" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="flag">Flag State*</label>
+                                <input type="text" id="flag" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="classificationSociety">Classification Society</label>
+                                <input type="text" id="classificationSociety" class="form-control" placeholder="e.g., Lloyd's Register, ABS">
+                            </div>
+                        </form>
+
+                        <h4>Owner & Operator Information</h4>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label for="ownerName">Registered Owner*</label>
+                                <input type="text" id="ownerName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ownerAddress">Owner Address</label>
+                                <input type="text" id="ownerAddress" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="operatorName">Operator/Manager</label>
+                                <input type="text" id="operatorName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="operatorContact">Operator Contact</label>
+                                <input type="text" id="operatorContact" class="form-control" placeholder="Email or phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="masterName">Master's Name</label>
+                                <input type="text" id="masterName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="emergencyContact">Emergency Contact</label>
+                                <input type="text" id="emergencyContact" class="form-control">
+                            </div>
+                        </form>
+
+                        <h4>BFMP Revision Information</h4>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label for="lastDrydock">Date of Last Dry-docking*</label>
+                                <input type="date" id="lastDrydock" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nextDrydock">Date of Next Scheduled Dry-docking*</label>
+                                <input type="date" id="nextDrydock" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="revisionNumber">BFMP Revision Number*</label>
+                                <input type="text" id="revisionNumber" class="form-control" placeholder="e.g., Rev. 1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="revisionDate">Revision Date*</label>
+                                <input type="date" id="revisionDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="responsiblePerson">Responsible Person*</label>
+                                <input type="text" id="responsiblePerson" class="form-control"
+                                    placeholder="Name responsible for BFMP implementation" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="responsiblePosition">Position/Role*</label>
+                                <input type="text" id="responsiblePosition" class="form-control"
+                                    placeholder="e.g., Chief Officer, Master" required>
+                            </div>
+                        </form>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary prev-tab" data-prev="vessel-details" disabled>Previous</button>
+                            <button class="btn btn-primary next-tab" data-next="operating-profile">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="operating-profile" class="tab-pane" role="tabpanel" aria-labelledby="operating-profile-tab">
+                        <h4>Vessel Operating Profile</h4>
+                        <div class="info-note">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Document how the vessel operates to confirm
+                                suitability of coatings and management actions.</p>
+                        </div>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label for="operatingSpeed">Typical Operating Speed (knots)*</label>
+                                <input type="number" id="operatingSpeed" class="form-control" min="0" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxSpeed">Maximum Speed (knots)</label>
+                                <input type="number" id="maxSpeed" class="form-control" min="0" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="minSpeed">Minimum Operating Speed (knots)</label>
+                                <input type="number" id="minSpeed" class="form-control" min="0" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="inServicePeriod">In-service Period (months)*</label>
+                                <input type="number" id="inServicePeriod" class="form-control" min="1" max="120" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="drydockInterval">Typical Dry-dock Interval (months)*</label>
+                                <input type="number" id="drydockInterval" class="form-control" min="1" max="120" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="annualOperatingDays">Annual Operating Days</label>
+                                <input type="number" id="annualOperatingDays" class="form-control" min="0" max="365" placeholder="Days at sea per year">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="tradingRoutes">Typical Trading Routes*</label>
+                                <textarea id="tradingRoutes" class="form-control" rows="3"
+                                    placeholder="Example: Primary operations in Australian territorial waters, ports including [EDIT: Sydney, Melbourne, Brisbane, Darwin, Perth]. Occasional transits to New Zealand and Pacific Island nations. Regular patrol areas include [EDIT: Bass Strait, Great Barrier Reef, Timor Sea]." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="operatingArea">Primary Operating Area*</label>
+                                <select id="operatingArea" class="form-control" required>
+                                    <option value="">Select Area</option>
+                                    <option value="Global">Global</option>
+                                    <option value="Regional (e.g., SE Asia)">Regional (e.g., SE Asia)</option>
+                                    <option value="Coastal (Australia)">Coastal (Australia)</option>
+                                    <option value="Local (e.g., Port Philip Bay)">Local (e.g., Port Philip Bay)</option>
+                                    <option value="Tropical Waters">Tropical Waters</option>
+                                    <option value="Temperate Waters">Temperate Waters</option>
+                                    <option value="Polar Waters">Polar Waters</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="climateZones">Climate Zones*</label>
+                                <textarea id="climateZones" class="form-control" rows="2"
+                                    placeholder="Example: Tropical waters (northern Australia, Pacific Islands), temperate waters (southern Australia, New Zealand). Water temperatures ranging from [EDIT: 15°C to 30°C] seasonally." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="seasonalOperations">Seasonal Operations?</label>
+                                <select id="seasonalOperations" class="form-control">
+                                    <option value="No">No - Year-round operations</option>
+                                    <option value="Yes - Summer">Yes - Summer season only</option>
+                                    <option value="Yes - Winter">Yes - Winter season only</option>
+                                    <option value="Yes - Variable">Yes - Variable seasonal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="averageIdlePeriod">Average Idle Period (days)</label>
+                                <input type="number" id="averageIdlePeriod" class="form-control" min="0" placeholder="Typical days idle at port">
+                            </div>
+                            <div class="form-group">
+                                <label for="maxIdlePeriod">Maximum Idle Period (days)</label>
+                                <input type="number" id="maxIdlePeriod" class="form-control" min="0" placeholder="Longest expected idle period">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="layupProcedures">Layup/Extended Idle Procedures</label>
+                                <textarea id="layupProcedures" class="form-control" rows="3"
+                                    placeholder="Example: For idle periods exceeding 30 days, MGPS to be operated daily for minimum [EDIT: 2 hours]. Underwater inspection to be conducted prior to extended layup and within 7 days of resuming operations. Consider in-water cleaning if idle period exceeds [EDIT: 60 days] in tropical waters or [EDIT: 90 days] in temperate waters."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="speedRestrictions">Speed or Activity Restrictions</label>
+                                <textarea id="speedRestrictions" class="form-control" rows="2"
+                                    placeholder="Example: Vessel operates at reduced speeds during patrol operations (typically [EDIT: 6-12 knots]). Dynamic positioning operations conducted during [EDIT: border protection, rescue operations]. Extended periods at anchor in [EDIT: specific location]. Slow steaming practiced for fuel efficiency on long transits."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="afsSuitability">Are the Installed AFS Suitable for Operating Profile?*</label>
+                                <select id="afsSuitability" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Partially">Partially</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="afsSuitabilityNotes">AFS Suitability Notes</label>
+                                <textarea id="afsSuitabilityNotes" class="form-control" rows="2"
+                                    placeholder="Explain any concerns or notes about AFS suitability for operating profile"></textarea>
+                            </div>
+                        </form>
+
+                        <h4>Hull &amp; Niche Areas Description</h4>
+                        <div class="info-note">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Select all applicable niche areas on your vessel where biofouling is likely to accumulate.</p>
+                        </div>
+                        <form class="form-grid">
+                            <div class="form-group full-width">
+                                <label><strong>External Underwater Niche Areas (Select all that apply)*</strong></label>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_seachests" class="niche-checkbox" value="Sea Chests"> Sea Chests</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_gratings" class="niche-checkbox" value="Gratings"> Gratings</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_bowthrusters" class="niche-checkbox" value="Bow Thrusters"> Bow Thrusters</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_sternthrusters" class="niche-checkbox" value="Stern Thrusters"> Stern Thrusters</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_azimuth" class="niche-checkbox" value="Azimuth Thrusters"> Azimuth Thrusters</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_propellers" class="niche-checkbox" value="Propeller(s)"> Propeller(s)</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_rudders" class="niche-checkbox" value="Rudder(s)"> Rudder(s)</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_stabilizers" class="niche-checkbox" value="Stabilizer Fins"> Stabilizer Fins</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_bilgekeels" class="niche-checkbox" value="Bilge Keels"> Bilge Keels</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_transducers" class="niche-checkbox" value="Transducers"> Transducers</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_anodes" class="niche-checkbox" value="Anodes"> Sacrificial Anodes</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_ropeguards" class="niche-checkbox" value="Rope Guards"> Rope Guards</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_intakes" class="niche-checkbox" value="Seawater Intakes"> Seawater Intakes/Outlets</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_echosounders" class="niche-checkbox" value="Echo Sounders"> Echo Sounders</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_shafts" class="niche-checkbox" value="Shaft Struts"> Shaft Struts/Brackets</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_trimtabs" class="niche-checkbox" value="Trim Tabs"> Trim Tabs</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_skegs" class="niche-checkbox" value="Skegs"> Skegs</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_moonpool" class="niche-checkbox" value="Moon Pool"> Moon Pool</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_welldock" class="niche-checkbox" value="Well Dock"> Well Dock</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="niche_other" class="niche-checkbox" value="Other"> Other (specify below)</label>
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="nicheAreaDescription">Detailed Description of Hull and Niche Areas*</label>
+                                <textarea id="nicheAreaDescription" class="form-control" rows="5"
+                                    placeholder="Example: Sea chests: [EDIT: Two main engine cooling water sea chests, dimensions approximately 1.2m x 0.8m, protected by bronze gratings]. Bow thruster: [EDIT: Single tunnel thruster, 1.5m diameter, 8m length]. Gratings: [EDIT: Sea chest gratings bronze, approximate area 1.5 m²]. Propellers: [EDIT: Twin controllable pitch propellers, 5-blade, 3.2m diameter]. Rudders: [EDIT: Semi-balanced rudders with stock, approximate area 12 m²]. All major niche areas accessible during drydocking. Internal surfaces of sea chests and thruster tunnels accessible for inspection in water." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="unprotectedAreas">Unprotected or Difficult to Coat Areas</label>
+                                <textarea id="unprotectedAreas" class="form-control" rows="3"
+                                    placeholder="Example: Propeller blades (bare bronze, polished during drydock). Shaft struts and brackets (limited coating application due to geometry). Internal surfaces of thruster tunnels (difficult access, partial coating coverage). Transducer faces (uncoated as per manufacturer requirements). Anode surfaces (uncoated by design). Rudder pintle bearings (uncoated operational surfaces)."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label><strong>Internal Seawater Systems</strong></label>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-label"><input type="checkbox" id="internal_cooling" value="Cooling Water Systems"> Main Engine Cooling</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="internal_auxcooling" value="Auxiliary Cooling"> Auxiliary Engine Cooling</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="internal_firewater" value="Fire Water Systems"> Fire Fighting Systems</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="internal_ballast" value="Ballast Systems"> Ballast Systems</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="internal_hvac" value="HVAC Cooling"> HVAC/Air Conditioning</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="internal_freshwater" value="Fresh Water Makers"> Fresh Water Makers</label>
+                                    <label class="checkbox-label"><input type="checkbox" id="internal_other" value="Other Internal Systems"> Other Internal Systems</label>
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="internalSystemsDescription">Internal Systems Description</label>
+                                <textarea id="internalSystemsDescription" class="form-control" rows="3"
+                                    placeholder="Example: Main engine cooling: [EDIT: Two independent circuits, approximately 150m total piping length, protected by MGPS]. Auxiliary cooling: [EDIT: Single circuit, 80m piping, MGPS protected]. Fire fighting: [EDIT: Ring main system, 200m piping, no MGPS]. HVAC: [EDIT: Three separate systems, 120m total piping, MGPS protected]. All systems have primary filtration at sea chest entry. MGPS provides coverage for critical cooling systems. Fire main not protected due to operational requirements."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="diagramFiles">Upload Hull Diagrams/Plans*</label>
+                                <input type="file" id="diagramFiles" class="form-control" accept="image/*" multiple required
+                                    data-preview="diagrams-preview">
+                                <small class="form-text text-muted">Upload GA, docking plan and seawater system schematics showing niche areas.</small>
+                                <div class="photos-preview" id="diagrams-preview"></div>
+                            </div>
+                        </form>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary prev-tab" data-prev="vessel-details">Previous</button>
+                            <button class="btn btn-primary next-tab" data-next="anti-fouling">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="anti-fouling" class="tab-pane" role="tabpanel" aria-labelledby="anti-fouling-tab">
+                        <h4>Anti-fouling Coatings (AFC)</h4>
+                        <div class="info-note">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Add each coating applied to the vessel. Use
+                                the add button to document different systems.</p>
+                        </div>
+                        <div id="afc-container">
+                            <div class="afc-item" data-afc-id="1">
+                                <form class="form-grid">
+                                    <div class="form-group">
+                                        <label for="afcProductName1">Product Name*</label>
+                                        <input type="text" id="afcProductName1" class="form-control afc-product-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcManufacturer1">Manufacturer*</label>
+                                        <input type="text" id="afcManufacturer1" class="form-control afc-manufacturer" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcType1">Type of AFC*</label>
+                                        <select id="afcType1" class="form-control afc-type" required>
+                                            <option value="">Select Type</option>
+                                            <option value="Self-Polishing Copolymer (SPC)">Self-Polishing Copolymer (SPC)</option>
+                                            <option value="Controlled Depletion Polymer (CDP)">Controlled Depletion Polymer (CDP)</option>
+                                            <option value="Hard Coating">Hard Coating</option>
+                                            <option value="Foul Release Coating">Foul Release Coating</option>
+                                            <option value="Biocide-Free">Biocide-Free</option>
+                                            <option value="Silicone-based">Silicone-based</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcServiceLife1">Intended Service Life (years)*</label>
+                                        <input type="number" id="afcServiceLife1" class="form-control afc-service-life" min="1"
+                                            max="10" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcApplicationDate1">Application Date*</label>
+                                        <input type="date" id="afcApplicationDate1" class="form-control afc-application-date" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcDrydockLocation1">Drydock Location</label>
+                                        <input type="text" id="afcDrydockLocation1" class="form-control afc-drydock-location" placeholder="Where applied">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcPrimerName1">Primer Product Name</label>
+                                        <input type="text" id="afcPrimerName1" class="form-control afc-primer-name" placeholder="If applicable">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcPrimerCoats1">Primer Coats</label>
+                                        <input type="number" id="afcPrimerCoats1" class="form-control afc-primer-coats" min="0" max="5" placeholder="Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcTiecoat1">Tie-coat Product</label>
+                                        <input type="text" id="afcTiecoat1" class="form-control afc-tiecoat" placeholder="If applicable">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcTopcoats1">Number of Topcoats*</label>
+                                        <input type="number" id="afcTopcoats1" class="form-control afc-topcoats" min="1" max="10" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcThickness1">Total DFT (μm)*</label>
+                                        <input type="number" id="afcThickness1" class="form-control afc-thickness" min="0" step="10" 
+                                            placeholder="Dry film thickness" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="afcColor1">Coating Color</label>
+                                        <input type="text" id="afcColor1" class="form-control afc-color" placeholder="e.g., Red, Blue">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="afcLocations1">Locations Applied*</label>
+                                        <textarea id="afcLocations1" class="form-control afc-locations" rows="2"
+                                            placeholder="Example: Applied to flat bottom, vertical sides, bow and stern sections. Boot-top area with separate tie coat. Not applied to propellers, shaft brackets, or transducer faces. Niche areas including sea chest gratings, rudder surfaces, and thruster tunnel entries (different product/specification as needed)." required></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="afcSuitableProfile1">Suitable Operating Profiles*</label>
+                                        <textarea id="afcSuitableProfile1" class="form-control afc-profile" rows="2"
+                                            placeholder="Example: Designed for vessels operating at speeds of [EDIT: 10-25 knots]. Suitable for tropical and temperate waters. Effective with idle periods up to [EDIT: 30 days]. Performance optimized for continuous operation with minimal stationary periods. Compatible with MGPS systems." required></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="afcMaintenance1">Recommended Maintenance/Repair Regime*</label>
+                                        <textarea id="afcMaintenance1" class="form-control afc-maintenance" rows="2"
+                                            placeholder="Example: Visual inspection during each underwater hull inspection. Touch-up repairs using approved products as required for damage areas. Light mechanical cleaning (soft brush/sponge) acceptable if biofouling accumulation observed. Recoating interval: [EDIT: 60 months] or at next scheduled drydocking. Maintain coating manufacturer contact for technical support." required></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="afcSpecialConsiderations1">Special Considerations</label>
+                                        <textarea id="afcSpecialConsiderations1" class="form-control afc-special-considerations" rows="2"
+                                            placeholder="Example: Application requires surface preparation to SA 2.5 standard. Minimum surface temperature [EDIT: 10°C], maximum relative humidity [EDIT: 85%] during application. Not suitable for in-water cleaning using high-pressure systems. Compatible with cathodic protection systems. SDS available onboard and with shore management."></textarea>
+                                    </div>
+                                </form>
+                                <button class="btn btn-sm btn-secondary remove-afc" type="button" style="display: none;"><i
+                                        class="fas fa-trash"></i> Remove Coating</button>
+                            </div>
+                        </div>
+                        <div class="button-group">
+                            <button id="add-afc" class="btn btn-sm btn-secondary" type="button"><i class="fas fa-plus"
+                                    aria-hidden="true"></i> Add Another Coating</button>
+                        </div>
+
+                        <h4>IAFS Certificate</h4>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label for="iafsNumber">IAFS Certificate Number</label>
+                                <input type="text" id="iafsNumber" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="iafsIssueDate">Issue Date</label>
+                                <input type="date" id="iafsIssueDate" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="iafsFile">Upload IAFS Certificate (Optional)</label>
+                                <input type="file" id="iafsFile" class="form-control" accept="image/*,application/pdf">
+                            </div>
+                        </form>
+
+                        <h4>Marine Growth Prevention Systems (MGPS)</h4>
+                        <div class="info-note">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Document each MGPS installed on the vessel.
+                            </p>
+                        </div>
+                        <div id="mgps-container">
+                            <div class="mgps-item" data-mgps-id="1">
+                                <form class="form-grid">
+                                    <div class="form-group">
+                                        <label for="mgpsManufacturer1">Manufacturer*</label>
+                                        <input type="text" id="mgpsManufacturer1" class="form-control mgps-manufacturer" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsModel1">Model*</label>
+                                        <input type="text" id="mgpsModel1" class="form-control mgps-model" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsType1">Type of MGPS*</label>
+                                        <select id="mgpsType1" class="form-control mgps-type" required>
+                                            <option value="">Select Type</option>
+                                            <option value="Anodic System">Anodic System (Copper/Aluminum)</option>
+                                            <option value="Impressed Current">Impressed Current</option>
+                                            <option value="Ultrasonic">Ultrasonic</option>
+                                            <option value="Chemical Dosing">Chemical Dosing</option>
+                                            <option value="Electrolytic">Electrolytic</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsServiceLife1">Service Life (years)*</label>
+                                        <input type="number" id="mgpsServiceLife1" class="form-control mgps-service-life" min="1"
+                                            max="20" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsInstallDate1">Installation Date</label>
+                                        <input type="date" id="mgpsInstallDate1" class="form-control mgps-install-date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsLastService1">Last Service Date</label>
+                                        <input type="date" id="mgpsLastService1" class="form-control mgps-last-service">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsOperationalStatus1">Operational Status*</label>
+                                        <select id="mgpsOperationalStatus1" class="form-control mgps-operational-status" required>
+                                            <option value="">Select</option>
+                                            <option value="Operational">Fully Operational</option>
+                                            <option value="Partially Operational">Partially Operational</option>
+                                            <option value="Non-Operational">Non-Operational</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsMaintenanceInterval1">Maintenance Interval (months)</label>
+                                        <input type="number" id="mgpsMaintenanceInterval1" class="form-control mgps-maintenance-interval" 
+                                            min="1" max="60" placeholder="Recommended interval">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="mgpsLocations1">Locations Installed*</label>
+                                        <textarea id="mgpsLocations1" class="form-control mgps-locations" rows="2"
+                                            placeholder="Example: System installed in [EDIT: port and starboard sea chests]. Protects main engine cooling system, auxiliary engine cooling, and HVAC seawater circuits. Copper anodes installed at sea chest inlet. Control panels located in [EDIT: engine room, port and starboard sides]. System provides coverage for approximately [EDIT: 150m] of internal piping." required></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="mgpsOperatingParameters1">Operating Parameters</label>
+                                        <textarea id="mgpsOperatingParameters1" class="form-control mgps-operating-parameters" rows="2"
+                                            placeholder="Example: Operating voltage: [EDIT: 24V DC]. Current output: [EDIT: 0-10A adjustable]. Normal operating current: [EDIT: 6A]. Dosing rate: [EDIT: 20ppb copper ion concentration]. Runtime: Continuous operation when seawater systems in use. Anode consumption rate: approximately [EDIT: 2kg per 1000 hours operation]. System automatically adjusts based on flow rate and water temperature."></textarea>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="mgpsMaintenance1">Maintenance Procedures*</label>
+                                        <textarea id="mgpsMaintenance1" class="form-control mgps-maintenance" rows="2"
+                                            placeholder="Example: Daily: Check system operation, verify indicator lights showing green/normal. Weekly: Record anode current readings, check for alarms. Monthly: Inspect anode condition, check electrical connections, verify timer settings. Quarterly: Clean anode surfaces if required, test alarm functions. Annually: Replace anodes if consumed below [EDIT: 30%] original size. Anode replacement typically required every [EDIT: 12-18 months] depending on usage. Maintain log of all maintenance activities in MGPS record book." required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsManual1">MGPS Operating Manual Available?*</label>
+                                        <select id="mgpsManual1" class="form-control mgps-manual" required>
+                                            <option value="">Select</option>
+                                            <option value="Yes - Onboard">Yes - Kept Onboard</option>
+                                            <option value="Yes - Office">Yes - At Office</option>
+                                            <option value="Digital Copy">Digital Copy Available</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mgpsManualLocation1">Manual Location/Reference</label>
+                                        <input type="text" id="mgpsManualLocation1" class="form-control mgps-manual-location" 
+                                            placeholder="Where manual is stored">
+                                    </div>
+                                </form>
+                                <button class="btn btn-sm btn-secondary remove-mgps" type="button" style="display: none;"><i
+                                        class="fas fa-trash"></i> Remove MGPS</button>
+                            </div>
+                        </div>
+                        <div class="button-group">
+                            <button id="add-mgps" class="btn btn-sm btn-secondary" type="button"><i class="fas fa-plus"
+                                    aria-hidden="true"></i> Add Another MGPS</button>
+                        </div>
+
+                        <h4>Installation Details</h4>
+                        <form class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="afsInstallation">AFS Installation Details*</label>
+                                <textarea id="afsInstallation" class="form-control" rows="5"
+                                    placeholder="Describe where each AFS is applied and any unprotected areas" required></textarea>
+                            </div>
+                        </form>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary prev-tab" data-prev="operating-profile">Previous</button>
+                            <button class="btn btn-primary next-tab" data-next="management">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="management" class="tab-pane" role="tabpanel" aria-labelledby="management-tab">
+                        <h4>Inspection &amp; Cleaning Schedules</h4>
+                        <div class="info-note">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Define inspection and cleaning approaches to
+                                demonstrate effective management.</p>
+                        </div>
+                        
+                        <h5>Inspection Schedule</h5>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label for="inspectionDaily">Daily Inspection Activities</label>
+                                <textarea id="inspectionDaily" class="form-control" rows="2"
+                                    placeholder="Example: Check MGPS operation lights and current readings. Verify no MGPS alarms. Visual inspection of accessible deck drains and scuppers for marine growth. Record in ship's log. Responsibility: [EDIT: Engineering Officer of the Watch]."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="inspectionWeekly">Weekly Inspection Activities</label>
+                                <textarea id="inspectionWeekly" class="form-control" rows="2"
+                                    placeholder="Example: Detailed MGPS performance check including anode current readings and water flow verification. Visual inspection of sea chest gratings (if accessible). Check cooling water temperatures for signs of fouling. Record in MGPS log and Biofouling Record Book. Responsibility: [EDIT: Chief Engineer]."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="inspectionMonthly">Monthly Inspection Activities</label>
+                                <textarea id="inspectionMonthly" class="form-control" rows="2"
+                                    placeholder="Example: Inspection of internal seawater systems including sea chest chambers (if safe access available). Monitor cooling system pressures and temperatures for baseline comparisons. Review MGPS performance data. Inspect fire main strainers. Document findings in Biofouling Record Book. Responsibility: [EDIT: Chief Engineer]."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="inspectionQuarterly">Quarterly Inspection Activities</label>
+                                <textarea id="inspectionQuarterly" class="form-control" rows="2"
+                                    placeholder="Example: Detailed inspection of all accessible niche areas. Check floating equipment (fenders, mooring lines) for fouling. Inspect transom and stern areas from tender if conditions permit. Photograph any biofouling observed. Compare with previous inspection photos. Report findings to [EDIT: Fleet Manager]. Document in Biofouling Record Book."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="inspectionAnnual">Annual Inspection Activities</label>
+                                <textarea id="inspectionAnnual" class="form-control" rows="2"
+                                    placeholder="Example: Comprehensive underwater inspection (UWILD) or drydock inspection of all hull and niche areas. Full photographic survey of hull, propellers, rudders, thrusters, sea chests, gratings, and all underwater appendages. Assessment against biosecurity cleaning levels. Written report including recommendations for cleaning or maintenance. Update BFMP if significant changes to biofouling patterns observed."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="inspectionPreArrival">Pre-Arrival Inspection</label>
+                                <textarea id="inspectionPreArrival" class="form-control" rows="2"
+                                    placeholder="Example: Prior to arrival in ports with strict biosecurity requirements (Australia, New Zealand, California), review vessel biofouling history. Confirm last inspection date and results. Verify MGPS operational throughout voyage. Check for any recent groundings or long periods at anchor. Complete MARS declaration (Australia) or MPI declaration (New Zealand) accurately. Have recent UWILD report and photos available if requested."></textarea>
+                            </div>
+                        </form>
+
+                        <h5>Underwater Inspection in Water (UWILD)</h5>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label for="uwildFrequency">UWILD Frequency*</label>
+                                <select id="uwildFrequency" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="Quarterly">Quarterly (every 3 months)</option>
+                                    <option value="Semi-Annual">Semi-Annual (every 6 months)</option>
+                                    <option value="Annual">Annual</option>
+                                    <option value="As Required">As Required/Risk-Based</option>
+                                    <option value="Not Applicable">Not Applicable</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="uwildLastDate">Last UWILD Date</label>
+                                <input type="date" id="uwildLastDate" class="form-control">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="uwildProcedure">UWILD Procedures*</label>
+                                <textarea id="uwildProcedure" class="form-control" rows="3"
+                                    placeholder="Example: UWILD conducted by qualified commercial divers with underwater photography/video equipment. Inspection covers: hull (100% coverage), propellers, rudders, sea chest gratings, thruster tunnels (entry areas), all underwater appendages. Biofouling assessed using [EDIT: DAFF/MPI] rating levels. Detailed photographic record maintained with date/location stamps. Written report provided within [EDIT: 48 hours] including recommendations for cleaning. Report includes comparison with previous inspections. All findings recorded in Biofouling Record Book." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="uwildContractors">Approved UWILD Contractors</label>
+                                <textarea id="uwildContractors" class="form-control" rows="2"
+                                    placeholder="Example: [EDIT: Company Name], Contact: [EDIT: name, phone, email]. Services available in [EDIT: Sydney, Melbourne, Brisbane]. Alternative: [EDIT: Company Name 2], Contact: [EDIT: details]. Internal capability: Ship's diving team (if qualified and equipped for UWILD). All contractors must hold appropriate diving certifications and liability insurance."></textarea>
+                            </div>
+                        </form>
+
+                        <h5>Cleaning Schedule</h5>
+                        <form class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="cleaningHullSchedule">Hull Cleaning Schedule*</label>
+                                <textarea id="cleaningHullSchedule" class="form-control" rows="3"
+                                    placeholder="Example: Routine cleaning not required if biofouling remains at acceptable levels (slime layer only). Trigger for cleaning: UWILD report indicates biofouling rating above [EDIT: Level 2]. Extended idle period exceeding [EDIT: 60 days in tropical waters, 90 days in temperate]. Observed increase in fuel consumption exceeding [EDIT: 5%]. Prior to entry into high biosecurity risk ports. Cleaning conducted during drydock or by approved in-water contractor. Minimum 7 days between cleaning and arrival in biosecurity controlled port." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="cleaningNicheSchedule">Niche Area Cleaning Schedule*</label>
+                                <textarea id="cleaningNicheSchedule" class="form-control" rows="3"
+                                    placeholder="Example: Sea chest gratings: cleaned during each drydock, or in-water if heavy fouling observed. Thruster tunnels: inspected annually, cleaned if biofouling present. Propellers: polished during each drydock, light brushing acceptable in-water if required. Rudders: cleaned during drydock, in-water grooming if fouling observed. Transducers: cleaned as required to maintain performance. Anodes: not cleaned (sacrificial). All niche cleaning conducted by qualified personnel using approved soft brush/sponge methods to avoid coating damage." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="cleaningInternalSchedule">Internal System Cleaning Schedule</label>
+                                <textarea id="cleaningInternalSchedule" class="form-control" rows="2"
+                                    placeholder="Example: Sea chests: physical cleaning during drydock, internal surfaces accessible via manhole. Fire main: flushed quarterly with freshwater when alongside. Cooling systems: MGPS provides continuous protection, system flushing conducted if performance degradation observed. Strainers: cleaned weekly or as required. Annual backflushing of all seawater systems when in port. Chemical treatment only if approved by [EDIT: Chief Engineer/Fleet Manager]."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="cleaningMethods">Cleaning Methods &amp; Equipment*</label>
+                                <textarea id="cleaningMethods" class="form-control" rows="3"
+                                    placeholder="Example: Approved methods: Soft brush/sponge (manual), grooming (light mechanical with soft pads), polishing (propellers only). NOT approved: High-pressure water blasting, abrasive pads, scrapers, mechanical rotating brushes on coated surfaces. Equipment: Soft bristle brushes, non-abrasive sponges, low-pressure washers (<1000 psi for rinsing only). Divers must be briefed on coating type and acceptable cleaning techniques. All cleaning must not damage anti-fouling coating. Waste capture required in environmentally sensitive areas." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="cleaningContractors">Approved Cleaning Contractors</label>
+                                <textarea id="cleaningContractors" class="form-control" rows="2"
+                                    placeholder="List approved in-water cleaning contractors and contact details"></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="cleaningRestrictions">Cleaning Restrictions &amp; Requirements</label>
+                                <textarea id="cleaningRestrictions" class="form-control" rows="2"
+                                    placeholder="Port authority requirements, environmental restrictions, capture requirements"></textarea>
+                            </div>
+                        </form>
+
+                        <h4>Biofouling Risk Monitoring &amp; Contingency Planning</h4>
+                        <form class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="riskParameters">Biofouling Risk Parameters*</label>
+                                <textarea id="riskParameters" class="form-control" rows="4"
+                                    placeholder="Example: Extended port stays (>30 days). Operating in warm tropical waters (>25°C). Reduced speed operations (<10 knots for extended periods). MGPS failure or degraded performance. Extended idle periods at anchor. Operating in areas with high biofouling pressure. Freshwater exposure. Damage to anti-fouling coating. Increased fuel consumption indicating hull resistance. Rising cooling water temperatures indicating internal fouling. Failure to conduct scheduled inspections." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="deviationLimits">Deviation Limits*</label>
+                                <textarea id="deviationLimits" class="form-control" rows="3"
+                                    placeholder="Example: Port stay exceeding [EDIT: 45 days]. Idle at anchor exceeding [EDIT: 21 days]. MGPS offline for more than [EDIT: 7 days]. Fuel consumption increase >5% compared to baseline. Cooling water temperature increase >3°C above normal. Speed reduction >1 knot at same engine RPM. UWILD report indicating biofouling rating above Level 2. Missed scheduled inspection." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="contingencyActions">Contingency Actions*</label>
+                                <textarea id="contingencyActions" class="form-control" rows="4"
+                                    placeholder="Example: Immediate: Report deviation to [EDIT: Fleet Manager/Master]. Investigate cause. Review operational schedule. Short-term: Arrange UWILD inspection within [EDIT: 14 days]. Increase MGPS operating time if system available. Plan for in-water cleaning if biofouling confirmed. Adjust operational profile to reduce risk (increase speed, reduce idle time). Update biosecurity declarations. Medium-term: Conduct in-water cleaning if required. Arrange early drydock if significant fouling. Review and update BFMP procedures. Report to classification society if required." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="longTermActions">Long-term Actions*</label>
+                                <textarea id="longTermActions" class="form-control" rows="3"
+                                    placeholder="Example: Review anti-fouling coating selection and performance. Consider alternative coating systems at next drydock. Upgrade or install additional MGPS capacity. Modify operational profile to reduce biofouling risk. Increase inspection frequency in high-risk operating areas. Revise BFMP based on lessons learned. Review contractor performance and selection. Consider hull performance monitoring systems. Update crew training program. Consult with coating manufacturers for technical support." required></textarea>
+                            </div>
+                        </form>
+
+                        <h4>Waste Management &amp; Safety Procedures</h4>
+                        <form class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="wasteManagement">Capture and Disposal of Waste*</label>
+                                <textarea id="wasteManagement" class="form-control" rows="4"
+                                    placeholder="Example: All biofouling material removed during cleaning to be captured and contained. Waste captured using collection devices, filter bags, or containment curtains during in-water cleaning. No discharge of biofouling waste into water. Collected waste stored in sealed containers marked 'Biofouling Waste - Biosecurity Risk'. Disposal in accordance with MARPOL Annex V and local port regulations. In Australia: waste treated as quarantine material, disposal approved by biosecurity officer. In NZ: disposal as per MPI requirements. Record all waste disposal in Biofouling Record Book and Garbage Record Book. Contact [EDIT: waste contractor name] for approved disposal." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="wasteContainment">Waste Containment Methods</label>
+                                <textarea id="wasteContainment" class="form-control" rows="2"
+                                    placeholder="Example: Containment curtains deployed around cleaning area. Vacuum collection systems used for removal. Filter bags (50 micron mesh) fitted to vacuum outlets. Soft brushes and sponges used to minimize material dispersal. Containment verified before commencing cleaning. Floating debris booms deployed if required. All equipment inspected before and after use. Divers briefed on waste capture requirements. Work stopped if containment fails."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="safetyProcedures">Safety Procedures*</label>
+                                <textarea id="safetyProcedures" class="form-control" rows="4"
+                                    placeholder="Example: Lockout/tagout: All shafts, propellers, thrusters, rudders isolated before in-water work. Lockout tags signed by [EDIT: Chief Engineer]. Confined space entry: Atmosphere tested, ventilation established, permits issued per ship's procedures. Minimum 2-person team. Diving operations: Dive plan prepared and approved. Safety diver on standby. Communication maintained throughout. Decompression tables available. Emergency oxygen ready. Chemical handling: SDS reviewed prior to use. Appropriate PPE worn. Spill containment available. Ventilation adequate. Permit-to-work: Required for all underwater work, confined space entry, and hot work near recent coating application." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="safetyEquipment">Required Safety Equipment</label>
+                                <textarea id="safetyEquipment" class="form-control" rows="2"
+                                    placeholder="Example: PPE: Gloves (chemical resistant), safety glasses, respirators (if required), protective coveralls, non-slip footwear. Confined space: Gas detector (O2, LEL, H2S, CO), ventilation fan, communication equipment, rescue harness and tripod. Diving: Full diving equipment per operation requirements, surface-supplied air preferred for extended work, emergency oxygen, first aid kit. Lockout devices: Padlocks, tags, chain/cable barriers. Signage: 'Divers Below' flags, caution signs. Emergency equipment: Fire extinguishers, spill kit, emergency contacts posted."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="emergencyProcedures">Emergency Procedures</label>
+                                <textarea id="emergencyProcedures" class="form-control" rows="2"
+                                    placeholder="Example: Medical emergency: Cease operations immediately. Administer first aid. Contact [EDIT: emergency services/medical facility]. Diving emergency: Execute emergency ascent procedures. Administer oxygen. Contact hyperbaric facility. Confined space emergency: Activate rescue team. Do not enter without proper equipment. Chemical exposure: Remove from exposure, decontaminate, refer to SDS, seek medical attention. Equipment failure: Cease operations, recover personnel safely, report to [EDIT: Master/Chief Engineer]. Contact numbers: Emergency [EDIT: 000], Port Control [EDIT: number], Company [EDIT: number]."></textarea>
+                            </div>
+                        </form>
+
+                        <h4>Crew Training &amp; Familiarisation</h4>
+                        <form class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="crewTraining">Crew Training Details*</label>
+                                <textarea id="crewTraining" class="form-control" rows="4"
+                                    placeholder="Example: All crew involved in biofouling management activities to receive initial training on this BFMP within [EDIT: 1 month] of joining vessel. Training delivered by [EDIT: Chief Officer/external provider]. Personnel requiring training: [EDIT: Master, Chief Officer, Chief Engineer, Engineering Officers, relevant ratings]. Training includes review of this BFMP, biosecurity risks, inspection techniques, record keeping, and reporting procedures. Practical familiarization with MGPS operation and inspection locations. Training records maintained in vessel training matrix and Biofouling Record Book. Refresher training conducted [EDIT: annually] or when BFMP significantly revised." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="trainingTopics">Training Topics Covered</label>
+                                <textarea id="trainingTopics" class="form-control" rows="3"
+                                    placeholder="Example: Understanding biofouling and invasive aquatic species risks. IMO MEPC.207(62) guidelines overview. Australian, New Zealand, and California biosecurity requirements. Identification of biofouling (slime, weed, barnacles, mussels, etc.). Biofouling rating levels (DAFF/MPI standards). Inspection procedures and schedules. Operation and maintenance of MGPS. Hull coating inspection and damage identification. Record keeping in Biofouling Record Book. Biosecurity declaration procedures (MARS, MPI). Safety procedures for inspection and cleaning activities. Waste capture and disposal requirements. Emergency response procedures."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="trainingFrequency">Training Frequency</label>
+                                <select id="trainingFrequency" class="form-control">
+                                    <option value="">Select</option>
+                                    <option value="Initial">Initial Only</option>
+                                    <option value="Annual">Annual</option>
+                                    <option value="Biannual">Every 2 Years</option>
+                                    <option value="As Required">As Required</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="trainingProvider">Training Provider</label>
+                                <input type="text" id="trainingProvider" class="form-control" placeholder="Internal or external provider">
+                            </div>
+                        </form>
+
+                        <h4>Communication &amp; Reporting</h4>
+                        <form class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="reportingProcedures">Reporting Procedures*</label>
+                                <textarea id="reportingProcedures" class="form-control" rows="3"
+                                    placeholder="Example: All biofouling-related activities and observations to be recorded in Biofouling Record Book by [EDIT: Chief Officer]. Significant issues reported immediately to Master. Master notifies [EDIT: Fleet Manager] of: MGPS failures, significant biofouling observed, extended idle periods, coating damage, missed inspections, biosecurity concerns. Monthly summary report sent to [EDIT: Fleet Manager] including MGPS operation logs, inspection results, fuel consumption trends. Annual BFMP review conducted by [EDIT: Fleet Manager/Technical Superintendent]. Biofouling Record Book available for inspection by Port State Control, biosecurity authorities, and classification society." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="externalReporting">External Reporting Requirements</label>
+                                <textarea id="externalReporting" class="form-control" rows="3"
+                                    placeholder="Example: Australia: Complete MARS (Maritime Arrivals Reporting System) declaration at least 48 hours prior to arrival. Biofouling section must be accurate and complete. DAFF may request UWILD inspection or cleaning based on declaration. New Zealand: Complete MPI pre-arrival biosecurity import health standard declaration. Biofouling status must be declared. Vessel may be inspected on arrival. MPI may direct cleaning if non-compliant. California: Submit Marine Invasive Species Program Annual Vessel Reporting Form at least 24 hours prior to first arrival in calendar year. Contact details: DAFF Biosecurity [EDIT: contact], MPI [EDIT: contact], California MISP [EDIT: contact]." ></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="documentRetention">Documentation Retention*</label>
+                                <textarea id="documentRetention" class="form-control" rows="2"
+                                    placeholder="Example: BFMP and Biofouling Record Book maintained onboard vessel at all times. Records retained for vessel's operational life or minimum [EDIT: 5 years]. Digital backup copies maintained by [EDIT: Fleet Manager] at shore office. UWILD reports, photographs, and cleaning certificates filed with Biofouling Record Book. Training records maintained in vessel training matrix. All documentation available for inspection by authorities. Document storage location: [EDIT: Master's office, safe]. Backup location: [EDIT: company document management system]." required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="keyContacts">Key Contacts</label>
+                                <textarea id="keyContacts" class="form-control" rows="3"
+                                    placeholder="Example: BFMP Coordinator (Onboard): [EDIT: Chief Officer, email, phone]. Fleet Manager: [EDIT: name, email, phone]. Technical Superintendent: [EDIT: name, email, phone]. UWILD Contractor: [EDIT: company, contact, phone]. Cleaning Contractor: [EDIT: company, contact, phone]. Coating Manufacturer Technical Support: [EDIT: contact details]. MGPS Manufacturer: [EDIT: contact details]. Classification Society: [EDIT: surveyor name, contact]. Emergency Contact: [EDIT: 24/7 number]. Regulatory Authorities: DAFF [EDIT: phone], MPI [EDIT: phone], Port Control [EDIT: number]."></textarea>
+                            </div>
+                        </form>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary prev-tab" data-prev="anti-fouling">Previous</button>
+                            <button class="btn btn-primary next-tab" data-next="generate">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="generate" class="tab-pane" role="tabpanel" aria-labelledby="generate-tab">
+                        <h4>Biofouling Management Plan Configuration</h4>
+                        <div class="info-note">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Review the collected information before
+                                generating your plan. Use the preview to double-check content and print/save.</p>
+                        </div>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label for="planTitle">BFMP Document Title</label>
+                                <input type="text" id="planTitle" class="form-control" value="Biofouling Management Plan"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="documentNumber">Document Number</label>
+                                <input type="text" id="documentNumber" class="form-control" placeholder="e.g., BFMP-YYYY-XXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="documentRevision">Revision</label>
+                                <input type="text" id="documentRevision" class="form-control" value="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="planFormat">Document Format</label>
+                                <select id="planFormat" class="form-control" required>
+                                    <option value="Full Plan">Complete BFMP &amp; BFRB</option>
+                                    <option value="BFMP Only">BFMP Only</option>
+                                    <option value="BFRB Only">BFRB Only</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="coverPhoto">Cover Photo (Optional)</label>
+                                <input type="file" id="coverPhoto" class="form-control" accept="image/*" data-preview="cover-preview">
+                                <small class="form-text text-muted">Upload an image for the cover page (max ~5&nbsp;MB).</small>
+                                <div id="cover-preview" class="cover-preview"></div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="companyLogo">Company Logo (Optional)</label>
+                                <input type="file" id="companyLogo" class="form-control" accept="image/*" data-preview="logo-preview">
+                                <small class="form-text text-muted">Upload a logo to show in the plan header.</small>
+                                <div id="logo-preview" class="cover-preview"></div>
+                            </div>
+                        </form>
+                        <div class="info-note">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Download option is intentionally disabled for
+                                reliability. Use Preview &raquo; Print / Save as PDF.</p>
+                        </div>
+                        <div class="form-actions button-group">
+                            <button class="btn btn-secondary prev-tab" data-prev="management">Previous</button>
+                            <button id="preview-plan" class="btn btn-primary" type="button"><i class="fas fa-eye"
+                                    aria-hidden="true"></i> Preview Plan</button>
+                            <button id="generate-plan" class="btn btn-success" type="button"><i class="fas fa-download"
+                                    aria-hidden="true"></i> Download Plan (Disabled)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="plan-preview-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="preview-title">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="preview-title">BFMP Preview</h2>
+                <button class="modal-close" type="button" aria-label="Close preview">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="plan-preview-container"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="close-preview" class="btn btn-secondary" type="button">Close</button>
+                <button id="print-plan" class="btn btn-primary" type="button">Print / Save as PDF</button>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/portal-nav.js"></script>
+    <script src="bfmp.js"></script>
+</body>
+
+</html>
