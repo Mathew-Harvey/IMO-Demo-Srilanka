@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Inspection Report | Sri Lanka Workshop Portal</title>
+    <meta name="description" content="Demo biofouling hull inspection report — MT Fortune, Colombo Port, June 2026.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/portal.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portal-page-hero {
+            flex-shrink: 0;
+        }
+
+        .viewer-toolbar {
+            flex-shrink: 0;
+            z-index: 90;
+            background: var(--white);
+            border-bottom: 1px solid var(--line);
+            box-shadow: 0 2px 6px rgba(11,46,79,.05);
+        }
+        .viewer-toolbar .inner {
+            width: min(960px, 94vw);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 0;
+            min-height: var(--toolbar-h, 52px);
+        }
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .toolbar-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-width: 40px;
+            min-height: 40px;
+            padding: 0 12px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--white);
+            color: var(--imo-navy);
+            font-family: inherit;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .12s, border-color .12s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .toolbar-btn:hover { background: var(--bg); border-color: #c8d6e2; }
+        .toolbar-btn:active { transform: scale(.97); }
+        .toolbar-btn:disabled { opacity: .4; cursor: not-allowed; }
+        .page-indicator {
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--imo-navy);
+            min-width: 72px;
+            text-align: center;
+        }
+        .toolbar-btn.download {
+            background: var(--imo-navy);
+            color: #fff;
+            border-color: var(--imo-navy);
+        }
+        .toolbar-btn.download:hover { background: var(--un-blue); border-color: var(--un-blue); }
+        .toolbar-btn.qr-btn { background: var(--teal); color: #fff; border-color: var(--teal); }
+        .toolbar-btn.qr-btn:hover { background: #0c8a83; border-color: #0c8a83; }
+        .toolbar-label { display: none; }
+
+        .qr-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(11, 46, 79, .55);
+            backdrop-filter: blur(4px);
+        }
+        .qr-modal[hidden] { display: none; }
+        .qr-card {
+            width: min(420px, 100%);
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 24px 24px;
+            text-align: center;
+            position: relative;
+        }
+        .qr-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--imo-navy);
+            font-size: 1.4rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .qr-close:hover { background: var(--line); }
+        .qr-card h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--imo-navy);
+            margin-bottom: 6px;
+        }
+        .qr-card .qr-lede {
+            color: var(--muted);
+            font-size: .9rem;
+            margin-bottom: 18px;
+        }
+        .qr-canvas-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+        .qr-canvas-wrap canvas {
+            border-radius: 10px;
+            border: 1px solid var(--line);
+        }
+        .qr-url {
+            display: block;
+            font-size: .78rem;
+            color: var(--muted);
+            word-break: break-all;
+            margin-bottom: 16px;
+            padding: 0 4px;
+        }
+        .qr-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .qr-actions button {
+            flex: 1 1 auto;
+            min-width: 120px;
+            padding: 11px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--imo-navy);
+            font-family: inherit;
+            font-size: .88rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .qr-actions button.primary {
+            background: var(--imo-navy);
+            color: #fff;
+            border-color: var(--imo-navy);
+        }
+        .qr-actions button:hover { filter: brightness(.97); }
+        .qr-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--imo-navy);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: .85rem;
+            font-weight: 600;
+            z-index: 1001;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s;
+        }
+        .qr-toast.show { opacity: 1; }
+
+        .viewer-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        .viewer-scroll {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px 0 32px;
+        }
+        .pages-wrap {
+            width: min(920px, 94vw);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .page-shell {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+        .page-shell canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .page-num {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(11,46,79,.72);
+            color: #fff;
+            font-size: .72rem;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 999px;
+            pointer-events: none;
+        }
+
+        .loading, .error-state {
+            width: min(920px, 94vw);
+            margin: 40px auto;
+            text-align: center;
+            padding: 48px 24px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .loading .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--line);
+            border-top-color: var(--teal);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading p, .error-state p { color: var(--muted); font-size: .95rem; }
+        .error-state h2 { color: var(--imo-navy); margin-bottom: 10px; font-size: 1.15rem; }
+        .error-state a {
+            display: inline-flex;
+            margin-top: 16px;
+            padding: 11px 20px;
+            background: var(--imo-navy);
+            color: #fff;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        footer {
+            flex-shrink: 0;
+            background: var(--imo-navy);
+            color: #7fa0bb;
+            padding: 20px 0;
+            font-size: .8rem;
+            text-align: center;
+        }
+        footer .container { width: min(1140px, 92vw); margin: 0 auto; }
+
+        @media (max-width: 480px) {
+            .toolbar-btn span.toolbar-label { display: none; }
+            .toolbar-btn { padding: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="portal-chrome" data-active="report" data-base="../"></div>
+
+    <header class="portal-page-hero">
+        <div class="container">
+            <span class="eyebrow">
+                <img class="flag" src="../assets/sl_flag.svg" alt="Flag of Sri Lanka">
+                Sri Lanka · Colombo
+            </span>
+            <h1>Demo Biofouling Hull Inspection Report</h1>
+            <p class="hero-sub">ROV inspection of MT Fortune at Colombo Port — findings, LoF ratings, coating condition and recommendations from the live workshop demonstration.</p>
+            <div class="hero-meta">
+                <span class="meta-chip">🚢 MT Fortune · IMO 9434668</span>
+                <span class="meta-chip">📍 Colombo Port, Berth 8</span>
+                <span class="meta-chip">📅 24 June 2026</span>
+            </div>
+        </div>
+        <svg class="hero-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="#f5f8fb" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path>
+        </svg>
+    </header>
+
+    <div class="viewer-main">
+        <div class="viewer-toolbar" role="toolbar" aria-label="Report controls">
+            <div class="inner">
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" id="btn-prev" aria-label="Previous page" disabled>
+                        ‹ <span class="toolbar-label">Prev</span>
+                    </button>
+                    <span class="page-indicator" id="page-indicator">—</span>
+                    <button type="button" class="toolbar-btn" id="btn-next" aria-label="Next page" disabled>
+                        <span class="toolbar-label">Next</span> ›
+                    </button>
+                </div>
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" id="btn-zoom-out" aria-label="Zoom out">−</button>
+                    <button type="button" class="toolbar-btn" id="btn-fit" aria-label="Fit to width"><span class="toolbar-label">Fit</span></button>
+                    <button type="button" class="toolbar-btn" id="btn-zoom-in" aria-label="Zoom in">+</button>
+                    <button type="button" class="toolbar-btn qr-btn" id="btn-qr" aria-label="Show QR code">
+                        ⊞ <span class="toolbar-label">QR Code</span>
+                    </button>
+                    <a class="toolbar-btn download" id="btn-download" href="../SriLanka%20Demo%20Biofouling%20Hull%20Inspection%20Report_compressed%20(1).pdf" download="Sri-Lanka-Hull-Inspection-Report.pdf">
+                        ↓ <span class="toolbar-label">Download</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="viewer-scroll" id="viewer-scroll">
+            <div class="loading" id="loading">
+                <div class="spinner" aria-hidden="true"></div>
+                <p>Loading inspection report…</p>
+            </div>
+            <div class="pages-wrap" id="pages-wrap" hidden></div>
+            <div class="error-state" id="error-state" hidden>
+                <h2>Could not load the report</h2>
+                <p>Your browser may be blocking the PDF. Try opening or downloading it directly.</p>
+                <a id="error-fallback" href="../SriLanka%20Demo%20Biofouling%20Hull%20Inspection%20Report_compressed%20(1).pdf" target="_blank" rel="noopener">Open PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-modal" id="qr-modal" hidden role="dialog" aria-labelledby="qr-title" aria-modal="true">
+        <div class="qr-card">
+            <button type="button" class="qr-close" id="qr-close" aria-label="Close">×</button>
+            <h2 id="qr-title">Scan to view this report</h2>
+            <p class="qr-lede">Point a phone camera at the QR code to open the inspection report instantly.</p>
+            <div class="qr-canvas-wrap"><canvas id="qr-canvas"></canvas></div>
+            <span class="qr-url" id="qr-url"></span>
+            <div class="qr-actions">
+                <button type="button" id="qr-copy">Copy link</button>
+                <button type="button" class="primary" id="qr-download">Download QR</button>
+            </div>
+        </div>
+    </div>
+    <div class="qr-toast" id="qr-toast" aria-live="polite"></div>
+
+    <footer>
+        <div class="container">Franmarine · MarineStream · Sri Lanka National Technology Demonstration &amp; Training Workshop</div>
+    </footer>
+
+    <script src="../assets/portal-nav.js"></script>
+    <script src="../assets/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="report-viewer.js"></script>
+</body>
+</html>

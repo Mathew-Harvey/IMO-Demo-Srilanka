@@ -6,23 +6,8 @@
     <title>Participant Portal | Sri Lanka National Technology Demonstration &amp; Training Workshop</title>
     <meta name="description" content="Participant portal for the Sri Lanka National Technology Demonstration & Training Workshop under the IMO–Norad TEST Biofouling Project. Colombo, 23–26 June 2026.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/portal.css">
     <style>
-        :root {
-            --imo-navy: #0b2e4f;
-            --imo-navy-2: #103a63;
-            --un-blue: #0093d3;
-            --teal: #0fa39b;
-            --gold: #f2a900;
-            --maroon: #8d153a;
-            --ink: #14202b;
-            --muted: #5a6b78;
-            --line: #e4ebf1;
-            --bg: #f5f8fb;
-            --white: #ffffff;
-            --radius: 16px;
-            --shadow: 0 10px 30px rgba(11,46,79,.10);
-            --shadow-lg: 0 22px 50px rgba(11,46,79,.18);
-        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
@@ -34,57 +19,6 @@
         }
         .container { width: min(1140px, 92vw); margin: 0 auto; }
         a { color: inherit; }
-
-        /* ===== Top bar ===== */
-        .topbar {
-            background: var(--imo-navy);
-            color: #cfe2f1;
-            font-size: .82rem;
-            letter-spacing: .02em;
-        }
-        .topbar .container {
-            display: flex; flex-wrap: wrap; gap: 8px 18px;
-            align-items: center; justify-content: space-between;
-            padding: 9px 0;
-        }
-        .topbar strong { color: #fff; }
-        .topbar .tag { color: var(--gold); font-weight: 600; }
-
-        /* ===== Hero ===== */
-        .hero {
-            position: relative;
-            color: #fff;
-            background:
-                radial-gradient(1200px 500px at 80% -20%, rgba(0,147,211,.55), transparent 60%),
-                linear-gradient(135deg, var(--imo-navy) 0%, var(--imo-navy-2) 45%, #0c4a73 100%);
-            overflow: hidden;
-        }
-        .hero .container { position: relative; z-index: 2; padding: 56px 0 130px; }
-        .hero-wave { position: absolute; bottom: -1px; left: 0; width: 100%; z-index: 1; display: block; }
-        .eyebrow {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: rgba(255,255,255,.10);
-            border: 1px solid rgba(255,255,255,.20);
-            padding: 7px 14px; border-radius: 999px;
-            font-size: .8rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-            backdrop-filter: blur(6px);
-        }
-        .eyebrow .flag { width: 22px; height: 14px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,.3); }
-        .hero h1 {
-            font-size: clamp(1.9rem, 4.4vw, 3.1rem);
-            font-weight: 800; line-height: 1.12; margin: 20px 0 14px;
-            max-width: 16ch;
-        }
-        .hero h1 .accent { color: var(--gold); }
-        .hero-sub { font-size: clamp(1rem, 1.6vw, 1.18rem); color: #d7e7f4; max-width: 60ch; }
-        .hero-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-        .meta-chip {
-            display: inline-flex; align-items: center; gap: 9px;
-            background: rgba(255,255,255,.12);
-            border: 1px solid rgba(255,255,255,.18);
-            padding: 10px 16px; border-radius: 12px; font-weight: 600; font-size: .92rem;
-        }
-        .meta-chip .ic { font-size: 1.05rem; }
 
         /* ===== Section ===== */
         section { padding: 64px 0; }
@@ -109,6 +43,7 @@
         .tool-banner { height: 130px; display: flex; align-items: center; justify-content: center; font-size: 3.4rem; }
         .tool-banner.guide { background: linear-gradient(135deg, #0fa39b, #0b6e74); }
         .tool-banner.calc  { background: linear-gradient(135deg, #1E4D78, #0b2e4f); }
+        .tool-banner.report { background: linear-gradient(135deg, var(--maroon), #5e0d27); }
         .tool-body { padding: 24px 24px 26px; flex: 1; display: flex; flex-direction: column; }
         .tool-body h3 { font-size: 1.28rem; font-weight: 800; color: var(--imo-navy); }
         .tool-body .lede { color: var(--muted); margin: 8px 0 16px; flex: 1; }
@@ -165,23 +100,15 @@
         .disclaimer { border-top: 1px solid rgba(255,255,255,.12); padding-top: 16px; color: #7fa0bb; font-size: .8rem; }
 
         @media (max-width: 640px) {
-            .hero .container { padding: 40px 0 110px; }
             .report { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top bar -->
-    <div class="topbar">
-        <div class="container">
-            <span><strong>IMO–Norad TEST Biofouling Project</strong> · National Demonstration &amp; Training</span>
-            <span class="tag">Participant Portal — no login required</span>
-        </div>
-    </div>
+    <div id="portal-chrome" data-active="portal" data-base=""></div>
 
-    <!-- Hero -->
-    <header class="hero">
+    <header class="portal-page-hero portal-page-hero--home">
         <div class="container">
             <span class="eyebrow">
                 <img class="flag" src="assets/sl_flag.svg" alt="Flag of Sri Lanka">
@@ -206,14 +133,14 @@
             <div class="section-head">
                 <div class="kicker">Workshop Resources</div>
                 <h2>Your participant toolkit</h2>
-                <p>Two practical, browser-based tools used in the demonstration. No sign-in, no install — open them on your phone, tablet or laptop.</p>
+                <p>Three practical, browser-based tools used in the demonstration. No sign-in, no install — open them on your phone, tablet or laptop.</p>
             </div>
             <div class="tools">
                 <a class="tool" href="guide/index.html">
                     <div class="tool-banner guide">🦪</div>
                     <div class="tool-body">
                         <h3>Biofouling Identification Guide</h3>
-                        <p class="lede">A visual field guide for spotting invasive marine species on ship hulls — set to the <strong>Sri Lanka</strong> edition, covering species of concern such as the charru mussel and Asian green mussel.</p>
+                        <p class="lede">A visual field guide for spotting invasive marine species on ship hulls — Sri Lanka edition, covering species of concern such as the charru mussel and Asian green mussel.</p>
                         <ul>
                             <li>Photo galleries &amp; "how to spot it" tips</li>
                             <li>Sri Lanka IMS list with MEPA reporting</li>
@@ -233,6 +160,19 @@
                             <li>Interactive charts &amp; scenario comparison</li>
                         </ul>
                         <span class="tool-cta">Open the calculator →</span>
+                    </div>
+                </a>
+                <a class="tool" href="report/index.html">
+                    <div class="tool-banner report">📋</div>
+                    <div class="tool-body">
+                        <h3>Demo Hull Inspection Report</h3>
+                        <p class="lede">The live ROV inspection report for MT Fortune at Colombo Port — executive summary, LoF ratings, niche-area findings and recommendations from the workshop demonstration.</p>
+                        <ul>
+                            <li>Full 24-page inspection report</li>
+                            <li>Propeller, rudder, sea chest &amp; transducer findings</li>
+                            <li>Readable on phone and desktop — download available</li>
+                        </ul>
+                        <span class="tool-cta">View the report →</span>
                     </div>
                 </a>
             </div>
@@ -322,5 +262,6 @@
         </div>
     </footer>
 
+    <script src="assets/portal-nav.js"></script>
 </body>
 </html>

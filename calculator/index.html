@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/portal.css">
 
     <!-- Chart.js (CDN) -->
     <script src="./chart.min.js"></script>
@@ -59,8 +60,8 @@
         html { font-size: 16px; scroll-behavior: smooth; }
         body {
             font-family: var(--font-sans);
-            background-color: var(--neutral-200);
-            color: var(--neutral-800);
+            background-color: var(--bg);
+            color: var(--ink);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -77,18 +78,6 @@
         .container { width: 100%; max-width: var(--container-xl); margin: 0 auto; padding: var(--space-4); }
         .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
         .main-content { flex: 1; padding: var(--space-5) 0; }
-
-        /* Static calculator hero (replaces site chrome hero) */
-        .calc-hero {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            color: #fff;
-            padding: var(--space-8) 0 var(--space-10);
-        }
-        .calc-hero .container { display: flex; flex-direction: column; gap: var(--space-2); }
-        .calc-hero a.calc-back { color: #cfe0f0; font-weight: 600; font-size: .9rem; align-self: flex-start; }
-        .calc-hero a.calc-back:hover { color: #fff; }
-        .calc-hero h1 { color: #fff; margin: var(--space-2) 0 0; font-size: clamp(2rem, 4vw, 3rem); }
-        .calc-hero p { color: #d7e7f4; margin: 0; max-width: 70ch; }
 
         /* Currency Selector */
         .currency-selector-container { display: flex; justify-content: center; padding: var(--space-4); margin-top: 0; position: relative; z-index: 10; }
@@ -248,13 +237,20 @@
 </head>
 
 <body>
-    <!-- Static header (self-contained — replaces MarineStream site chrome) -->
-    <header class="calc-hero">
+    <div id="portal-chrome" data-active="calculator" data-base="../"></div>
+
+    <header class="portal-page-hero">
         <div class="container">
-            <a href="../index.html" class="calc-back"><i class="fas fa-arrow-left"></i> Workshop portal</a>
+            <span class="eyebrow">
+                <img class="flag" src="../assets/sl_flag.svg" alt="Flag of Sri Lanka">
+                Sri Lanka · Colombo
+            </span>
             <h1>Hull Fouling Cost Calculator</h1>
-            <p>Estimate the added fuel, cost and CO₂ emissions from hull fouling — physics-based model calibrated on University of Melbourne research. Provided by MarineStream™.</p>
+            <p class="hero-sub">Estimate the added fuel, cost and CO₂ emissions from hull fouling — physics-based model calibrated on University of Melbourne research.</p>
         </div>
+        <svg class="hero-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="#f5f8fb" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path>
+        </svg>
     </header>
 
     <div class="page-wrapper">
@@ -697,5 +693,6 @@
             if (closeButton) closeButton.addEventListener('click', closeContactModal);
         });
     </script>
+    <script src="../assets/portal-nav.js"></script>
 </body>
 </html>
