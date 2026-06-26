@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var PDF_URL = '../SriLanka%20Demo%20Biofouling%20Hull%20Inspection%20Report_compressed%20(1).pdf';
+    var PDF_URL = '../SriLanka%20Demo%20Biofouling%20Hull%20Inspection%20Report_compressed%20(2).pdf';
     var REPORT_URL = window.location.href.split('#')[0];
 
     var loadingEl = document.getElementById('loading');
